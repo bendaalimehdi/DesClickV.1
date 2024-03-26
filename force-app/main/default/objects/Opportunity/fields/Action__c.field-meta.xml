@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action__c</fullName>
+    <externalId>false</externalId>
+    <label>Action</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MAJ</fullName>
+                <default>false</default>
+                <label>MAJ</label>
+            </value>
+            <value>
+                <fullName>MKG</fullName>
+                <default>false</default>
+                <label>MKG</label>
+            </value>
+            <value>
+                <fullName>APS</fullName>
+                <default>false</default>
+                <label>APS</label>
+            </value>
+            <value>
+                <fullName>STW</fullName>
+                <default>false</default>
+                <label>STW</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

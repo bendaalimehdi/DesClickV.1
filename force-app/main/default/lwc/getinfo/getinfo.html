@@ -1,0 +1,28 @@
+<template>
+    <template if:true={showComponent}>
+    <template if:true={error}>
+        <p>{error}</p>
+    </template>
+  
+
+    <lightning-dual-listbox
+        name="employees"
+        label="Employees"
+        source-label="Available Employees"
+        selected-label="Selected Employees"
+        options={employeeOptions}
+        onchange={handleChange}
+    >
+   
+
+</lightning-dual-listbox>
+<lightning-button 
+            variant="brand"
+            class="slds-align_absolute-center slds-var-m-top_large" 
+            label="Send" 
+            title="send" 
+            onclick={handleSelected}
+            disabled={activateButton}>
+        </lightning-button>
+    </template>
+</template>

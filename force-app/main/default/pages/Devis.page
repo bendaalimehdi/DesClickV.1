@@ -1,0 +1,176 @@
+<apex:page docType="html-5.0" showHeader="false" standardStylesheets="false" sidebar="false" standardController="Opportunity" renderAs="pdf">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formation</title>
+    <style>
+      /* Define base styles */
+      body {
+        color: #000; /* Black */
+        line-height: 35px;
+      }
+
+      /* Define font family */
+      body, h1, h5 {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Styles for headers */
+      h1 {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #0162c0; /* Primary color */
+      }
+
+      h5 {
+        color: #FF8C00; /* Secondary color */
+      }
+
+      /* Container for content sections */
+      .formArea {
+        margin: 15px;
+        box-shadow: 0px 0px 30px 1px rgb(205, 205, 205);
+        border-radius: 20px;
+        padding: 40px;
+      }
+
+      /* Highlight text with secondary color */
+      p b {
+        color: #FF8C00; /* Secondary color */
+      }
+
+      /* Center table cells and apply background color */
+      .formArea table td {
+        text-align: center;
+        background-color: #efefef;
+        margin: 1px;
+      }
+
+      /* Center footer text */
+      footer {
+        text-align: center;
+        line-height: 25px;
+      }
+
+      /* Remove default list styles */
+      ul {
+        margin-top: 0;
+        padding-top: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      /* Style signature section */
+      .signature {
+        width: 25%;
+        text-align: center;
+        margin: 80px 80px 0 80px;
+      }
+
+      /* Highlight with yellow background */
+      .yellow-span {
+        background-color: yellow;
+      }
+
+      /* Style logo positioning */
+      .logo {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 100px; /* Ajustez la taille selon vos besoins */
+    height: auto; /* Maintenir le rapport hauteur/largeur */
+}
+
+      /* Media query for small screens (adjust breakpoint as needed) */
+      @media (max-width: 500px) {
+        .logo {
+          width: 50px;
+        }
+      }
+    </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <center>
+                    <div>
+                        <!-- <img src="{!URLFOR($Resource.LogoDC, 'logo.png')}" alt="" class="logo"></img> -->
+                        <h2>
+                            <span class="yellow-span">NOM DE L'ENTREPRISE: {!Opportunity.Account.Name} <br/>
+                            Adresse de l'entreprise: {!Opportunity.Account.BillingStreet}, {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}
+                            <br/></span><br/>
+                            N°Siren :{!Opportunity.Account.Num_SIREN__c}<span class="yellow-span"><br/></span>
+                        </h2>
+                        <h2>A Kremlin-Bicêtre ; Lexxx<span class="yellow-span"><br/></span></h2>
+                    </div>
+                </center>
+            </header>
+
+            <section>
+                <h3>Date de validité : 1 mois</h3>
+                <table>
+                    <tr>
+                        <th>Description</th>
+                        <th>Qté</th>
+                        <th>Prix unitaire</th>
+                        <th>Montant HT</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong class="underlined">Formation</strong>: <span class="yellow-span">nom de la formation: {!Opportunity.Formation_choisie__c}</span><br/>
+                            <strong class="underlined">Lieux</strong>: <span class="yellow-span">adresse de l'entreprise: {!Opportunity.Account.BillingStreet}, {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}</span><br/>
+                            <strong class="underlined">Date</strong>: <span class="yellow-span">date début formation: {!Opportunity.Date_Formation__c}</span> au <span class="yellow-span">date fin de formation: xxx</span><br/>
+                            <strong class="underlined">Horaires</strong>: de 9:00 à 12:30 et de 13:30 à 17:00 xxx<br/>
+                            <strong class="underlined">Durée</strong>: nombre des heures (nombres jours){!Opportunity.Duree_Formation__c}<br/>
+                            <strong class="underlined">Formation</strong>: en <span class="yellow-span">INTRA</span><br/>
+                            Tarif est de nombre de stagiaire <span class="yellow-span">nombres stagiaires x tarifs heures x nombres heures = Montant ht</span><br/>
+                            Hors taxes (tarif : INTRA ou INTER nombre de jours- forfait journalier mettre le prix -(nombre de stagiaire))
+                        </td>
+                        <td>1,00</td>
+                        <td><span class="yellow-span">{!Opportunity.Taux__c}</span></td>
+                        <td><span class="yellow-span">{!Opportunity.Taux__c}</span></td>
+                    </tr>
+                </table>
+
+                <p class="italic">Mandat (facultatif)<br/>
+                Par la présente et à la date de signature, je mandate Faouzi DJABER, représentant légal de l'organisme de formation SAS DC WEB APS, pour effectuer toutes les démarches nécessaires à la constitution et au suivi de mon dossier auprès de l'OPCO ou du FAF jusqu'à son règlement. Tout document ou déclaration transmis en mon nom par le mandataire m'engage en cas d'erreur, de non-conformité ou de fausse déclaration.</p>
+
+                <table>
+                    <tr>
+                        <td class="underlined">Total HT</td>
+                        <td class="underlined">TVA</td>
+                        <td class="underlined">Total TTC</td>
+                    </tr>
+                    <tr>
+                        <td><span class="yellow-span">{!Opportunity.Taux__c}</span></td>
+                        <td><span class="yellow-span">20%</span></td>
+                        <td><span class="yellow-span">{!Opportunity.Taux__c * 1.20 }</span></td>
+                    </tr>
+                </table>
+
+                <p class="centered small-text">En cas de mandat, ces signatures valent bon pour mandat et bon pour acceptation de mandat</p>
+
+                <div style="overflow: auto;">
+                    <div style="float: left;">
+                        <p><strong>Acceptation - Date<br/>Signature du demandeur</strong></p>
+                    </div>
+                    <div style="float: right;">
+                        <p><strong>DJABER Faouzi, <br/>Représentant légal de DC WEB APS</strong></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p class="small-text">
+                
+                SAS - DC WEB APS<br/>
+                3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
+                Numéro SIRET : 81274844000037 <br/>
+                Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet de région de l’ile de France) - ID Data dock : 0080818
+            </p>
+        </footer>
+    </body>
+    </html>
+</apex:page>
+

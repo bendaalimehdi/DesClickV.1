@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Formation_Souhaite__c</fullName>
+    <externalId>false</externalId>
+    <label>Formation Souhaité</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Formation HACCP</fullName>
+                <default>false</default>
+                <label>Formation HACCP</label>
+            </value>
+            <value>
+                <fullName>Formation Piloter Mon Site</fullName>
+                <default>false</default>
+                <label>Formation Piloter Mon Site</label>
+            </value>
+            <value>
+                <fullName>Formation Galette Des Rois</fullName>
+                <default>false</default>
+                <label>Formation Galette Des Rois</label>
+            </value>
+            <value>
+                <fullName>Formation Gâteaux de Fêtes</fullName>
+                <default>false</default>
+                <label>Formation Gâteaux de Fêtes</label>
+            </value>
+            <value>
+                <fullName>Formation Google ADS</fullName>
+                <default>false</default>
+                <label>Formation Google ADS</label>
+            </value>
+            <value>
+                <fullName>Formation Management Pilotage</fullName>
+                <default>false</default>
+                <label>Formation Management Pilotage</label>
+            </value>
+            <value>
+                <fullName>Formation Négociation Commerciale</fullName>
+                <default>false</default>
+                <label>Formation Négociation Commerciale</label>
+            </value>
+            <value>
+                <fullName>Formation Réseaux Sociaux</fullName>
+                <default>false</default>
+                <label>Formation Réseaux Sociaux</label>
+            </value>
+            <value>
+                <fullName>Formation Patisserie Classique</fullName>
+                <default>false</default>
+                <label>Formation Patisserie Classique</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

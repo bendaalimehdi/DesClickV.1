@@ -1,0 +1,113 @@
+
+<apex:page standardController="Opportunity" extensions="MyControllerExtension" renderAs="pdf" applyBodyTag="True" >
+    <html>
+        <head>
+            <title>Convention de Formation Professionnelle</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                }
+                h1 {
+                    color: #336699;
+                    text-align: center;
+                }
+                p {
+                    text-align: justify;
+                    margin-bottom: 10px;
+                }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+                .section-title {
+                    color: #336699;
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-top: 20px;
+                }
+                .signature {
+                    margin-top: 30px;
+                }
+            </style>
+        </head>
+        <body>
+            <apex:form >
+                <script>
+                    var opportunityId = '{!$CurrentPage.parameters.opportunityId}';
+                    var accountName = '{!Opportunity.Account.Name}';
+                </script>
+                <h1>CONVENTION DE FORMATION PROFESSIONNELLE</h1>
+                <p>Entre les soussignés :</p>
+                <p>La société DC WEB APS domiciliée au 3, rue Lech Walesa 94270 Le Kremlin Bicêtre et enregistrée sous le numéro de déclaration d'activité 11 94 101 81 94 auprès de la Direction Régionale des Entreprises, de la Concurrence, de la Consommation, du Travail et de l’Emploi en Île de France (DIRECCTE Île de France).</p>
+                <p>La société <apex:outputtext value="{!generateAccountName}" escape="false"/>  <apex:outputtext value="{!generateAdress}" escape="false"/> et représentée par :</p>
+                <p>Madame/Monsieur <apex:outputtext value="{!generateContactName}" escape="false"/> </p>
+
+                <p class="section-title">Article 1er : Objet de la convention</p>
+                <p>L’organisme DC WEB APS organisera l’action de formation suivante :</p>
+                <p>Intitulé du stage: Hygiène et Sécurité alimentaire</p>
+                <p>Nature de l’action : INTRA présentiel</p>
+                <p>Objectifs opérationnels : joints en annexe</p>
+                <p>Programme et méthodes : joints en annexe</p>
+                <p>Type d’action de formation (article L.6313-1 du Code du travail): Action de formation</p>
+                <p>Durée : 14 heures</p>
+                <p>Lieu:<apex:outputtext value="{!generateAccountName}" escape="false"/> domiciliée <apex:outputtext value="{!generateAdress}" escape="false"/></p>
+                <p>Dates et horaires : du 15/02/2023 au 16/02/2023 de 9:00 à 12:30 et de 13:30 à 17 :00</p>
+
+                <p class="section-title">Article 2 : Effectif formé</p>
+                <p>L’organisme DC WEB APS animera une/des sessions de formation pour les personnes suivantes :</p>
+                <apex:outputtext value="{!selectedEmployees}" escape="false"/>
+
+                <p class="section-title">Article 3 : Dispositions financières</p>
+                <p>En contrepartie de cette action de formation, l’employeur s’acquittera des coûts suivants : Frais de formation :</p>
+                <table>
+                    <tr>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th>Cout Total H.T</th>
+                        <th>T.V.A 20%</th>
+                        <th>TOTAL GENERAL (TTC)</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1400.00€</td>
+                        <td>1400.00€</td>
+                        <td>280.00€</td>
+                        <td>1680.00€</td>
+                    </tr>
+                </table>
+
+                <p class="section-title">Article 4 : Modalités d’évaluation et de sanction</p>
+                <p>Le contrôle des connaissances sera assuré par la vérification de l’assiduité des participants et l’accent mis sur leur participation constante et active, notamment dans le cadre d’études des cas pratiques, préparées et exposées par les formateurs.</p>
+                <p>Une attestation, précisant la nature et la durée de la session, sera remise aux bénéficiaires à l’issue de la formation (Moyen de contrôle de l’assiduité (attestation d’assiduité + feuilles d’émargement pour les formations en présentiel / attestation d’assiduité + relevé de connexion pour les formations à distance) : attestation d’assiduité + feuilles d’émargement).</p>
+
+                <p class="section-title">Article 5 : Modalités de règlement</p>
+                <p>En cas de paiement effectué par un OPCO, l’Etablissement s’engage à effectuer la demande de prise en charge avant le début de la formation.</p>
+                <p>En cas de prise en charge partielle par l’OPCO, la différence de coût restera à la charge de la société <apex:outputtext value="{!generateAccountName}" escape="false"/></p> 
+                <p>En cas de refus de prise en charge par l’OPCO, ou si l’accord de prise en charge par l’OPCO ne nous parvient pas au 1er jour de la formation, la totalité des frais de formation sera facturée à la société<apex:outputtext value="{!generateAccountName}" escape="false"/>.</p>
+                
+                <pclass="section-title">Article 6 : Dédit ou abandon</p>
+                <p>En cas de dédit par l’entreprise à moins de 15 jours francs avant le début de l’action mentionnée à l’article 1, ou d’abandon en cours de formation par un ou plusieurs stagiaires, l’organisme remboursera sur le coût total, les sommes qu’il n’aura pas réellement dépensées ou engagées pour la réalisation de ladite action.</p>
+
+                <pclass="section-title"> Article 7 : Différends éventuels</p>
+                <p>Si une contestation ou un différend ne peuvent être réglés à l’amiable, le Tribunal de Créteil sera seul compétent pour régler le litige.</p>
+                
+                <p>Fait en double exemplaire, à Le Kremlin Bicêtre, le 06/01/2023</p>
+                <p>Pour l’entreprise</p>
+                <p><apex:outputtext value="{!generateContactName}" escape="false"/></p>
+                <p>Cachet de l’entreprise cliente</p>
+                <p>Pour l’organisme</p>
+                <p>Faouzi Djaber en Qualité de Président Directeur Général</p>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

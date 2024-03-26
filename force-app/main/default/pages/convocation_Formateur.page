@@ -1,0 +1,182 @@
+<apex:page docType="html-5.0" showHeader="false" standardStylesheets="false" sidebar="false" standardController="Opportunity" extensions="MyControllerExtension"  >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Formation</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+
+            h1, h4 {
+                color: #0162c0;
+                margin-top: 0;
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f9f9f9;
+            }
+
+            .formArea {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .logo {
+                max-width: 150px;
+                margin: 20px auto;
+                display: block;
+            }
+
+            footer {
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            footer p {
+                margin: 10px 0;
+            }
+
+            /* Add additional styles as needed */
+        </style> 
+    </head>
+    <body>
+        <header>
+            <center>
+                <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo"/>
+                <h1>CONVENTION DE FORMATION PROFESSIONNELLE</h1>
+                <p>(Article L.6353-1 du Code du travail)</p>
+            </center>
+        </header>
+        <section class="formArea">
+            <h4>Entre les soussignés : </h4>
+            <p>
+                <span><b>1</b></span> la société DC WEB APS domiciliée au 3, rue Lech Walesa 94270 - Le Kremlin-Bicêtre et enregistrée sous le numéro de déclaration d'activité 11 94 101 81 94 auprès de la Direction Régionale des Entreprises, de la Concurrence, de la Consommation, du Travail et de l’Emploi en Île de France (DIRECCTE Île de France).
+                <br/>
+                <span><b>2</b></span> La societe {!Opportunity.Account.Name} domiciliée {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}  <br/>immatriculée au Registre du Commerce et des Sociétés sous le numéro {!Opportunity.Account.Num_SIREN__c} représentée par son gérant Monsieur/Madam{!Opportunity.ContactPricipal__c} en qualité de Gérant.
+            </p>
+            <br/><br/>
+            <p>
+                Est conclue la convention suivante, en application des dispositions du Livre III de la Sixième partie du Code du travail portant organisation de la formation professionnelle continue.
+                <br/>
+                <b>Article 1er : Objet de la convention</b>
+                <br/>
+                L’organisme DC WEB APS organisera l’action de formation suivante :
+            </p>
+            <ul>
+                <li>Intitulé du stage: <span class="yellow-span"><b>{!Opportunity.Formation_choisie__c}</b></span></li>
+                <li>Nature de l’action : <span class="yellow-span"><b>INTRA présentiel</b></span></li>
+                <li>Objectifs opérationnels : joints en annexe</li>
+                <li>Programme et méthodes : joints en annexe</li>
+                <li>Type d’action de formation (article L.6313-1 du Code du travail): Action de formation</li>
+                <li>Durée : <span class="yellow-span"><b>{!Opportunity.Duree_Formation__c}</b></span></li>
+                <li>Lieu: <span class="yellow-span"><b>{!Opportunity.Account.Name}</b></span> domiciliée <span class="yellow-span"><b> {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity} </b></span></li>
+                <li>Dates et horaires : du <span class="yellow-span"><b>{!Opportunity.Date_Formation__c}</b></span> au<span class="yellow-span"><b>{!opportunity.Date_Formation__c}</b></span> de 9:00 à 12:30 et de 13:30 à 17 :00</li>
+            </ul>
+            <p>
+                <b>Article 2 : Effectif formé</b>
+                <br/>
+                L’organisme DC WEB APS animera une/des sessions de formation pour les personnes suivantes
+            </p>
+            <apex:outputtext value="{!selectedEmployees}" escape="false"/>
+            <table width="100%">
+                <tr>
+                    <td><b>Civilité</b></td>
+                    <td><b>Nom</b></td>
+                    <td><b>Prénom</b></td>
+                    <td><b>Fonction</b></td>
+                </tr>
+                <tr>
+                    <td>Monsieur</td>
+                    <td><span class="yellow-span"><b>Nom de stagiaire</b></span></td>
+                    <td><span class="yellow-span"><b>Prénom</b></span></td>
+                    <td>Employé</td>
+                </tr>
+                <tr>
+                    <td>Monsieur</td>
+                    <td><span class="yellow-span"><b>Nom de stagiaire</b></span></td>
+                    <td><span class="yellow-span"><b>Prénom</b></span></td>
+                    <td>Employé</td>
+                </tr>
+                <tr>
+                    <td>Monsieur</td>
+                    <td><span class="yellow-span"><b>Nom de stagiaire</b></span></td>
+                    <td><span class="yellow-span"><b>Prénom</b></span></td>
+                    <td>Employé</td>
+                </tr>
+            </table>
+            <br/><br/>
+            <p>
+                <b>Article 3 : Dispositions financières</b>
+                <br/>
+                En contrepartie de cette action de formation, l’employeur s’acquittera des coûts suivants :
+            </p>
+            <table width="100%">
+                <tr>
+                    <td><b>Quantité</b></td>
+                    <td><b>…..€ </b></td>
+                </tr>
+            
+               
+            </table>
+            <p>
+                <b>Article 4 : Modalités d’évaluation et de sanction</b>
+                <br/>
+                Le contrôle des connaissances sera assuré par la vérification de l’assiduité des participants et l’accent mis sur leur participation constante et active, notamment dans le cadre d’études des cas pratiques, préparées et exposées par les formateurs.
+                <br/>
+                Une attestation, précisant la nature et la durée de la session, sera remise aux bénéficiaires à l’issue de la formation
+                (Moyen de contrôle de l’assiduité (attestation d’assiduité + feuilles d’émargement pour les formations en présentiel / attestation d’assiduité + relevé de connexion pour les formations à distance) : attestation d’assiduité + feuilles d’émargement)
+                <br/><br/>
+                <b>Article 5 : Modalités de règlement</b>
+                <br/>
+                En cas de paiement effectué par un OPCO, l’Etablissement s’engage à effectuer la demande de prise en charge avant le début de la formation.
+                En cas de prise en charge partielle par l’OPCO, la différence de coût restera à la charge de la société <span class="yellow-span">nom de la societe</span>
+                En cas de refus de prise en charge par l’OPCO, ou si l’accord de prise en charge par l’OPCO ne nous parvient pas au 1er jour de la formation, la totalité des frais de formation sera facturée à la société<span class="yellow-span">nom de la societe.</span>
+                <br/><br/>
+                <b>Article 6 : Dédit ou abandon</b>
+                <br/>
+                En cas de dédit par l’entreprise à moins de 15 jours francs avant le début de l’action mentionnée à l’article 1, ou d’abandon en cours de formation par un ou plusieurs stagiaires, l’organisme remboursera sur le coût total, les sommes qu’il n’aura pas réellement dépensées ou engagées pour la réalisation de ladite action.
+                <br/><br/>
+                <b>Article 7 : Différends éventuels</b>
+                <br/>
+                Si une contestation ou un différend ne peuvent être réglés à l’amiable, le Tribunal de Créteil sera seul compétent pour régler le litige.
+                <br/>Fait en double exemplaire, à Le Kremlin Bicêtre, le .
+            </p>
+            <section class="d-flex">
+        <div class="signature-container">
+            <div class="signature left">
+                Pour l’organisme<br/>
+                Faouzi Djaber en Qualité<br/>
+                de Président Directeur Général
+            </div>
+            <div class="signature right">
+                Pour l’entreprise<br/>
+                (nom et qualité du signataire)<br/>
+                Cachet de l’entreprise cliente
+            </div>
+        </div>
+    </section>
+            <br/><br/>
+            <hr/>
+            <br/><br/>
+            <footer>
+                <p>
+                    SAS - DC WEB APS<br/>
+                    3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
+                    Tél.: 01 80 91 62 25 – Email: Formation@des-click.com – <br/>Site Internet: https://formation.des-click.com
+                    N° SIRET : 812 748 440 00037 – Id/TVA : FR79812748440<br/>
+                    N° de déclaration d’activité : 11 94 10181 94 (auprès du préfet de région de l’ile de France) - ID Data dock : 0080818
+                </p>
+            </footer>
+        </section>
+    </body>
+</apex:page>

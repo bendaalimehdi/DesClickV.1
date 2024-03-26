@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Num_ro_De_Dossier__c</fullName>
+    <displayFormat>{YY}-{0000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Numéro De Dossier</label>
+    <type>AutoNumber</type>
+</CustomField>
