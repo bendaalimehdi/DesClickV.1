@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Benefice_attendus__c</fullName>
+    <externalId>false</externalId>
+    <label>Bénéfice attendus</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Augmentation de vos ventes</fullName>
+                <default>false</default>
+                <label>Augmentation de vos ventes</label>
+            </value>
+            <value>
+                <fullName>Amélioration des vos marges, rentabilité, profitabilité</fullName>
+                <default>false</default>
+                <label>Amélioration des vos marges, rentabilité, profitabilité</label>
+            </value>
+            <value>
+                <fullName>Baisse des coûts</fullName>
+                <default>false</default>
+                <label>Baisse des coûts</label>
+            </value>
+            <value>
+                <fullName>Une meilleur qualité de services</fullName>
+                <default>false</default>
+                <label>Une meilleur qualité de services</label>
+            </value>
+            <value>
+                <fullName>Une meilleur motivation des salariés</fullName>
+                <default>false</default>
+                <label>Une meilleur motivation des salariés</label>
+            </value>
+            <value>
+                <fullName>Développer les compétences de vos salariés</fullName>
+                <default>false</default>
+                <label>Développer les compétences de vos salariés</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

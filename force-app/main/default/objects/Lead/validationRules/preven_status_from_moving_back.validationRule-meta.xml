@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>preven_status_from_moving_back</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(Status),
+    OR(
+        AND(
+            ISPICKVAL(PRIORVALUE(Status), &quot;New&quot;),
+            ISPICKVAL(Status, &quot;Working&quot;)
+        ),
+        AND(
+            ISPICKVAL(PRIORVALUE(Status), &quot;Working&quot;),
+            ISPICKVAL(Status, &quot;Qualified&quot;)
+        ),
+        AND(
+            ISPICKVAL(PRIORVALUE(Status), &quot;Qualified&quot;),
+            ISPICKVAL(Status, &quot;Unqualified&quot;)
+        ),
+        AND(
+            ISPICKVAL(PRIORVALUE(Status), &quot;Unqualified&quot;),
+            OR(
+                ISPICKVAL(Status, &quot;New&quot;),
+                ISPICKVAL(Status, &quot;Working&quot;),
+                ISPICKVAL(Status, &quot;Qualified&quot;)
+            )
+        ),
+        ISPICKVAL(PRIORVALUE(Status), &quot;Unqualified&quot;)
+    )
+)</errorConditionFormula>
+    <errorMessage>Le statut du lead ne peut pas être rétrogradé. Veuillez vous assurer que le statut du lead ne passe pas d&apos;un état plus avancé à un état moins avancé</errorMessage>
+</ValidationRule>

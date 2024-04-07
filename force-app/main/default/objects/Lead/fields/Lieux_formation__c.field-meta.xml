@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lieux_formation__c</fullName>
+    <externalId>false</externalId>
+    <label>Lieux de la formation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Au Kremlin Bicêtre dans les locaux de Des-Click formation</fullName>
+                <default>false</default>
+                <label>Au Kremlin Bicêtre dans les locaux de Des-Click formation</label>
+            </value>
+            <value>
+                <fullName>Dans vos locaux</fullName>
+                <default>false</default>
+                <label>Dans vos locaux</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

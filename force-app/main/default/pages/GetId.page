@@ -1,0 +1,5 @@
+<apex:page standardController="Opportunity">
+    <apex:outputText value="{!Opportunity.Id}" />
+  
+   
+</apex:page>

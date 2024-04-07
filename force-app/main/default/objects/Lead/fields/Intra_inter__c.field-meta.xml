@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Intra_inter__c</fullName>
+    <externalId>false</externalId>
+    <label>Intra/ inter</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Une formation en intra-entreprise (formation délivrée exclusivement à vous)</fullName>
+                <default>false</default>
+                <label>Une formation en intra-entreprise (formation délivrée exclusivement à vous)</label>
+            </value>
+            <value>
+                <fullName>Une formation en inter-entreprise (formation qui réunit plusieurs entreprise)</fullName>
+                <default>false</default>
+                <label>Une formation en inter-entreprise (formation qui réunit plusieurs entreprise)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

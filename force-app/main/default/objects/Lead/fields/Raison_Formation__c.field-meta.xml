@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Raison_Formation__c</fullName>
+    <externalId>false</externalId>
+    <label>Raison de Formation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Difficulté économique</fullName>
+                <default>false</default>
+                <label>Difficulté économique</label>
+            </value>
+            <value>
+                <fullName>Mieux mesurer la performance de votre activité</fullName>
+                <default>false</default>
+                <label>Mieux mesurer la performance de votre activité</label>
+            </value>
+            <value>
+                <fullName>Mutations technologiques (Digitalisation)</fullName>
+                <default>false</default>
+                <label>Mutations technologiques (Digitalisation)</label>
+            </value>
+            <value>
+                <fullName>Développez vos ventes</fullName>
+                <default>false</default>
+                <label>Développez vos ventes</label>
+            </value>
+            <value>
+                <fullName>Mieux gérer la clientèle</fullName>
+                <default>false</default>
+                <label>Mieux gérer la clientèle</label>
+            </value>
+            <value>
+                <fullName>la règlementation (obligation légale : sécurité, hygiène, allergènes....)</fullName>
+                <default>false</default>
+                <label>la règlementation (obligation légale : sécurité, hygiène, allergènes....)</label>
+            </value>
+            <value>
+                <fullName>Assurer une meilleur qualité et d&apos;hygiène</fullName>
+                <default>false</default>
+                <label>Assurer une meilleur qualité et d&apos;hygiène</label>
+            </value>
+            <value>
+                <fullName>Développer les compétences de vos salariés</fullName>
+                <default>false</default>
+                <label>Développer les compétences de vos salariés</label>
+            </value>
+            <value>
+                <fullName>Favoriser la mobilité et les promotions internes</fullName>
+                <default>false</default>
+                <label>Favoriser la mobilité et les promotions internes</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
