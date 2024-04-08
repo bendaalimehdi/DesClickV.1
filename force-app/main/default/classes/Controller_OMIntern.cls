@@ -12,7 +12,7 @@ public with sharing class Controller_OMIntern {
         String opportunityId = ApexPages.currentPage().getParameters().get('id');
 
         // Query Formateur__c records related to the Opportunity
-        Formateurs = [SELECT Id, First_Name__c, Name, Adresse__City__s, Adresse__PostalCode__s, Adresse__Street__s, N_Siren__c, Type__c FROM Formateur__c WHERE Opportunity__c = :opportunityId AND Type__c = 'Formateur Interne' LIMIT 1];
+        Formateurs = [SELECT Id, First_Name__c, Name, Adresse__City__s, Adresse__PostalCode__s, Adresse__Street__s, N_Siren__c, Type__c FROM Formateur__c WHERE Opportunity__c = :opportunityId  LIMIT 1];
         
         // Check if Formateurs list is empty
         if (!Formateurs.isEmpty()) {
@@ -29,7 +29,7 @@ public with sharing class Controller_OMIntern {
             // Get today's date
             Date todayDate = Date.today();
             String formattedDate = String.valueOf(todayDate.year()) + String.valueOf(todayDate.month()).leftPad(2, '0') + String.valueOf(todayDate.day()).leftPad(2, '0');
-            String modifiedTitle = 'Devis_' + formattedDate;
+            String modifiedTitle = 'Ordre De Mission_' + formattedDate;
 
             // Check if opportunityId is not null
             if (opportunityId != null) {
@@ -55,7 +55,7 @@ public with sharing class Controller_OMIntern {
                         // Insert PDF as ContentVersion
                         ContentVersion contentVersionPDFToInsert = new ContentVersion(
                             Title = modifiedTitle,
-                            PathOnClient = 'Devis_' + formattedDate + '.pdf',
+                            PathOnClient = 'Ordre De Mission_' + formattedDate + '.pdf',
                             VersionData = pdfContent,
                             origin = 'H'
                         );
@@ -88,7 +88,7 @@ public with sharing class Controller_OMIntern {
                         // Insert PDF as ContentVersion
                         ContentVersion contentVersionPDFToInsert = new ContentVersion(
                             Title = modifiedTitle,
-                            PathOnClient = 'Devis_' + formattedDate + '.pdf',
+                            PathOnClient = 'Ordre De Mission_' + formattedDate + '.pdf',
                             VersionData = pdfContent,
                             origin = 'H'
                         );

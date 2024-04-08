@@ -1,0 +1,183 @@
+<apex:page showHeader="false" sidebar="True" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" standardController="Opportunity" extensions="Controller_FeuilleEmargement" renderAs="pdf" >
+    <html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Feuille Collective d’émargement</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                margin: 0;
+                padding: 0;
+                text-align: center; /* Center align content */
+            }
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #fff;
+                text-align: left; /* Align content to the left within the container */
+            }
+
+            /* .formArea {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            } */
+
+            .logo {
+                max-width: 150px;
+                margin: 20px auto;
+                display: block;
+            }
+
+            .yellow-span {
+                color: #07113b;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            table,
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            .footer {
+                text-align: center;
+                font-size: 10px;
+                margin-top: 20px;
+            }
+            .signature-section {
+                margin-top: 20px;
+                overflow: auto;
+                text-align: center;
+            }
+
+            .signature-section p {
+                display: inline-block;
+                width: 50%;
+            }
+
+            .left {
+                text-align: left;
+            }
+
+            .right {
+                text-align: right;
+            }
+            @page {
+          size: A4 ; /* Set page size to A4 */
+        }
+}
+
+        </style>
+
+    </head>
+    <body>
+    <div class="container">
+      <header style="text-align: center;">
+        <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo" style="display: block; margin: 0 auto;"/>
+        <h1 style="margin-top: 10px;">Feuille Collective d’émargement</h1>
+    </header>
+    
+        <section class="formArea">
+          <p>
+            Référence Dossier : <span><apex:outputText value=" {!opp.Num_ro_De_Dossier__c}" /></span> <br />
+            Folio : Raison sociale de l’organisme de formation DC WEB APS <br />
+            Contact : <b><i>M.Boumelassa</i></b> Courriel :
+            <b><i> formation@des-click.com</i></b> Téléphone :
+            <b><i> 06 50 37 10 97</i></b> <br />
+            <i>Intitulé de la formation : <span><apex:outputText value=" {!opp.Formation_choisie__c}" /></span> <br />
+            Période de formation concernée par la feuille d d’émargement :
+            <b> du : <span><apex:outputText value="{0,date,MM/dd/yyyy}">
+              <apex:param value="{!opp.Date_Formation__c}" />
+          </apex:outputText></span> </b>
+            <b> au : <span></span><apex:outputText value=" {!opp.Date_Fin_Formation__c}" /></b> </i> <br />
+            Lieu de la formation : <span><apex:outputText value=" {!opp.Account.Name} , {!Opp.Account.BillingStreet} {!opp.Account.BillingCity} {!opp.Account.BillingPostalCode}"  /> </span>
+        </p>
+        
+             
+            
+        	
+        	<section>
+ <table style="width: 100%">
+    <tr>
+        <td>
+            <b><i> Nom des prénoms des stagiaires</i></b>
+        </td>
+        <td colspan="2">
+            <b>Date : <i><apex:outputText value="{0,date,MM/dd/yyyy}">
+              <apex:param value="{!opp.Date_Formation__c}" />
+          </apex:outputText></i></b>
+        </td>
+        <td colspan="2">
+            <b>Date : <i><apex:outputText value=" {!opp.Date_Fin_Formation__c}" /></i></b>
+        </td>
+        <td>
+            <b> <i>Nbr d’heures</i></b>
+        </td>
+    </tr>
+    <tr>
+      <td style="width: 30%;"></td> <!-- La première colonne prend 25% de la largeur -->
+      <td style="width: 14%;"> <!-- Le reste est divisé uniformément entre les colonnes restantes -->
+          <b><i>M</i></b>
+      </td>
+      <td style="width: 14%;">
+          <b><i>AM</i></b>
+      </td>
+      <td style="width: 14%;">
+          <b><i>M</i></b>
+      </td>
+      <td style="width: 14%;">
+          <b><i>AM</i></b>
+      </td>
+      <td style="width: 14%;"></td> <!-- L'espace restant est 0% pour maintenir la composition du tableau -->
+  </tr>
+    <apex:repeat value="{!activeContacts}" var="contact">
+        <tr>
+            <td><b>{!contact.Salutation}</b> {!contact.LastName} {!contact.FirstName}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </apex:repeat>
+    <tr>
+        <td><b> Formateur : <br/> <apex:outputText value="{!formateur.Salutation__c} {!formateur.Name} {!formateur.First_Name__c} " /></b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+            <br/>
+           
+        </section>
+        </section> <!-- Corrected closing tag for the nested section -->
+        <div class="footer">
+            SAS - DC WEB APS<br/>
+            3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
+            Numéro SIRET : 81274844000037 <br/>
+            Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet de région de l’ile de France) - ID Data dock : 0080818<br/>
+        </div>
+    </div>
+    </body>
+    </html>
+</apex:page>
