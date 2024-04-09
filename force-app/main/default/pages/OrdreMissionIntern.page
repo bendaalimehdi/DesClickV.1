@@ -1,8 +1,7 @@
-
- <!-- * @description       : Visualforce page Ordre de mission Formateur Interne
+<!-- * @description       : Visualforce page Ordre de mission Formateur Interne
  * @author            : Ben Daali Mehdi
  * @group             : DC WEB APS
- * @last modified on  : 04-04-2024
+ * @last modified on  : 09-04-2024
  * @last modified by  : Ben Daali Mehdi -->
 
  <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" standardController="Opportunity" extensions="Controller_OMIntern" renderAs="Advanced_pdf">
@@ -11,7 +10,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Formation</title>
         <style type="text/css">
-    
             body { font-family: Arial, sans-serif; color: #000; line-height: 35px; }
             h1 { font-weight: bold; text-transform: uppercase; color: #0162c0; }
             h5 { color: #FF8C00; }
@@ -47,12 +45,12 @@
                 <p>
                     <center>
                         La société DC WEP APS, confie à Monsieur 
-                         <span  ><strong>{!Formateurs[0].Name} {!Formateurs[0].First_Name__c}</strong></span> une mission consistant à dispenser une 
-                        <span  ><strong>{!Opportunity.Formation_choisie__c}</strong></span>
+                        <span><strong>{!formateur.Formateur__r.Name} {!formateur.Formateur__r.First_Name__c}</strong></span> une mission consistant à dispenser une 
+                        <span><strong>{!Opportunity.Formation_choisie__c}</strong></span>.
                         Cette mission doit se dérouler à 
-                        <span  ><strong>{!Opportunity.Account.Name}, {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}  </strong></span> du 
-                        <span  ><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Opportunity.Date_Formation__c}" /></apex:outputText></strong></span> au
-                        <span  ><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Opportunity.Date_Formation__c}" /></apex:outputText></strong></span>
+                        <span><strong>{!Opportunity.Account.Name}, {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}</strong></span> du
+                        <span><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Opportunity.Date_Formation__c}" /></apex:outputText></strong></span> au
+                        <span><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Opportunity.Date_Fin_Formation__c}" /></apex:outputText></strong></span>.
                     </center>
                 </p>
                 <br/><br/>

@@ -1,3 +1,11 @@
+<!-- 
+ * @description       : visualforce page "Feuille_Emargement" to generate a pdf file for the collective signature of the trainees
+ * @author            : Ben Daali Mehdi
+ * @group             : DC WEB APS
+ * @last modified on  : 08-04-2024
+ * @last modified by  : Ben Daali Mehdi -->
+
+
 <apex:page showHeader="false" sidebar="True" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" standardController="Opportunity" extensions="Controller_FeuilleEmargement" renderAs="pdf" >
     <html>
     <head>
@@ -158,7 +166,7 @@
         </tr>
     </apex:repeat>
     <tr>
-        <td><b> Formateur : <br/> <apex:outputText value="{!formateur.Salutation__c} {!formateur.Name} {!formateur.First_Name__c} " /></b></td>
+        <td><b> Formateur : <br/> <apex:outputText value="{!opp.Formateur__r.Salutation__c} {!opp.Formateur__r.Name} {!opp.Formateur__r.First_Name__c} " /></b></td>
         <td></td>
         <td></td>
         <td></td>

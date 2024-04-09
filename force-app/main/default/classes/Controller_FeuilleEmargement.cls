@@ -17,7 +17,7 @@ public with sharing class Controller_FeuilleEmargement{
             try {
                 opp = [SELECT Id, Account.Name, Account.BillingStreet, Account.BillingCity, 
                                Account.BillingState, Account.BillingPostalCode, Account.Num_SIREN__c, 
-                               Num_ro_De_Dossier__c, Formation_choisie__c, Date_Formation__c, Date_Fin_Formation__c
+                               Num_ro_De_Dossier__c, Formation_choisie__c, Date_Formation__c, Date_Fin_Formation__c, Formateur__r.First_Name__c, Formateur__r.Name, Formateur__r.Salutation__c
                        FROM Opportunity 
                        WHERE Id = :opportunityId 
                        LIMIT 1];
@@ -32,10 +32,10 @@ public with sharing class Controller_FeuilleEmargement{
                 }
                 
                 // Query Formateur__c separately
-                formateur = [SELECT Id, First_Name__c, Name, Salutation__c 
-                             FROM Formateur__c 
-                             WHERE Opportunity__c = :opportunityId 
-                             LIMIT 1];
+                // formateur = [SELECT Id, Formateur__r.First_Name__c, Formateur__r.Name, Formateur__r.Salutation__c 
+                //              FROM Opportunity 
+                //              WHERE Id = :opportunityId 
+                //              LIMIT 1];
                 
                 if(formateur == null) {
                     ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Formateur not found.'));

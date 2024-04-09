@@ -1,26 +1,22 @@
 public with sharing class Controller_OMIntern {
-    private final Opportunity opp; // This line is commented out, consider removing if not needed
+    public Opportunity formateur { get; private set; }
+    public Date today { get { return Date.today(); } }
 
-    // List of Formateur__c records
-    public List<Formateur__c> Formateurs { get; private set; }
-
-    // Today's date property
-    public Date today { get { return Date.today(); }}
-
-    // Constructor
     public Controller_OMIntern(ApexPages.StandardController stdController) {
         String opportunityId = ApexPages.currentPage().getParameters().get('id');
 
-        // Query Formateur__c records related to the Opportunity
-        Formateurs = [SELECT Id, First_Name__c, Name, Adresse__City__s, Adresse__PostalCode__s, Adresse__Street__s, N_Siren__c, Type__c FROM Formateur__c WHERE Opportunity__c = :opportunityId  LIMIT 1];
-        
-        // Check if Formateurs list is empty
-        if (!Formateurs.isEmpty()) {
-            Formateur__c formateur = Formateurs[0];
+        // Retrieve Opportunity with related Formateur
+        List<Opportunity> opportunities =  [SELECT Id, Formateur__r.Name, Formateur__r.First_Name__c, Formateur__r.Adresse__City__s, Formateur__r.Adresse__PostalCode__s, Formateur__r.Adresse__Street__s, Formateur__r.N_Siren__c, Formateur__r.Type__c FROM Opportunity WHERE Id = :opportunityId  LIMIT 1];
+
+        // Check if opportunity exists
+        if (!opportunities.isEmpty()) {
+            formateur = opportunities[0];
         } else {
-            Formateurs = null;
+            formateur = null;
         }
     }
+
+
 
     // Method to generate PDF
     @AuraEnabled
@@ -34,12 +30,12 @@ public with sharing class Controller_OMIntern {
             // Check if opportunityId is not null
             if (opportunityId != null) {
                 // Query Formateur__c records related to the Opportunity
-                List<Formateur__c> formateurs = [SELECT Type__c FROM Formateur__c WHERE Opportunity__c = :opportunityId LIMIT 1];
+                List<Opportunity> formateurs = [SELECT Id, Formateur__r.Type__c FROM Opportunity WHERE Id = :opportunityId LIMIT 1];
                 
                 // Check if formateurs list is not empty
                 if (!formateurs.isEmpty()) {
-                    Formateur__c formateur = formateurs[0];
-                    if (formateur.Type__c == 'Formateur Interne') {
+                    Opportunity formateur = formateurs[0];
+                    if (formateur.Formateur__r.Type__c == 'Formateur Interne') {
                         // If Formateur Type is Interne, set PDF page to OrdreMissionIntern
                         PageReference pdfPage = Page.OrdreMissionIntern;
                         pdfPage.getParameters().put('id', opportunityId);
@@ -72,7 +68,7 @@ public with sharing class Controller_OMIntern {
                         insert contentlink;
 
                         return 'PDF generated successfully.';
-                    } else if (formateur.Type__c == 'Formateur Externe') {
+                    } else if (formateur.Formateur__r.Type__c == 'Formateur Externe') {
                         // If Formateur Type is Externe, set PDF page to OrdreMissionExtern
                         PageReference pdfPage = Page.OrdreMissionExtern;
                         pdfPage.getParameters().put('id', opportunityId);

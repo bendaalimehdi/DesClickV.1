@@ -10,15 +10,6 @@ private class TestController_OMIntern {
 
     @testSetup 
     static void setup() {
-        // Create Opportunity with Internal Formateur
-        Opportunity opportunityObjInternal = new Opportunity (
-            Formation_choisie__c = 'Formation HACCP', 
-            Date_Formation__c = System.today(), 
-            Name = 'Internal Formateur Opportunity', 
-            StageName = 'Conception', 
-            CloseDate = Date.today()
-        );
-        insert opportunityObjInternal;
 
         Formateur__c internalFormateurObj = new Formateur__c (
             Name = 'Test Formateur Internal', 
@@ -27,10 +18,32 @@ private class TestController_OMIntern {
             Adresse__City__s = 'test value', 
             Adresse__PostalCode__s = 'test value', 
             N_Siren__c = 'test value',
-            Type__c = 'Formateur Interne',
-            Opportunity__c = opportunityObjInternal.Id
+            Type__c = 'Formateur Interne'
+            
         );
         insert internalFormateurObj;
+        // Create Opportunity with Internal Formateur
+        Opportunity opportunityObjInternal = new Opportunity (
+            Formation_choisie__c = 'Formation HACCP', 
+            Date_Formation__c = System.today(), 
+            Name = 'Internal Formateur Opportunity', 
+            StageName = 'Conception', 
+            CloseDate = Date.today(),
+            Formateur__c = internalFormateurObj.Id
+        );
+        insert opportunityObjInternal;
+
+          Formateur__c externalFormateurObj = new Formateur__c (
+            Name = 'Test Formateur External', 
+            First_Name__c = 'test value1', 
+            Adresse__Street__s = 'Test Value1', 
+            Adresse__City__s = 'test value1', 
+            Adresse__PostalCode__s = 'test value1', 
+            N_Siren__c = 'test value1',
+            Type__c = 'Formateur Externe'
+           
+        );
+        insert externalFormateurObj;
 
         // Create Opportunity with External Formateur
         Opportunity opportunityObjExternal = new Opportunity (
@@ -38,21 +51,12 @@ private class TestController_OMIntern {
             Date_Formation__c = System.today(), 
             Name = 'External Formateur Opportunity', 
             StageName = 'Conception', 
-            CloseDate = Date.today()
+            CloseDate = Date.today(),
+            Formateur__c = externalFormateurObj.Id
         );
         insert opportunityObjExternal;
 
-        Formateur__c externalFormateurObj = new Formateur__c (
-            Name = 'Test Formateur External', 
-            First_Name__c = 'test value1', 
-            Adresse__Street__s = 'Test Value1', 
-            Adresse__City__s = 'test value1', 
-            Adresse__PostalCode__s = 'test value1', 
-            N_Siren__c = 'test value1',
-            Type__c = 'Formateur Externe',
-            Opportunity__c = opportunityObjExternal.Id
-        );
-        insert externalFormateurObj;
+      
 
         
       

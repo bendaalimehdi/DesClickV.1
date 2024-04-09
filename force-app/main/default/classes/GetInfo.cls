@@ -19,18 +19,18 @@ public  class GetInfo {
     }
     
     
-    @AuraEnabled(cacheable=true)
-    public static List<Formateur__c> getFormateurNames(String opportunityId) {
-        List<Formateur__c> formateur = new List<Formateur__c>();
+    // @AuraEnabled(cacheable=true)
+    // public static List<Formateur__c> getFormateurNames(String opportunityId) {
+    //     List<Formateur__c> formateur = new List<Formateur__c>();
         
-        // Ensure opportunityId is not null before proceeding
-        if (opportunityId != null) {
-            // Retrieve the Formateur__c records related to the given Opportunity
-            formateur = [SELECT Formateur__c.Name FROM Formateur__c WHERE Opportunity__c = :opportunityId];
-        }
+    //     // Ensure opportunityId is not null before proceeding
+    //     if (opportunityId != null) {
+    //         // Retrieve the Formateur__c records related to the given Opportunity
+    //         formateur = [SELECT Formateur__c.Name FROM Formateur__c WHERE Opportunity__c = :opportunityId];
+    //     }
         
-        return formateur;
-    }
+    //     return formateur;
+    // }
     
     
     
