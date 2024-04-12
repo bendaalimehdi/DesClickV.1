@@ -1,0 +1,171 @@
+<apex:page standardController="Opportunity" extensions="Controller_covocation_Stagaire" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" >
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>CONVOCATION stagiaire</title>
+        <style>
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+            
+            body {
+                font-family: "Arial", sans-serif;
+                color: #000;
+                line-height: 35px;
+            }
+
+            header img.logo {
+                max-width: 300px;
+                margin: 20px auto;
+                display: block;
+            }
+
+            h1 {
+                font-weight: bold;
+                font-style: italic;
+                color: #0162c0;
+            }
+
+            h5 {
+                color: #FF8C00;
+            }
+
+        
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+                text-align: center;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+
+            .italic {
+                font-style: italic;
+            }
+
+            b {
+                font-weight: bold;
+            }
+            .footer {
+                text-align: center;
+                font-size: 10px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <header>
+            <center>
+                <div>
+                    <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo"/>
+                    <h1>Convocation</h1>
+                </div>
+            </center>
+        </header>
+        <div class="container">
+            <section class="formArea">
+                <p>
+                    <div>
+                        <span class="yellow-span">Monsieur/Madame 
+                            
+                        ,</span>
+                        <apex:variable var="contact" value="{!$CurrentPage.parameters.contact}" />
+                      
+
+                        <apex:pageBlock>
+                            <apex:pageBlockTable value="{!activeContacts}" var="con">
+                                <apex:column value="{!con.FirstName}"/>
+                                <apex:column value="{!con.LastName}"/>
+                            </apex:pageBlockTable>
+                        </apex:pageBlock>
+                      
+                        
+                         (En accord avec votre responsable
+                        hiérarchique), nous avons le plaisir de vous convier à la formation :
+                        <br /><br />
+                        <b> Intitulé de la formation </b>:<span class="yellow-span"> nom de la formation</span><br />
+                        <b>Dont l’objectif est de vous permettre </b>
+                        <span class="yellow-span">objectif de la formation</span>
+                    </div>
+                    <br /><br />
+                    <div>
+                        <b>À partir de </b>:
+                        <br /><br />
+                        <table>
+                            <tr>
+                                <th>Date</th>
+                                <th>Début</th>
+                                <th>Fin</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!Opportunity.Date_Formation__c}" />
+                                    </apex:outputText>
+                                </td>
+                                <td>9 : 00</td>
+                                <td>17 : 00</td>
+                            </tr>
+                            <tr>
+                                <td> <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                    <apex:param value="{!Opportunity.Date_Fin_Formation__c}" />
+                                    </apex:outputText></td>
+                                <td>9 : 00 </td>
+                                <td>17 : 00</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br /><br />
+                    <div>
+                        Lieu :<span class="yellow-span"><b>nom de la société , adresse <br /><br /> </b></span> Formateur :
+                        <br /><br />
+                        <table>
+                            <tr>
+                                <th>Civilité</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                            </tr>
+                            <tr>
+                                
+                                <td><span class="yellow-span"><apex:outputText value="{!opp.Formateur__r.Salutation__c}"  /></span></td>
+                                <td><span class="yellow-span"><apex:outputText value="{!opp.Formateur__r.Name} {!opp.Formateur__r.First_Name__c}" /></span></td>
+                                <td><span class="yellow-span"><apex:outputText value="{!opp.Formateur__r.First_Name__c}" /></span></td>
+                            </tr>
+                        </table>
+                        <br />
+                        Les supports de cours vous seront fournis en début de formation ainsi que des moyens informatiques si
+                        nécessaire, Si vous le désirez, vous pouvez utiliser votre PC personnel (sous Windows et dotés des
+                        logiciels utilisés pendant la formation) pour effectuer les travaux dirigés lors de la session.
+                        <br /><br />
+                        Le programme détaillé de cette formation et un plan d’accès sont joints en annexe.<br /><br />
+                        Pour toute demande d’information concernant cette formation, vous pouvez vous adresser à : Boumelassa
+                        Abdelaziz au 01 80 91 62 25<br />
+                        Veuillez agréer, Monsieur, nos salutations distinguées.<br />
+                        <span class="italic">M. Faouzi DJABER Président Directeur Général</span>
+                    </div>
+                </p>
+                <br /><br />
+                <br /><br />
+                <div class="footer">
+                    SAS - DC WEB APS<br/>
+                    3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
+                    Numéro SIRET : 81274844000037 <br/>
+                    Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet de région de l’ile de France) - ID Data dock : 0080818<br/>
+                </div>
+            </section>
+        </div>
+    </body>
+   
+</apex:page>

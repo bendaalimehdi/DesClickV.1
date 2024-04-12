@@ -1,30 +1,45 @@
-<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" standardController="Opportunity" extensions="MyControllerExtension" renderAs="Advanced_pdf">
-    <html>
+<apex:page standardController="Opportunity" extensions="Controller_Convocation_Formateur" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" renderAs="Advanced_pdf">
     <head>
-        <meta charset="UTF-8"/>
-        <title>Formation</title>
         <style>
+            @page {
+                margin: 50px;
+                size: A4;
+                font-family: Arial, sans-serif;
+                line-height: 1.5;
+            }
+
+            h1 {
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #0162c0;
+            }
+
+            h5 {
+                color: #FF8C00;
+            }
+
+            .d-flex {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             body {
                 font-family: Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
-                margin: 0;
-                padding: 0;
+                color: #000;
+                line-height: 35px;
             }
 
-            .container {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 20px;
-                background-color: #f9f9f9;
+            p b {
+                color: #000000;
+                font-style: italic; 
             }
 
-            .formArea {
-                background-color: #fff;
-                padding: 30px;
-                border-radius: 5px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                margin-bottom: 20px;
+            td {
+                text-align: center;
+                background-color: #efefef;
+                margin: 1px;
+                border: 1px solid #000; 
             }
 
             .logo {
@@ -33,25 +48,9 @@
                 display: block;
             }
 
-            .yellow-span {
-                color: #07113b;
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            table,
-            th,
-            td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
-
-            th {
-                background-color: #f2f2f2;
+            footer {
+                text-align: center;
+                line-height: 25px;
             }
 
             .footer {
@@ -59,154 +58,105 @@
                 font-size: 10px;
                 margin-top: 20px;
             }
-            .signature-section {
-                margin-top: 20px;
-                overflow: auto;
-                text-align: center;
+
+            ul {
+                margin-top: 0px;
+                padding-top: 0px;
+                margin-bottom: 0px;
+                padding-bottom: 0px;
             }
 
-            .signature-section p {
-                display: inline-block;
-                width: 50%;
+            .page-break {
+                page-break-before: always; /* Force le saut de page avant cet élément */
             }
 
-            .left {
-                text-align: left;
+            @media print {
+                /* Styles spécifiques pour l'impression */
             }
-
-            .right {
-                text-align: right;
-            }
-
         </style>
-
     </head>
     <body>
-    <div class="container">
         <header>
-            <center>
-                <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo"/>
-                <h1>CONVENTION DE FORMATION PROFESSIONNELLE</h1>
-                <p>(Article L.6353-1 du Code du travail)</p>
-            </center>
+            <section class="d-flex">
+                <div class="hdLeft">
+                    <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo"/>
+                    <center>
+                        <h1>Convocation</h1>
+                        <p><small>(Remise à main propre contre décharge)</small></p>
+                    </center>
+                    <p>
+                        Responsable Pole formation : <b> Mr BOUMELASSA</b>
+                        <b> M.BOUMELASSA</b>
+                    </p>
+                </div>
+                <div class="hd-right">
+                    <p>Destinataire(s)<br/>
+                        Pour Information : <b>Direction : Mr DJABER Faouzi</b> <br/>
+                        Pour Action : <span><b>Formateur :<apex:outputText value="{!opp.Formateur__r.Salutation__c} {!opp.Formateur__r.Name} {!opp.Formateur__r.First_Name__c}" /></b></span><br/>
+                        Lieu et Date : Le Kremlin Bicêtre, le <b> <apex:outputText value="{0,date,dd MMMM yyyy}"> <apex:param value="{!TODAY()}" /></apex:outputText></b>
+                    </p>
+                </div>
+            </section>
         </header>
         <section class="formArea">
-            <h4>Entre les soussignés : </h4>
+            Nous vous informons que vous allez dispenser une formation dont les modalités sont précisées ci-dessous. Nous sommes à votre disposition pour tout complément d’information et pour vous assister dans cette mission.
+            <hr/>
             <p>
-                <span><b>1</b></span> la société DC WEB APS domiciliée au 3, rue Lech Walesa 94270 - Le Kremlin-Bicêtre et enregistrée sous le numéro de déclaration d'activité 11 94 101 81 94 auprès de la Direction Régionale des Entreprises, de la Concurrence, de la Consommation, du Travail et de l’Emploi en Île de France (DIRECCTE Île de France).
-                <br/>
-                <span><b>2</b></span> La société {!Opportunity.Account.Name} domiciliée {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}  <br/>immatriculée au Registre du Commerce et des Sociétés sous le numéro  représentée par son gérant : <apex:outputText value="{!IF(gerant.size > 0, gerant[0].Salutation + ' ' + gerant[0].Name, 'Aucun gérant trouvé')}" escape="true"/>.
+                Formation : <b> {!Opportunity.Formation_choisie__c}</b><br/>
+                Lieu de la formation :<b>{!Opportunity.Account.BillingStreet}, {!Opportunity.Account.BillingPostalCode}, {!Opportunity.Account.BillingCity} </b> <br/>
+                Date de la formation :<b><apex:outputText value="{0,date,MM/dd/yyyy}"> 
+                <apex:param value="{!Opportunity.Date_Formation__c}" />
+                </apex:outputText> </b> <br/>
+                Durée :<b>{!Opportunity.Duree_Formation__c}  {!Opportunity.Unit__c}</b>
             </p>
-            <br/>
-            <p>
-                Est conclue la convention suivante, en application des dispositions du Livre III de la Sixième partie du Code du travail portant organisation de la formation professionnelle continue.
-                <br/>
-                <b>Article 1er : Objet de la convention</b>
-                <br/>
-                L’organisme DC WEB APS organisera l’action de formation suivante :
-            </p>
-            <ul>
-                <li>Intitulé du stage: <span class="yellow-span"><b>{!Opportunity.Formation_choisie__c}</b></span></li>
-                <li>Nature de l’action : <span class="yellow-span"><b>INTRA présentiel</b></span></li>
-                <li>Objectifs opérationnels : joints en annexe</li>
-                <li>Programme et méthodes : joints en annexe</li>
-                <li>Type d’action de formation (article L.6313-1 du Code du travail): Action de formation</li>
-                <li>Durée : <span class="yellow-span"><b>{!Opportunity.Duree_Formation__c}</b></span></li>
-                <li>Lieu: <span class="yellow-span"><b>{!Opportunity.Account.Name}</b></span> domiciliée <span class="yellow-span"><b> {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity} </b></span></li>
-                <li>Dates et horaires : du <span class="yellow-span"><b>{!Opportunity.Date_Formation__c}</b></span> au <span class="yellow-span"><b>{!Opportunity.Date_Formation__c}</b></span> de 9:00 à 12:30 et de 13:30 à 17 :00</li>
-            </ul>
-            <p>
-                <b>Article 2 : Effectif formé</b>
-                <br/>
-                L’organisme DC WEB APS animera une/des sessions de formation pour les personnes suivantes
-            </p>
-            <table>
+            <table width="100%">
                 <tr>
-                    <th>Civilité</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Fonction</th>
+                    <td>
+                        <b> Date </b>
+                    </td>
+                    <td><b> Début</b></td>
+                    <td><b> Fin</b></td>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputText value="{0,date,MM/dd/yyyy}">
+                        <apex:param value="{!Opportunity.Date_Formation__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td>09:00 </td>
+                    <td>17:00 </td>
+                </tr>
+                <tr>
+                    <td>
+                        <apex:outputText value="{0,date,MM/dd/yyyy}">
+                        <apex:param value="{!Opportunity.Date_Fin_Formation__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td>09:00 </td>
+                    <td>17:00 </td>
+                </tr>
+            </table>
+
+            <div class="page-break"></div> <!-- Ajout du saut de page ici -->
+
+            <p><b>Stagiaire(s):</b></p>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <b> Civilité </b>
+                    </td>
+                    <td><b> Nom</b></td>
+                    <td><b> Prénom</b></td>
                 </tr>
                 <apex:repeat value="{!activeContacts}" var="contact">
                     <tr>
-                        <td>{!contact.Salutation}</td>
-                        <td><span class="yellow-span"><b>{!contact.LastName}</b></span></td>
-                        <td><span class="yellow-span"><b>{!contact.FirstName}</b></span></td>
-                        <td>{!contact.Fonction__c}</td>
+                        <td><b>{!contact.Salutation}</b></td>
+                        <td>{!contact.LastName}</td>
+                        <td>{!contact.FirstName}</td>
                     </tr>
                 </apex:repeat>
             </table>
-            <br/>
-            <p>
-                <b>Article 3 : Dispositions financières</b>
-                <br/>
-                En contrepartie de cette action de formation, l’employeur s’acquittera des coûts suivants :
-            </p>
-            <table>
-                <tr>
-                    <th>Quantité</th>
-                    <th>Prix</th>
-                    <th>Cout Total H.T</th>
-                    <th>T.V.A 20%</th>
-                    <th>TOTAL GENERAL (TTC)</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>{!Opportunity.Taux__c}€</td>
-                    <td>{!Opportunity.Taux__c}€</td>
-                    <td><apex:outputText value="{!Opportunity.Taux__c * 0.20}" />€</td>
-                    <td><apex:outputText value="{!Opportunity.Taux__c * 1.20}" />€</td>
-                </tr>
-            </table>
-            
-            <p>
-                <b>Article 4 : Modalités d’évaluation et de sanction</b>
-                <br/>
-                Le contrôle des connaissances sera assuré par la vérification de l’assiduité des participants et l’accent mis sur leur participation constante et active, notamment dans le cadre d’études des cas pratiques, préparées et exposées par les formateurs.
-                <br/>
-                Une attestation, précisant la nature et la durée de la session, sera remise aux bénéficiaires à l’issue de la formation
-                (Moyen de contrôle de l’assiduité (attestation d’assiduité + feuilles d’émargement pour les formations en présentiel / attestation d’assiduité + relevé de connexion pour les formations à distance) : attestation d’assiduité + feuilles d’émargement)
-            </p>
-            <br/>
-            <p>
-                <b>Article 5 : Modalités de règlement</b>
-                <br/>
-                En cas de paiement effectué par un OPCO, l’Etablissement s’engage à effectuer la demande de prise en charge avant le début de la formation.
-                En cas de prise en charge partielle par l’OPCO, la différence de coût restera à la charge de la société <span class="yellow-span">{!Opportunity.Account.Name}</span>
-                En cas de refus de prise en charge par l’OPCO, ou si l’accord de prise en charge par l’OPCO ne nous parvient pas au 1er jour de la formation, la totalité des frais de formation sera facturée à la société <span class="yellow-span">{!Opportunity.Account.Name}.</span>
-            </p>
-            <br/>
-            <p>
-                <b>Article 6 : Dédit ou abandon</b>
-                <br/>
-                En cas de dédit par l’entreprise à moins de 15 jours francs avant le début de l’action mentionnée à l’article 1, ou d’abandon en cours de formation par un ou plusieurs stagiaires, l’organisme remboursera sur le coût total, les sommes qu’il n’aura pas réellement dépensées ou engagées pour la réalisation de ladite action.
-            </p>
-            <br/>
-            <p>
-                <b>Article 7 : Différends éventuels</b>
-                <br/>
-                Si une contestation ou un différend ne peuvent être réglés à l’amiable, le Tribunal de Créteil sera seul compétent pour régler le litige.
-                <br/>Fait en double exemplaire, à Le Kremlin Bicêtre, le <br/>  <apex:outputText value="{0,date,dd MMMM yyyy}"> <apex:param value="{!TODAY()}" />
-                </apex:outputText>
-            </p>
-            <section>
-                <div style="float: left; width: 50%; text-align: center;">
-                    <p><strong>Acceptation - Date<br/>Signature du demandeur</strong></p>
-                </div>
-                <div style="float: right; width: 50%; text-align: center;">
-                    <p><strong>DJABER Faouzi, <br/>Représentant légal de DC WEB APS</strong></p>
-                </div>
-                
-            <br/><br/>
-            <br></br>
-            <br/><br/>
-            <br></br>
-            <br/><br/>
-            <br></br>
-            <br/><br/>
-            <br></br>
-        </section>    
-        <section>
+
             <div class="footer">
                 SAS - DC WEB APS<br/>
                 3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
@@ -214,8 +164,5 @@
                 Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet de région de l’ile de France) - ID Data dock : 0080818<br/>
             </div>
         </section>
-        </section>
-    </div>
     </body>
-    </html>
 </apex:page>
