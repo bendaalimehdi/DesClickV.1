@@ -1,0 +1,38 @@
+<apex:page standardController="Opportunity" extensions="Controller_covocation_Stagaire" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Other Page</title>
+        <style>
+            /* Your existing CSS styles */
+        </style>
+    </head>
+    <body>
+        <header>
+            <center>
+                <div>
+                    <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo"/>
+                    <h1>Other Page</h1>
+                </div>
+            </center>
+        </header>
+        <div class="container">
+            <section class="formArea">
+                <!-- Display selected contact name from the first page -->
+                <apex:outputPanel rendered="{!selectedContactName != null}">
+                    <p>Selected Contact Name: {!selectedContactName}</p>
+                </apex:outputPanel>
+            </section>
+            <p>Selected Contact ID: {!selectedContactId}</p>
+        </div>
+        <!-- Button to refresh the Visualforce page -->
+        <button onclick="refreshPage()">Refresh Page</button>
+        
+        <script>
+            // Function to refresh the Visualforce page
+            function refreshPage() {
+                location.reload();
+            }
+        </script>
+    </body>
+</apex:page>

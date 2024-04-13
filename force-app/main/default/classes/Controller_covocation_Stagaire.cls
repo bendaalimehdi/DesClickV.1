@@ -1,113 +1,91 @@
 public with sharing class Controller_covocation_Stagaire {
-    public List<Contact> activeContacts { get; private set; }
-    public Opportunity opp { get; set; }
-    public Id selectedContactId { get; set; }
-    public String selectedContactName { get; set; } // Property to store selected contact's name
+    public String opportunityId { get; set; }
+    public String contactId { get; set; }
+    public String contactFirstName { get; set; }
+    public String contactLastName { get; set; }
 
-    public Controller_covocation_Stagaire(ApexPages.StandardController stdController) {
-        this.opp = (Opportunity) stdController.getRecord();
-        opp = [SELECT Id, Num_ro_De_Dossier__c, Formation_choisie__c, Date_Formation__c, Date_Fin_Formation__c, Formateur__r.First_Name__c, Formateur__r.Name, Formateur__r.Salutation__c, AccountId
-    FROM Opportunity 
-    WHERE Id = :opp.Id 
-    LIMIT 1];
-    activeContacts = [SELECT Id, Name, FirstName, LastName, Salutation, Fonction__c FROM Contact WHERE AccountId = :opp.AccountId AND active__c = true];
-        
-        
-    }
+    
+    public Controller_covocation_Stagaire(ApexPages.StandardController controller) {
+        this.opportunityId = controller.getId();
+        this.contactId = ApexPages.currentPage().getParameters().get('contactId');
 
-    public List<SelectOption> getActiveContactOptions() {
-        List<SelectOption> options = new List<SelectOption>();
-        for (Contact contact : activeContacts) {
-            options.add(new SelectOption(contact.Id, contact.Name));
+        if (this.contactId != null) {
+            Contact contact = [SELECT FirstName, LastName FROM Contact WHERE Id = :this.contactId LIMIT 1];
+            this.contactFirstName = contact.FirstName;
+            this.contactLastName = contact.LastName;
         }
-        return options;
     }
 
-    public PageReference generatePDF() {
-        try {
-            if (selectedContactId != null) {
-                // Get the selected contact's name and pass it to the generatePDFs method
-                selectedContactName = getContact(selectedContactId).Name;
-                return generatePDFs(selectedContactId);
+
+
+    
+
+@AuraEnabled
+public static String generatePDFs(String opportunityId) {
+    try {
+        if (opportunityId != null) {
+            Opportunity opp = [SELECT Id, Name, AccountId FROM Opportunity WHERE Id = :opportunityId LIMIT 1];
+            List<Contact> activeContacts = [SELECT Id, FirstName, LastName FROM Contact WHERE AccountId = :opp.AccountId AND active__c = true];
+
+            if (activeContacts.isEmpty()) {
+                return 'No active contacts found for the account.';
             } else {
-                // If no contact is selected, clear the selectedContactName
-                selectedContactName = null;
-                return null;
-            }
-            } catch (Exception e) {
-            System.debug('Error generating PDF: ' + e.getMessage());
-            return null;
-        }
-    }
-    
-    
+                List<ContentVersion> contentVersionsToInsert = new List<ContentVersion>();
+                List<ContentDocumentLink> contentDocumentLinksToInsert = new List<ContentDocumentLink>();
 
-    public PageReference generatePDFs(Id contactId) {
-        try {
-            Contact selectedContact = getContact(contactId); // Retrieve the selected contact based on the ID
-            if (selectedContact != null) {
-                // Generate the PDF content using the selected contact's information
-                PageReference pdfPage = Page.convocation_Stagaire;
-                pdfPage.getParameters().put('contactId', selectedContact.Id); 
-    
-                Blob pdfContent;
-                if (!Test.isRunningTest()) {
-                    pdfContent = pdfPage.getContentAsPDF();
-                } else {
-                    pdfContent = Blob.valueOf('This is a test PDF content.');
+                for (Contact contact : activeContacts) {
+                    PageReference pdfPage = Page.convocation_Stagaire;
+                    pdfPage.getParameters().put('id', opp.Id);
+                    pdfPage.getParameters().put('contactId', contact.Id);
+                    
+                    Blob pdfContent;
+                    if (!Test.isRunningTest()) {
+                        pdfContent = pdfPage.getContentAsPDF();
+                    } else {
+                        pdfContent = Blob.valueOf('This is a test PDF content.');
+                    }
+
+                    String modifiedTitle = 'PDF for ' + contact.FirstName + ' ' + contact.LastName;
+                    String formattedDate = Datetime.now().format('yyyy-MM-dd_HH-mm-ss');
+                    ContentVersion contentVersionPDFToInsert = new ContentVersion(
+                        Title = modifiedTitle,
+                        PathOnClient = 'Devis_' + formattedDate + '.pdf',
+                        VersionData = pdfContent,
+                        origin = 'H'
+                    );
+
+                    contentVersionsToInsert.add(contentVersionPDFToInsert);
                 }
-    
-                String modifiedTitle = 'PDF for ' + selectedContact.Name;
-                String formattedDate = Datetime.now().format('yyyy-MM-dd');
-                ContentVersion contentVersionPDFToInsert = new ContentVersion(
-                    Title = modifiedTitle,
-                    PathOnClient = 'Convocation_' + formattedDate + '.pdf',
-                    VersionData = pdfContent,
-                    origin = 'H'
-                );
-    
-                insert contentVersionPDFToInsert;
-    
-                ContentVersion contentVersionPDF = [SELECT Id, Title, ContentDocumentId
-                    FROM ContentVersion WHERE Id = :contentVersionPDFToInsert.Id LIMIT 1];
-    
-                ContentDocumentLink contentlink = new ContentDocumentLink();
-                contentlink.LinkedEntityId = opp.Id;
-                contentlink.ContentDocumentId = contentVersionPDF.ContentDocumentId;
-                contentlink.ShareType = 'V';
-    
-                insert contentlink;
-    
-                return null; // Redirect or refresh as needed
-            }
-            return null;
-        } catch (Exception e) {
-            System.debug('Error generating PDF: ' + e.getMessage());
-            return null;
-        }
-    }
-    
 
-    public Contact getContact(Id contactId) {
-        return [SELECT Id, Name, FirstName, LastName, Salutation, Fonction__c FROM Contact WHERE Id = :contactId];
-    }
+                insert contentVersionsToInsert;
 
-    public void refreshSelectedContact() {
-        try {
-          
-            if(selectedContactId != null) {
-                
-                Contact selectedContact = [SELECT Id, Name, FirstName, LastName, Salutation, Fonction__c FROM Contact WHERE Id = :selectedContactId LIMIT 1];
-                
-               
-                System.debug('Selected Contact Name: ' + selectedContact.Name);
-                
-             
+                List<Id> insertedContentVersionIds = new List<Id>();
+                for (ContentVersion cv : contentVersionsToInsert) {
+                    insertedContentVersionIds.add(cv.Id);
+                }
+
+                Map<Id, ContentVersion> contentVersionMap = new Map<Id, ContentVersion>([SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id IN :insertedContentVersionIds]);
+
+                for (Id cvId : insertedContentVersionIds) {
+                    ContentVersion cv = contentVersionMap.get(cvId);
+                    ContentDocumentLink contentlink = new ContentDocumentLink();
+                    contentlink.LinkedEntityId = opp.Id;
+                    contentlink.ContentDocumentId = cv.ContentDocumentId;
+                    contentlink.ShareType = 'V';
+                    contentDocumentLinksToInsert.add(contentlink);
+                }
+
+                insert contentDocumentLinksToInsert;
+
+                return 'PDFs generated successfully.';
             }
-        } catch (Exception e) {
-           
-            System.debug('Error refreshing selected contact: ' + e.getMessage());
+        } else {
+            return 'Invalid Opportunity Id.';
         }
+    } catch (Exception e) {
+        System.debug('Error generating PDFs: ' + e.getMessage());
+        return 'Error generating PDFs. Please contact your administrator.';
     }
-    
+}
+
 }
