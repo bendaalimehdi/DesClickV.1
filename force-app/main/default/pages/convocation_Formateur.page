@@ -32,14 +32,14 @@
 
             p b {
                 color: #000000;
-                font-style: italic; 
+                font-style: italic; /* Ajout de la mise en forme italique */
             }
 
             td {
                 text-align: center;
                 background-color: #efefef;
                 margin: 1px;
-                border: 1px solid #000; 
+                border: 1px solid #000; /* Ajout de la bordure autour des cellules */
             }
 
             .logo {

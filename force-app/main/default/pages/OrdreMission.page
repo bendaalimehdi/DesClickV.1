@@ -1,22 +1,17 @@
-<!-- * @description       : Visualforce page Ordre de mission Formateur Interne
- * @author            : Ben Daali Mehdi
- * @group             : DC WEB APS
- * @last modified on  : 09-04-2024
- * @last modified by  : Ben Daali Mehdi -->
-
- <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" standardController="Opportunity" extensions="Controller_OMIntern" renderAs="Advanced_pdf">
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" renderAs="pdf">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Formation</title>
         <style type="text/css">
+    
             body { font-family: Arial, sans-serif; color: #000; line-height: 35px; }
             h1 { font-weight: bold; text-transform: uppercase; color: #0162c0; }
             h5 { color: #FF8C00; }
             .d-flex { display: flex; align-items: center; }
             .d-flex span { margin: 0 30px; }
             .formArea { margin: 15px; box-shadow: 0 0 30px 1px #CDCDCD; border-radius: 20px; padding: 40px; }
-            p b { color: hsl(0, 0%, 0%); }
+            p b { color: #FF8C00; }
             td { text-align: center; background-color: #efefef; margin: 1px; }
             footer { text-align: center; line-height: 25px; }
             ul { margin-top: 0; padding-top: 0; margin-bottom: 0; padding-bottom: 0; }
@@ -45,22 +40,19 @@
                 <p>
                     <center>
                         La société DC WEP APS, confie à Monsieur 
-                        <span><strong>{!formateur.Formateur__r.Name} {!formateur.Formateur__r.First_Name__c}</strong></span> une mission consistant à dispenser une 
-                        <span><strong>{!Opportunity.Formation_choisie__c}</strong></span>.
+                        <span class="yellow-span"><strong>(nom, prénom formateur)</strong></span> une mission consistant à dispenser une formation  
+                        <span class="yellow-span"><strong>(Nom de la formation)</strong></span>
                         Cette mission doit se dérouler à 
-                        <span><strong>{!Opportunity.Account.Name}, {!Opportunity.Account.BillingStreet} {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}</strong></span> du
-                        <span><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Opportunity.Date_Formation__c}" /></apex:outputText></strong></span> au
-                        <span><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Opportunity.Date_Fin_Formation__c}" /></apex:outputText></strong></span>.
+                        <span class="yellow-span"><strong>(nom de l’entreprise, adresse+département</strong></span> du 
+                        <span class="yellow-span"><strong>(date début de formation)</strong></span> au
+                        <span class="yellow-span"><strong>(date fin de la formation)</strong></span>
                     </center>
                 </p>
                 <br/><br/>
-                <p>A Kremlin-Bicêtre, le <span><strong><apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!today}" /></apex:outputText></strong></span></p>
-
+                <p>A Kremlin-Bicêtre, le <span class="yellow-span"><strong> ../../….</strong></span></p>
                 <br/><br/>
-              
-                <div>
-                    <p class="f-r"><strong>DJABER Faouzi</strong>,<br/>Représentant légal de DC WEB APS</p>
-                </div>
+                <p class="f-r"><b> Faouzi DJABER</b><br/>
+                Président Directeur Général</p>
             </section>
         </div>
     </body>

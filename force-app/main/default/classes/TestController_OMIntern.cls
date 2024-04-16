@@ -22,10 +22,11 @@ private class TestController_OMIntern {
             
         );
         insert internalFormateurObj;
-        // Create Opportunity with Internal Formateur
+       
         Opportunity opportunityObjInternal = new Opportunity (
             Formation_choisie__c = 'Formation HACCP', 
-            Date_Formation__c = System.today(), 
+            Date_Formation__c = DateTime.now() ,
+            Date_Fin_Formation__c = DateTime.now() ,
             Name = 'Internal Formateur Opportunity', 
             StageName = 'Conception', 
             CloseDate = Date.today(),
@@ -45,13 +46,14 @@ private class TestController_OMIntern {
         );
         insert externalFormateurObj;
 
-        // Create Opportunity with External Formateur
+        
         Opportunity opportunityObjExternal = new Opportunity (
             Formation_choisie__c = 'Formation HACCP', 
-            Date_Formation__c = System.today(), 
             Name = 'External Formateur Opportunity', 
             StageName = 'Conception', 
             CloseDate = Date.today(),
+            Date_Formation__c = DateTime.now() ,
+            Date_Fin_Formation__c = DateTime.now() ,
             Formateur__c = externalFormateurObj.Id
         );
         insert opportunityObjExternal;

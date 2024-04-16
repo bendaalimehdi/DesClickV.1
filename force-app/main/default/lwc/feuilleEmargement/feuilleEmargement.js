@@ -1,12 +1,12 @@
-import generatePDFs from '@salesforce/apex/Controller_covocation_Stagaire.generatePDFs';
+import generatePDF from '@salesforce/apex/Controller_FeuilleEmargement.generatePDF';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { LightningElement, api } from 'lwc';
 
-export default class PDFGenerator extends LightningElement {
+export default class FeuilleEmargement extends LightningElement {
     @api recordId;  
 
     handleGeneratePDF() {
-        generatePDFs({ opportunityId: this.recordId })
+        generatePDF({ opportunityId: this.recordId })
             .then(contentDocumentId => {
                 this.dispatchEvent(
                     new ShowToastEvent({

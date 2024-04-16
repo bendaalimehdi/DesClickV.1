@@ -76,16 +76,28 @@
         <section class="formArea">
             <p>
                 <div>
-                    <span class="yellow-span">Monsieur/Madame {!contactFirstName} {!contactLastName}</span>
+                   
+                    <table>
+                        <tr>
+                            <th>Salutation</th>
+                            <th>Prenom</th>
+                            <th>Nom</th>
+                        </tr>
+                        <tr>
+                            <td>{!contactSalutation}</td>
+                            <td>{!contactFirstName}</td>
+                            <td>{!contactLastName}</td>
+                        </tr>
+                    </table>
                     (En accord avec votre responsable hiérarchique), nous avons le plaisir de vous convier à la formation :
-                    <br /><br />
-                    <b> Intitulé de la formation </b>:<span class="yellow-span"> nom de la formation</span><br />
-                    <b>Dont l’objectif est de vous permettre </b><span class="yellow-span">objectif de la formation</span>
+                    <br />
+                    <b> Intitulé de la formation </b>:<span class="yellow-span"> <apex:outputText value="{!Opportunity.Formation_choisie__c}"  /></span><br />
+                    
                 </div>
-                <br /><br />
+                <br />
                 <div>
                     <b>À partir de </b>:
-                    <br /><br />
+                    <br />
                     <table>
                         <tr>
                             <th>Date</th>
@@ -112,9 +124,9 @@
                         </tr>
                     </table>
                 </div>
-                <br /><br />
+                <br />
                 <div>
-                    Lieu :<span class="yellow-span"><b>nom de la société , adresse <br /><br /> </b></span> Formateur :
+                    Lieu :<span class="yellow-span"><b> {!Opportunity.Account.Name}, {!Opportunity.Account.BillingStreet}, {!Opportunity.Account.BillingPostalCode}, {!Opportunity.Account.BillingCity} <br /><br /> </b></span> Formateur :
                     <br /><br />
                     <table>
                         <tr>
@@ -124,24 +136,29 @@
                         </tr>
                         <tr>
                             <td><span class="yellow-span"><apex:outputText value="{!Opportunity.Formateur__r.Salutation__c}"  /></span></td>
-                            <td><span class="yellow-span"><apex:outputText value="{!Opportunity.Formateur__r.Name} {!Opportunity.Formateur__r.First_Name__c}" /></span></td>
+                            <td><span class="yellow-span"><apex:outputText value="{!Opportunity.Formateur__r.Name} " /></span></td>
                             <td><span class="yellow-span"><apex:outputText value="{!Opportunity.Formateur__r.First_Name__c}" /></span></td>
                         </tr>
                     </table>
-                    <br />
+                    <br /><br />
                     Les supports de cours vous seront fournis en début de formation ainsi que des moyens informatiques si
                     nécessaire, Si vous le désirez, vous pouvez utiliser votre PC personnel (sous Windows et dotés des
                     logiciels utilisés pendant la formation) pour effectuer les travaux dirigés lors de la session.
-                    <br /><br />
-                    Le programme détaillé de cette formation et un plan d’accès sont joints en annexe.<br /><br />
-                    Pour toute demande d’information concernant cette formation, vous pouvez vous adresser à : Boumelassa
+                    <br />
+                    Le programme détaillé de cette formation et un plan d’accès sont joints en annexe.<br />
+                    Pour toute demande d’information concernant cette formation, vous pouvez vous adresser à : Mr.Boumelassa
                     Abdelaziz au 01 80 91 62 25<br />
                     Veuillez agréer, Monsieur, nos salutations distinguées.<br />
-                    <span class="italic">M. Faouzi DJABER Président Directeur Général</span>
+                    <div style="text-align: left;">
+                        <span class="italic">M. Faouzi DJABER</span>
+                        <br />
+                        <span class="italic">Président Directeur Général</span>
+                    </div>
+                    
                 </div>
             </p>
             <br /><br />
-            <br /><br />
+            
             <div class="footer">
                 SAS - DC WEB APS<br/>
                 3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
