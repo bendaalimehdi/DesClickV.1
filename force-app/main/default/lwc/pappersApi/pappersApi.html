@@ -1,0 +1,24 @@
+<template>
+  <lightning-card title="Company Information" icon-name="standard:account">
+    <div class="slds-m-around_medium">
+      <div class="slds-m-top_medium">
+        <lightning-button
+          label="Fetch Data"
+          onclick={handleButtonClick}
+        ></lightning-button>
+      </div>
+    </div>
+    <template if:true={companyInfo}>
+      <lightning-datatable
+        key-field="siren"
+        data={companyInfo}
+        columns={columns}
+        hide-checkbox-column="true"
+      >
+      </lightning-datatable>
+    </template>
+    <template if:true={error}>
+      <p>Error fetching company info: {error}</p>
+    </template>
+  </lightning-card>
+</template>
