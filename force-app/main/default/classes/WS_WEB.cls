@@ -1,25 +1,42 @@
-@RestResource(urlMapping='/v1/web')
+@RestResource(urlMapping='/v1/Wordpress')
 global with sharing class WS_WEB {
-    
-        
-        @HttpPost
-        global static String handleFormSubmission(String email, String siretNumber, String desiredDate, String expectedBenefits, String trainingLocation, String opco, String trainingReason, String intraInter) {
-            // Process the form submission data here
-            System.debug(responseMessage);
-            // For demonstration purposes, let's just return a success message with the received data
-            String responseMessage = 'Form submission successful! \n\n';
-            responseMessage += 'Email: ' + email + '\n';
-            responseMessage += 'Numéro de SIREN: ' + siretNumber + '\n';
-            responseMessage += 'Date souhaité: ' + desiredDate + '\n';
-            responseMessage += 'Bénéfice attendus: ' + expectedBenefits + '\n';
-            responseMessage += 'Lieux de la formation: ' + trainingLocation + '\n';
-            responseMessage += 'Opco: ' + opco + '\n';
-            responseMessage += 'Raison de Formation: ' + trainingReason + '\n';
-            responseMessage += 'Intra/ inter: ' + intraInter;
-            
-            return responseMessage;
-        
-        }
-        
+  @HttpPost
+  global static String updateRecord(
+    String email,
+    String siren,
+    String dateSouhaite,
+    String opco,
+    String raisonFormation,
+    String inter_intra,
+    String beneficesAttendus,
+    String lieuxFormation
+  ) {
+    try {
+      // Query the Lead based on the provided email
+      Lead[] leads = [SELECT Id FROM Lead WHERE Email = :email LIMIT 1];
+
+      if (leads.isEmpty()) {
+        return 'No Lead found with the provided email.';
+      }
+
+      // Update the Lead fields with the provided data
+      Lead existingLead = leads[0];
+      existingLead.Num_SIREN__c = siren;
+      existingLead.Date_souhaite__c = dateSouhaite; // Assign the provided value directly
+      existingLead.Opco__c = opco;
+      existingLead.Raison_Formation__c = raisonFormation;
+      existingLead.Intra_inter__c = inter_intra;
+      existingLead.Benefice_attendus__c = beneficesAttendus;
+      existingLead.Lieux_formation__c = lieuxFormation;
+
+      // Update the Lead record
+      update existingLead;
+
+      // Return success message
+      return 'Lead updated successfully.';
+    } catch (Exception e) {
+      // Handle any exceptions and return error message
+      return 'Error updating Lead: ' + e.getMessage();
     }
-    
+  }
+}

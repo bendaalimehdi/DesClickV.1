@@ -27,7 +27,7 @@ export default class PappersComponent extends LightningElement {
   @wire(getRecord, { recordId: "$recordId", fields: ["Account.Num_Siren__c"] })
   wiredRecord({ error, data }) {
     if (data) {
-      // Do nothing here as we will fetch data when the button is clicked
+      // Get the SIREN number from the record
     } else if (error) {
       this.error = error;
       this.showToast("Error", "Could not fetch record details", "error");
