@@ -1,0 +1,188 @@
+<apex:page
+  standardController="Opportunity"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  renderAs="pdf"
+>
+  <html>
+    <head>
+      <style type="text/css">
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 12px;
+          margin: 0.5cm; /* réduire la marge du document */
+        }
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          text-align: center;
+        }
+        .logo {
+          max-width: 150px;
+          margin: 20px auto;
+          display: block;
+        }
+        .content {
+          margin-top: 100px;
+        }
+        .footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          text-align: center;
+          font-size: 10px;
+        }
+        .footer p {
+          margin: 2px;
+        }
+        .left {
+          width: calc(50% - 0.25cm);
+          float: left;
+        }
+        .right {
+          width: calc(50% - 0.25cm);
+          float: right;
+          margin-left: 0.5cm;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="content">
+        <div>
+          <img src="{!URLFOR($Resource.Logo)}" class="logo" />
+          <p style="text-align: center">
+            CONTRAT DE SOUS-TRAITANCE FORMATION <br /> N° Dossier : 23-017 -
+            Référence Dossier OPCO : AKTO-2301AF006478
+          </p>
+        </div>
+        <div class="left">
+          <p>Entre les soussignés :</p>
+          <p>
+            DC WEB APS, société par actions simplifiée au capital social de 1000
+            €, dont le siège social est situé au 3 RUE LECH WALESA 94270 LE
+            KREMLIN-BICETRE, immatriculée au RSC de Créteil sous le numéro 812
+            748 440, représentée par M. Faouzi DJABER agissant et ayant les
+            pouvoirs nécessaires en tant que président.
+          </p>
+          <p>ci-après « le donneur d’ordre »</p>
+          <p>Et</p>
+          <p>
+            Madame MESLATY Ines, EI, dont le siège social est situé au 4 Che Des
+            Bourgognes – 95000 CERGY - 95000 CERGY, immatriculé au répertoire
+            des entreprises et établissements de l'INSEE sous le numéro
+            89123269600015.
+          </p>
+          <p>ci-après « le sous-traitant »</p>
+          <p>Il a été convenu ce qui suit :</p>
+          <p><strong>Article premier : Nature du contrat</strong></p>
+          <p>
+            Le présent contrat est conclu dans le cadre d’une prestation de
+            formation ponctuelle réalisée par le sous-traitant au bénéfice du
+            donneur d’ordre.
+          </p>
+          <p><strong>Article 2 : Objet du contrat</strong></p>
+          <p>
+            La formation, objet du contrat, est la suivante : HYGIENE ET
+            SECURITE ALIMENTAIRE EN RESTAURATION COMMERCIALE
+          </p>
+          <p>
+            Date(s) : de 13/02/2023 à 14/02/2023 Heures : 09:00 h à 12:30 et
+            13:30 h à 17:00.
+          </p>
+          <p>Lieu : SAS BNY - 26 grande place 59100 Roubaix</p>
+          <p>Nombre de stagiaires : 6</p>
+          <p><strong>Article 3 : Durée du contrat</strong></p>
+          <p>
+            Le présent contrat est strictement limité à la prestation de
+            formation visée à l’article 2. Il cesse de plein droit à son terme.
+          </p>
+          <p><strong>Article 4 : Obligations du sous-traitant</strong></p>
+          <p>Le sous-traitant s’engage à :</p>
+          <ul>
+            <li>
+              Se déplacer à notre siège social pour récupérer les documents (les
+              feuilles d’émargement, affiches, support d’auto-contrôle et
+              d’audit, les différents tests et questionnaires d’évaluation) au
+              moins deux jours avant le début de la formation.
+            </li>
+            <li>
+              Animer personnellement la formation dans le respect des objectifs
+              fixés par le donneur d’ordre et conformément aux exigences de la
+              dernière version applicable du référentiel Qualiopi ;
+            </li>
+            <li>
+              Communiquer au donneur d’ordre ses besoins en matériel
+              (projecteur, tableau, photocopies de supports…) au moins 8 jours
+              avant le début de la formation ;
+            </li>
+            <li>
+              Assurer l’évaluation des stagiaires à l’issue de l’action de
+              formation, afin de permettre au donneur d’ordre d’établir les
+              attestations de fin.
+            </li>
+          </ul>
+        </div>
+        <div class="right">
+          <p><strong>Article 5 : Obligations du donneur d’ordre</strong></p>
+          <p>Le donneur d’ordre s’engage à :</p>
+          <ul>
+            <li>
+              Confier au sous-traitant la formation prévue à l’article 2 ;
+            </li>
+            <li>Prendre en charge la gestion administrative ;</li>
+            <li>
+              Transmettre au sous-traitant une copie des feuilles de présence
+              signées par les stagiaires ;
+            </li>
+            <li>
+              Transmettre au sous-traitant une copie des questionnaires de
+              satisfaction remplis par les stagiaires à l’issue de la formation
+              ;
+            </li>
+            <li>
+              Prévenir le sous-traitant au moins 3 jours à l’avance en cas
+              d’annulation ou de report de la formation.
+            </li>
+          </ul>
+          <p><strong>Article 6 : Modalités financières</strong></p>
+          <p>
+            Le sous-traitant percevra une rémunération de 300 euros HT par
+            journée. Le paiement sera effectué à réception de la facture.
+          </p>
+          <p><strong>Article 7 : Dispositions diverses</strong></p>
+          <p>
+            Le présent contrat ne crée entre les parties aucun lien de
+            subordination, le sous-traitant demeurant libre et responsable du
+            contenu de la formation ;
+          </p>
+          <p>
+            Le sous-traitant dispose d’une propriété intellectuelle et/ou
+            artistique sur le contenu de sa formation. Le donneur d’ordre
+            s’engage à ne pas reproduire ni diffuser ce contenu sans l’accord du
+            sous-traitant.
+          </p>
+          <p>
+            Le sous-traitant s’engage à respecter une clause de non-concurrence
+            d’une durée de 2 ans vis-à-vis du client du donneur d’ordre.
+          </p>
+          <p>Fait au Le Kremlin-Bicêtre, le 13/02/2023</p>
+          <p>Le donneur d’ordre,</p>
+          <p>F. DJABER</p>
+          <p>Le sous-traitant MESLATY Ines– Formatrice – EI</p>
+        </div>
+      </div>
+      <div class="footer">
+        <p style="text-align: center">
+          SAS - DC WEB APS <br /> 3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre
+          - Numéro SIRET : 81274844000037
+        </p>
+      </div>
+    </body>
+  </html>
+</apex:page>

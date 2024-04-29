@@ -4,29 +4,82 @@
  * @group             : DC WEB APS
  * @last modified on  : 01-04-2024
  * @last modified by  : Ben Daali Mehdi
-**/
+ **/
 @isTest
 private class TestSendEmailNewLead {
-    @isTest
-    static void testSendEmailOnNewLeads() {
-        // Create test data
-        Lead newLead = new Lead(
-            FirstName = 'Test',
-            LastName = 'Lead',
-            Status = 'New',
-            Email = 'test@example.com',
-            Company = 'TestCompany'
-        );
-        insert newLead;
-        Test.startTest();
+  static void commonTestLogic(Lead newLead) {
+    Test.startTest();
 
-        SendEmailNewLead.SendEmailNewLead(new List<Lead>{newLead}, new Map<Id, Lead>{newLead.Id => newLead});
+    SendEmailNewLead.sendEmails(new List<Lead>{ newLead });
 
-        Integer invocations = Limits.getEmailInvocations();
+    Integer invocations = Limits.getEmailInvocations();
 
-        Test.stopTest();
+    Test.stopTest();
 
-        // Assert that the email was sent
-        System.assertEquals(1, invocations, 'Email has not been sent');
-    }  
+    // Assert that the email was sent
+    System.assertEquals(1, invocations, 'Email has not been sent');
+  }
+
+  @isTest
+  static void testSendEmailOnNewLead() {
+    // Create test data
+    Lead newLead = new Lead(
+      FirstName = 'Test',
+      LastName = 'Lead',
+      Status = 'New',
+      Email = 'test@example.com',
+      Company = 'TestCompany'
+    );
+    insert newLead;
+
+    commonTestLogic(newLead);
+  }
+
+  @isTest
+  static void testSendEmailOnWorkingHACCP() {
+    // Create test data
+    Lead newLead = new Lead(
+      FirstName = 'Test',
+      LastName = 'Lead',
+      Status = 'Working',
+      Email = 'test@example.com',
+      Formation_Souhaite__c = 'Formation HACCP',
+      Company = 'TestCompany'
+    );
+    insert newLead;
+
+    commonTestLogic(newLead);
+  }
+
+  @isTest
+  static void testSendEmailOnWorkingPiloterSite() {
+    // Create test data
+    Lead newLead = new Lead(
+      FirstName = 'Test',
+      LastName = 'Lead',
+      Status = 'Working',
+      Email = 'test@example.com',
+      Formation_Souhaite__c = 'Formation Piloter Mon Site',
+      Company = 'TestCompany'
+    );
+    insert newLead;
+
+    commonTestLogic(newLead);
+  }
+
+  @isTest
+  static void testSendEmailOnWorkingPiloterApp() {
+    // Create test data
+    Lead newLead = new Lead(
+      FirstName = 'Test',
+      LastName = 'Lead',
+      Status = 'Working',
+      Email = 'test@example.com',
+      Formation_Souhaite__c = 'Formation Piloter Mon Application',
+      Company = 'TestCompany'
+    );
+    insert newLead;
+
+    commonTestLogic(newLead);
+  }
 }
