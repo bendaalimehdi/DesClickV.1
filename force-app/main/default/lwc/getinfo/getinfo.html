@@ -1,46 +1,26 @@
 <template>
-    <template if:true={showComponent}>
-        <template if:true={error}>
-            <p>{error}</p>
-        </template>
-
-        <!-- Employees Dual List Box -->
-        <lightning-layout>
-            <lightning-layout-item size="6">
-                <lightning-dual-listbox
-                    name="employees"
-                    label="Employees"
-                    source-label="Available Employees"
-                    selected-label="Selected Employees"
-                    options={employeeOptions}
-                    onchange={handleChange}
-                >
-                </lightning-dual-listbox>
-            </lightning-layout-item>
-
-            <!-- Formateurs Dual List Box -->
-            <lightning-layout-item size="6">
-                <lightning-dual-listbox
-                    name="formateurs"
-                    label="Formateurs"
-                    source-label="Available Formateurs"
-                    selected-label="Selected Formateurs"
-                    options={formateurOptions}
-                    onchange={handleFormateurChange}
-                >
-                </lightning-dual-listbox>
-            </lightning-layout-item>
-        </lightning-layout>
-
-        <!-- Send Button -->
-        <div class="slds-align_absolute-center slds-var-m-top_large">
-            <lightning-button 
-                variant="brand"
-                label="Send" 
-                title="Send" 
-                onclick={handleSelected}
-                disabled={activateButton}>
-            </lightning-button>
-        </div>
+  <template if:true={showComponent}>
+    <template if:true={error}>
+      <p>{error}</p>
     </template>
+
+    <lightning-dual-listbox
+      name="employees"
+      label="Employees"
+      source-label="Available Employees"
+      selected-label="Selected Employees"
+      options={employeeOptions}
+      onchange={handleChange}
+    >
+    </lightning-dual-listbox>
+    <lightning-button
+      variant="brand"
+      class="slds-align_absolute-center slds-var-m-top_large"
+      label="Send"
+      title="send"
+      onclick={handleSelected}
+      disabled={activateButton}
+    >
+    </lightning-button>
+  </template>
 </template>

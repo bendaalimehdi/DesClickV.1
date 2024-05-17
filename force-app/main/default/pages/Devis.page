@@ -1,193 +1,296 @@
-<apex:page renderAs="advanced_pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false"  standardController="Opportunity" extensions="DevisController">
-    <html>
+<apex:page
+  renderAs="pdf"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  standardController="Opportunity"
+  extensions="DevisController"
+>
+  <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>CONVOCATION stagiaire</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                color: #000;
-                margin: 0;
-                padding: 0;
-            }
-            .check {
-                width: 20px;
-                height: 15px;
-            }
+      <meta charset="UTF-8" />
+      <title>CONVOCATION stagiaire</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+        .check {
+          width: 20px;
+          height: 15px;
+        }
 
-            /* Define the container to hold all content */
-            .container {
-                width: 100%;
-                margin: 0 auto;
-                padding: 20px;
-            }
+        .container {
+          width: calc(
+            100% - 1cm
+          ); /* Adjust container width to match page width minus left and right margins */
+          margin: 0 auto; /* Center the container horizontally */
+          padding: 20px;
+        }
 
-            header {
-                margin-bottom: 20px;
-            }
+        header {
+          margin-bottom: 20px;
+        }
 
-            header img {
-                max-width: 250px;
-                margin-bottom: 20px;
-            }
+        header img {
+          max-width: 250px;
+          margin-bottom: 20px;
+        }
 
-            h2 {
-                color: #080808;
-                margin: 0;
-                font-size: 16px;
-            }
+        h2 {
+          color: #080808;
+          margin: 0;
+          font-size: 16px;
+        }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 20px;
-            }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+        }
 
-            th, td {
-                border: 1px solid #ddd;
-                padding: 10px;
-                text-align: left;
-            }
+        th,
+        td {
+          border: 1px solid #ddd;
+          padding: 10px;
+          text-align: left;
+        }
 
-            .yellow-span {
-                background-color: rgb(252, 252, 252);
-            }
+        .yellow-span {
+          background-color: rgb(252, 252, 252);
+        }
 
-            .underlined {
-                text-decoration: underline;
-            }
+        .underlined {
+          text-decoration: underline;
+        }
 
-            .italic {
-                font-style: italic;
-            }
+        .italic {
+          font-style: italic;
+        }
 
-            .centered {
-                text-align: center;
-            }
+        .centered {
+          text-align: center;
+        }
 
-            .small-text {
-                font-size: 10px; 
-                color: grey;
-                margin-top: 10px;
-            }
+        .small-text {
+          font-size: 10px;
+          color: grey;
+          margin-top: 10px;
+        }
 
-            footer {
-                text-align: center;
-                font-size: 10px;
-                margin-top: 20px;
-            }
+        footer {
+          text-align: center;
+          font-size: 10px;
+          margin-top: 20px;
+        }
 
-            /* Set page size and margins */
-            @page {
-                size: 21cm 29.7cm;
-                margin: 0.5cm;
-            }
-            .signature-container {
-                width: 100%;
-                overflow: hidden; /* Clearfix hack to contain floats */
-                }
+        @page {
+          size: 21cm 29.7cm;
+          /* margin: 0.5cm 2cm; */
+        }
+        .signature-container {
+          width: 100%;
+          overflow: hidden;
+        }
 
-                .signature-left {
-                float: left;
-                width: 45%; /* Adjust width as needed */
-                text-align: center;
-                }
+        .signature-left {
+          float: left;
+          width: 45%;
+          text-align: center;
+        }
 
-                .signature-right {
-                float: right;
-                width: 45%; /* Adjust width as needed */
-                text-align: right; /* Align text to the right */
-                margin-right: 5%; /* Ajouter une marge droite */
-                text-align: center;
-                }
-        </style>
+        .signature-right {
+          float: right;
+          width: 45%;
+          text-align: right;
+          margin-right: 5%;
+          text-align: center;
+        }
+        .right-align {
+          float: right;
+        }
+        .clear {
+          clear: both;
+        }
+      </style>
     </head>
 
     <body>
-        <div class="container">
-            <header>
-                <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo"/>
-                <h2>
-                    <span class="yellow-span">NOM DE L'ENTREPRISE:</span> <span class="dynamic-content">{!Opportunity.Account.Name}</span> <br/>
-                    Adresse de l'entreprise: {!Opportunity.Account.BillingStreet}, {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}
-                    <br/>
-                    N°Siren :<span class="yellow-span"><br/></span>
-                </h2>
-                <h2>A Kremlin-Bicêtre ; Le <apex:outputText value="{0,date,dd MMMM yyyy}"> <apex:param value="{!TODAY()}" /></apex:outputText><span class="yellow-span"><br/></span></h2>
-            </header>
-            
-            <section>
-                <p>Date de validité : 1 mois</p>
-                <table>
-                    <tr>
-                        <th>Description</th>
-                        <th>Qté</th>
-                        <th>Prix unitaire</th>
-                        <th>Montant HT</th>
-                    </tr>
-                    <tr>
-                        <td >
-                            <strong class="underlined">Formation</strong>: <span class="yellow-span">nom de la formation: {!Opportunity.Formation_choisie__c}</span><br/>
-                            <strong class="underlined">Lieux</strong>: <span class="yellow-span">adresse de l'entreprise: {!Opportunity.Account.BillingStreet}, {!Opportunity.Account.BillingPostalCode} {!Opportunity.Account.BillingCity}</span><br/>
-                            <strong class="underlined">Date</strong>: <span class="yellow-span">date début formation: {!Opportunity.Date_Formation__c}</span> au <span class="yellow-span">date fin de formation: xxx</span><br/>
-                            <strong class="underlined">Horaires</strong>: de 9:00 à 12:30 et de 13:30 à 17:00 xxx<br/>
-                            <strong class="underlined">Durée</strong>: nombre des heures (nombres jours){!Opportunity.Duree_Formation__c}<br/>
-                            <strong class="underlined">Formation</strong>: en <span class="yellow-span">INTRA</span><br/>
-                            Tarif est de nombre de stagiaire <span class="yellow-span">nombres stagiaires x tarifs heures x nombres heures = Montant ht</span><br/>
-                            Hors taxes (tarif : INTRA ou INTER nombre de jours- forfait journalier mettre le prix -(nombre de stagiaire))
-                        </td>
-                        <td>1,00</td>
-                        <td><span class="yellow-span">{!Opportunity.Taux__c}</span></td>
-                        <td><span class="yellow-span">{!Opportunity.Taux__c}</span></td>
-                    </tr>
-                </table>
-            
-                <table>
-                    <tr>
-                        <td class="underlined">Total HT</td>
-                        <td class="underlined">TVA</td>
-                        <td class="underlined">Total TTC</td>
-                    </tr>
-                    <tr>
-                        <td><span class="yellow-span">{!Opportunity.Taux__c}</span></td>
-                        <td><span class="yellow-span">20%</span></td>
-                        <td><span class="yellow-span">{!Opportunity.Taux__c * 1.20 }</span></td>
-                    </tr>
-                </table>
-                
-                <div class="content">
-                    <img src="{!URLFOR($Resource.uncheckbox)}" alt="" class="check"/>
-                    <label for="mandatCheck">Mandat (facultatif)</label><br/>
-                    <p class="italic">
-                        Par la présente et à la date de signature, je mandate Faouzi DJABER, représentant légal de l'organisme de formation SAS DC WEB APS, pour effectuer toutes les démarches nécessaires à la constitution et au suivi de mon dossier auprès de l'OPCO ou du FAF jusqu'à son règlement. Tout document ou déclaration transmis en mon nom par le mandataire m'engage en cas d'erreur, de non-conformité ou de fausse déclaration.
-                    </p>
-                </div>
-                
-            </section>
+      <div class="container">
+        <header>
+          <img src="{!URLFOR($Resource.Logo)}" alt="" class="logo" />
+          <h2 class="right-align">
+            <span>{!Opportunity.Account.Name}</span> <br />
+            <span
+              >{!Opportunity.Account.BillingStreet},
+              <br /> {!Opportunity.Account.BillingPostalCode},
+              {!Opportunity.Account.BillingCity}</span
+            ><br />
+            <span
+              >N°Siret :
+              <strong>{!Opportunity.Account.Num_SIREN__c}</strong></span
+            ><br /> A Kremlin-Bicêtre, Le
+            <span
+              ><apex:outputText value="{0,date,dd/MM/yyyy}"
+                ><apex:param value="{!TODAY()}" /></apex:outputText></span
+            ><br />
+            <div class="clear"></div>
+            <div class="clear"></div>
+          </h2>
+          <div style="text-align: center">
+            <strong>Devis Numéro : {!Opportunity.Num_Devis__c}</strong>
+          </div>
+        </header>
+        <div class="clear"></div>
 
-            <p class="centered small-text">En cas de mandat, ces signatures valent bon pour mandat et bon pour acceptation de mandat</p>
+        <section>
+          <p>Date de validité : 1 mois</p>
+          <table>
+            <tr>
+              <th>Description</th>
+              <th>Qté</th>
+              <th>Prix unitaire</th>
+              <th>Montant HT</th>
+            </tr>
+            <tr>
+              <td>
+                <strong class="underlined">Formation</strong>:
+                <span> {!Opportunity.Formation_choisie__c}</span><br />
+                <strong class="underlined">Lieux</strong>:
+                <span>
+                  {!Opportunity.Account.Name},
+                  {!Opportunity.Account.BillingStreet},
+                  {!Opportunity.Account.BillingPostalCode}
+                  {!Opportunity.Account.BillingCity}</span
+                ><br /> <strong class="underlined">Date</strong>: du
+                <span>
+                  <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param
+                      value="{!DATEVALUE(Opportunity.Date_Formation__c)}"
+                    />
+                  </apex:outputText>
+                </span>
+                au
+                <span>
+                  <apex:outputText value="{0,date,dd/MM/yyyy}">
+                    <apex:param
+                      value="{!DATEVALUE(Opportunity.Date_Fin_Formation__c)}"
+                    />
+                  </apex:outputText> </span
+                ><br /> <strong class="underlined">Horaires</strong>: de 9:00 à
+                12:30 et de 13:30 à 17:00 <br />
+                <strong class="underlined">Durée</strong>:
+                <apex:outputText
+                  value="{!ROUND(Opportunity.Duree_Formation__c, 0)}"
+                />
+                {!Opportunity.Unit__c}<br />
+                <strong class="underlined">Formation</strong>: en
+                <span>INTRA</span><br /> Tarif est de nombre de stagiaire
+                <span
+                  >nombres stagiaires x tarifs heures x nombres heures = Montant
+                  ht <br /> (
+                  <apex:outputText
+                    value="{!ROUND(Opportunity.Nombre_Stagiaire__c, 0)}"
+                  />
+                  x
+                  <apex:outputText value="{!ROUND(Opportunity.Taux__c, 2)}" />€
+                  x
+                  <apex:outputText
+                    value="{!ROUND(Opportunity.Duree_Formation__c, 0)}"
+                  />
+                  =
+                  <apex:outputText value="{!ROUND(Opportunity.Somme__c, 2)}" />
+                  )</span
+                ><br />
+              </td>
+              <td>1</td>
+              <td>
+                <span
+                  ><apex:outputText
+                    value="{!ROUND(Opportunity.Somme__c, 2)}"
+                  />€</span
+                >
+              </td>
+              <td>
+                <span
+                  ><apex:outputText
+                    value="{!ROUND(Opportunity.Somme__c, 2)}"
+                  />€</span
+                >
+              </td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td class="underlined" style="text-align: center">Total HT</td>
+              <td class="underlined" style="text-align: center">TVA</td>
+              <td class="underlined" style="text-align: center">Total TTC</td>
+            </tr>
+            <tr>
+              <td style="text-align: center">
+                <span
+                  ><apex:outputText
+                    value="{!ROUND(Opportunity.Somme__c, 2)}"
+                  />€</span
+                >
+              </td>
+              <td style="text-align: center"><span>20%</span></td>
+              <td style="text-align: center">
+                <span
+                  ><apex:outputText
+                    value="{!ROUND(Opportunity.Somme__c * 1.2, 2)}" /></span
+                >€
+              </td>
+            </tr>
+          </table>
 
-            <div class="signature-section">
-                <div class="signature-container">
-                  <div class="signature-left">
-                    <p><strong>Acceptation</strong><br/>Signature du demandeur</p>
-                  </div>
-                  <div class="signature-right">
-                    <p><strong>DJABER Faouzi</strong>,<br/>Représentant légal de DC WEB APS</p>
-                  </div>
-                </div>
-              </div>
-        
-        </div>
-        
-        <footer>
-            <p class="footer">
-                SAS - DC WEB APS<br/>
-                3, Rue Lech Walesa – 94270 Le Kremlin-Bicêtre<br/>
-                Numéro SIRET : 81274844000037 <br/>
-                Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet de région de l’ile de France) - ID Data dock : 0080818
+          <div class="content">
+            <img src="{!URLFOR($Resource.uncheckbox)}" alt="" class="check" />
+            <label for="mandatCheck">Mandat (facultatif)</label><br />
+            <p class="italic">
+              Par la présente et à la date de signature, je mandate Faouzi
+              DJABER, représentant légal de l'organisme de formation SAS DC WEB
+              APS, pour effectuer toutes les démarches nécessaires à la
+              constitution et au suivi de mon dossier auprès de l'OPCO ou du FAF
+              jusqu'à son règlement. Tout document ou déclaration transmis en
+              mon nom par le mandataire m'engage en cas d'erreur, de
+              non-conformité ou de fausse déclaration.
             </p>
-        </footer>
+          </div>
+        </section>
+
+        <p class="centered small-text">
+          En cas de mandat, ces signatures valent bon pour mandat et bon pour
+          acceptation de mandat
+        </p>
+
+        <div class="signature-section">
+          <div class="signature-container">
+            <div class="signature-left">
+              <p><strong>Acceptation</strong><br />Signature du demandeur</p>
+            </div>
+            <div class="signature-right">
+              <p>
+                <strong>DJABER Faouzi</strong>,<br />Représentant légal de DC
+                WEB APS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p class="footer">
+          SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le
+          Kremlin-Bicêtre<br /> Numéro SIRET : 81274844000037 <br />
+          Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet de
+          région de l’ile de France) - ID Data dock : 0080818
+        </p>
+      </footer>
     </body>
-    </html>
+  </html>
 </apex:page>
