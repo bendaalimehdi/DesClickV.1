@@ -1,0 +1,277 @@
+<apex:page
+  renderAs="pdf"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  standardController="Opportunity"
+  extensions="DevisController"
+>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Company Report</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: calc(100% - 1cm);
+          margin: 0 auto;
+          padding: 20px;
+        }
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        header img {
+          max-width: 150px;
+        }
+        header .company-info {
+          text-align: center;
+          font-size: 18px;
+        }
+        h2 {
+          color: #080808;
+          margin: 0;
+          font-size: 16px;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          font-size: 10px;
+        }
+        th,
+        td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+        .vertical-text {
+          writing-mode: vertical-lr;
+          transform: rotate(180deg);
+          white-space: nowrap;
+        }
+        .check {
+          width: 15px;
+          height: 15px;
+        }
+        footer {
+          text-align: center;
+          font-size: 10px;
+          margin-top: 20px;
+        }
+        @page {
+          size: A4 landscape;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <header>
+          <img src="{!URLFOR($Resource.Logo)}" alt="Company Logo" />
+          <div class="company-info">
+            <p>
+              {!Opportunity.Account.Name}, {!Opportunity.Account.BillingStreet},
+              {!Opportunity.Account.BillingPostalCode},
+              {!Opportunity.Account.BillingCity}
+            </p>
+
+            <p><h3>Contrôle à la réception</h3></p>
+          </div>
+        </header>
+        <table>
+          <thead>
+            <tr>
+              <th>Fournisseurs</th>
+              <th>Produits</th>
+              <th colspan="2">DLC / DDM (DLUO)</th>
+              <th colspan="2">Nature Emballage</th>
+              <th colspan="2">Quantité</th>
+              <th colspan="2">Température</th>
+              <th>N° de Lot</th>
+              <th>Observations</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Conforme</th>
+              <th>Non Conforme</th>
+              <th>Conforme</th>
+              <th>Non Conforme</th>
+              <th>Conforme</th>
+              <th>Non Conforme</th>
+              <th>Conforme</th>
+              <th>Non Conforme</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Repeat this block for each row of data -->
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td><input type="checkbox" class="check" /></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <!-- End of repeat -->
+          </tbody>
+        </table>
+        <footer>
+          <p>
+            SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le
+            Kremlin-Bicêtre<br /> Numéro SIRET : 81274844000037 <br /> Numéro de
+            déclaration d’activité : 11 94 10181 94 (auprès du préfet de région
+            de l’ile de France) - ID Data dock : 0080818
+          </p>
+        </footer>
+      </div>
+    </body>
+  </html>
+</apex:page>

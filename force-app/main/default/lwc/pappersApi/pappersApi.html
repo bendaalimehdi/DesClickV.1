@@ -7,13 +7,16 @@
     ></lightning-button>
 
     <template if:true={companyInfo}>
-      <lightning-datatable
-        key-field="siren"
-        data={companyInfo}
-        columns={columns}
-        hide-checkbox-column="true"
-      >
-      </lightning-datatable>
+      <div class="datatable-container">
+        <lightning-datatable
+          key-field="siren"
+          data={companyInfo}
+          columns={columns}
+          hide-checkbox-column="true"
+          class="slds-table_bordered"
+        >
+        </lightning-datatable>
+      </div>
     </template>
     <template if:true={error}>
       <p>Error fetching company info: {error}</p>

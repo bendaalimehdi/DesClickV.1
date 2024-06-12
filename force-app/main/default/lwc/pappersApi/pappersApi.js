@@ -4,14 +4,29 @@ import { getRecord } from "lightning/uiRecordApi";
 import { LightningElement, api, track, wire } from "lwc";
 
 const columns = [
-  { label: "SIREN", fieldName: "siren" },
-  { label: "Code NAF", fieldName: "code_naf" },
-  { label: "Libellé Code NAF", fieldName: "libelle_code_naf" },
-  { label: "Nom Entreprise", fieldName: "nom_entreprise" },
-  { label: "Rue", fieldName: "rue" },
-  { label: "Code Postal", fieldName: "code_postal" },
-  { label: "Ville", fieldName: "ville" },
-  { label: "Enseigne", fieldName: "enseigne" }
+  { label: "SIREN", fieldName: "siren", type: "text", wrapText: true },
+  { label: "Code NAF", fieldName: "code_naf", type: "text", wrapText: true },
+  {
+    label: "Libellé Code NAF",
+    fieldName: "libelle_code_naf",
+    type: "text",
+    wrapText: true
+  },
+  {
+    label: "Nom Entreprise",
+    fieldName: "nom_entreprise",
+    type: "text",
+    wrapText: true
+  },
+  { label: "Rue", fieldName: "rue", type: "text", wrapText: true },
+  {
+    label: "Code Postal",
+    fieldName: "code_postal",
+    type: "text",
+    wrapText: true
+  },
+  { label: "Ville", fieldName: "ville", type: "text", wrapText: true },
+  { label: "Enseigne", fieldName: "enseigne", type: "text", wrapText: true }
 ];
 
 export default class PappersComponent extends LightningElement {

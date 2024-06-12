@@ -19,7 +19,8 @@ public with sharing class WS_Pappers {
     System.debug('apiToken: ' + apiToken);
 
     String endpoint = 'https://api.pappers.fr/v2/entreprise';
-    String url = endpoint + '?api_token=' + apiToken + '&siren=' + siren;
+    String url = endpoint + '?api_token=' + apiToken + '&siret=' + siren;
+    System.debug('url: ' + url);
 
     HttpRequest req = new HttpRequest();
     req.setEndpoint(url);
@@ -30,6 +31,7 @@ public with sharing class WS_Pappers {
     try {
       HttpResponse res = http.send(req);
       System.debug('res: ' + res.getBody());
+      System.debug('code' + res.getStatusCode());
 
       if (res.getStatusCode() == 200) {
         return res.getBody();
