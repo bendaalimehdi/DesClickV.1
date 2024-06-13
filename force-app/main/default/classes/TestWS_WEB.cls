@@ -18,7 +18,8 @@ private class TestWS_WEB {
       'la règlementation (obligation légale : sécurité, hygiène, allergènes....)',
       'Une formation en intra-entreprise (formation délivrée exclusivement à vous)',
       'Augmentation de vos ventes',
-      'Au Kremlin Bicêtre dans les locaux de Des-Click formation'
+      'Au Kremlin Bicêtre dans les locaux de Des-Click formation',
+      '10'
     );
     Test.stopTest();
     System.assertEquals(
@@ -45,7 +46,8 @@ private class TestWS_WEB {
       'la règlementation (obligation légale : sécurité, hygiène, allergènes....)',
       'Une formation en intra-entreprise (formation délivrée exclusivement à vous)',
       'Augmentation de vos ventes',
-      'Au Kremlin Bicêtre dans les locaux de Des-Click formation'
+      'Au Kremlin Bicêtre dans les locaux de Des-Click formation',
+      '10'
     );
 
     System.assertEquals(
@@ -58,6 +60,7 @@ private class TestWS_WEB {
   @isTest
   static void testUpdateRecord_Exception() {
     String result = WS_WEB.updateRecord(
+      null,
       null,
       null,
       null,

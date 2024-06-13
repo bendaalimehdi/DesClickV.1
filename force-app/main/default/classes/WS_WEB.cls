@@ -9,7 +9,8 @@ global with sharing class WS_WEB {
     String raisonFormation,
     String inter_intra,
     String beneficesAttendus,
-    String lieuxFormation
+    String lieuxFormation,
+    String NumberOfEmployees
   ) {
     try {
       if (!Schema.sObjectType.Lead.isUpdateable()) {
@@ -30,6 +31,7 @@ global with sharing class WS_WEB {
       existingLead.Intra_inter__c = inter_intra;
       existingLead.Benefice_attendus__c = beneficesAttendus;
       existingLead.Lieux_formation__c = lieuxFormation;
+      existingLead.NumberOfEmployees = Integer.valueOf(NumberOfEmployees); // Assuming NumberOfEmployees__c is a number field
 
       update existingLead;
 

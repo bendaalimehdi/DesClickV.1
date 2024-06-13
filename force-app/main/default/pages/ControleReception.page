@@ -118,7 +118,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Repeat this block for each row of data -->
             <tr>
               <td></td>
               <td></td>
@@ -259,8 +258,6 @@
               <td></td>
               <td></td>
             </tr>
-
-            <!-- End of repeat -->
           </tbody>
         </table>
         <footer>
