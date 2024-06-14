@@ -84,8 +84,8 @@
               {!Opportunity.Account.BillingCity}
             </h3>
             <p>
-              <h4>RELEVE DE TEMPERATURE FROID POSITIF</h4>
-              <h6>(TEMPERATURE DEMANDEE 0 à 4°C (Tolerance ± 2°C))</h6>
+              <h4>RELEVE DE TEMPERATURE FROID NEGATIF</h4>
+              <h6>(TEMPERATURE DEMANDEE -17° à -21°C (Tolerance ± 2°C))</h6>
             </p>
           </td>
           <td class="info-container">
@@ -139,7 +139,7 @@
         </thead>
         <tbody>
           <tr class="non-conforme">
-            <td rowspan="2">10</td>
+            <td rowspan="2">-10</td>
 
             <td>M</td>
             <td></td>
@@ -210,7 +210,7 @@
           </tr>
 
           <tr class="non-conforme">
-            <td rowspan="2">9</td>
+            <td rowspan="2">-11</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -279,7 +279,7 @@
             <td></td>
           </tr>
           <tr class="non-conforme">
-            <td rowspan="2">8</td>
+            <td rowspan="2">-12</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -348,7 +348,7 @@
             <td></td>
           </tr>
           <tr class="non-conforme">
-            <td rowspan="2">7</td>
+            <td rowspan="2">-13</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -416,9 +416,9 @@
             <td></td>
             <td></td>
           </tr>
-          <!-- Surveillances section for temperatures 6 and 5 -->
-          <tr class="surveillances">
-            <td rowspan="2">6</td>
+
+          <tr class="non-conforme">
+            <td rowspan="2">-14</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -452,43 +452,8 @@
             <td></td>
             <td></td>
           </tr>
-          <tr class="surveillances">
+          <tr class="non-conforme">
             <td>S</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="surveillances">
-            <td rowspan="2">5</td>
-            <td>M</td>
             <td></td>
             <td></td>
             <td></td>
@@ -522,6 +487,41 @@
             <td></td>
           </tr>
           <tr class="surveillances">
+            <td rowspan="2">-15</td>
+            <td>M</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="surveillances">
             <td>S</td>
             <td></td>
             <td></td>
@@ -555,9 +555,78 @@
             <td></td>
             <td></td>
           </tr>
-          <!-- Acceptable section for temperatures 4 to 0 -->
+
+          <tr class="surveillances">
+            <td rowspan="2">-16</td>
+            <td>M</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="surveillances">
+            <td>S</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
           <tr class="acceptable">
-            <td rowspan="2">4</td>
+            <td rowspan="2">-17</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -626,7 +695,7 @@
             <td></td>
           </tr>
           <tr class="acceptable">
-            <td rowspan="2">3</td>
+            <td rowspan="2">-18</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -695,7 +764,7 @@
             <td></td>
           </tr>
           <tr class="acceptable">
-            <td rowspan="2">2</td>
+            <td rowspan="2">-19</td>
             <td>M</td>
             <td></td>
             <td></td>
@@ -764,76 +833,7 @@
             <td></td>
           </tr>
           <tr class="acceptable">
-            <td rowspan="2">1</td>
-            <td>M</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="acceptable">
-            <td>S</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="acceptable">
-            <td rowspan="2">0</td>
+            <td rowspan="2">-20</td>
             <td>M</td>
             <td></td>
             <td></td>

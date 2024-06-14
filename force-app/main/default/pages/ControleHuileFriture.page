@@ -1,0 +1,385 @@
+<apex:page
+  renderAs="pdf"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+>
+  <html>
+    <head>
+      <title>Temperature Report</title>
+      <style>
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th,
+        td {
+          border: 1px solid black;
+          padding: 5px;
+          text-align: center;
+          width: 5px; /* Set your desired width */
+          height: 5px; /* Set your desired height */
+          font-size: 10px;
+        }
+        .non-conforme {
+          background-color: #ffffff;
+          font-size: 10px;
+        }
+        .surveillances {
+          background-color: #ffffff;
+          font-size: 10px;
+        }
+        .acceptable {
+          background-color: #ffffff;
+          font-size: 10px;
+        }
+        @page {
+          size: A4 landscape;
+          margin: 5mm;
+        }
+        .header-table {
+          width: 100%;
+        }
+        .header-table img {
+          max-width: 150px;
+          vertical-align: middle;
+        }
+        .header-table .company-info {
+          text-align: center;
+          font-size: 14px;
+          vertical-align: middle;
+        }
+        .header-table {
+          text-align: right;
+          font-size: 14px;
+          vertical-align: middle;
+        }
+        .info-container {
+          text-align: left;
+          font-size: 14px;
+          vertical-align: middle;
+        }
+
+        .header,
+        .sub-header {
+          text-align: center;
+          font-size: 14px;
+        }
+      </style>
+    </head>
+    <body>
+      <table class="header-table">
+        <tr>
+          <td>
+            <img src="{!URLFOR($Resource.Logo)}" alt="Company Logo" />
+          </td>
+          <td class="company-info">
+            <h3>.........................</h3>
+            <p>
+              <h4>Contrôle huile de friture</h4>
+            </p>
+          </td>
+          <td class="info-container">
+            <div>
+              <p>Code Matriel :..............</p>
+              <p>MOIS de :.................</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th rowspan="2">Dates</th>
+            <th colspan="9">Friteuse</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Controle qualité</th>
+            <th></th>
+            <th>Changement d'huile</th>
+            <th></th>
+            <th>Controle qualité</th>
+            <th></th>
+            <th>Changement d'huile</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="non-conforme">
+            <td rowspan="2">10</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr class="non-conforme">
+            <td rowspan="2">9</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td rowspan="2">8</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td rowspan="2">7</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <!-- Surveillances section for temperatures 6 and 5 -->
+          <tr class="surveillances">
+            <td rowspan="2">6</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="surveillances">
+            <td rowspan="2">5</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <!-- Acceptable section for temperatures 4 to 0 -->
+          <tr class="acceptable">
+            <td rowspan="2">4</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="acceptable">
+            <td rowspan="2">3</td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="acceptable">
+            <td rowspan="2">2</td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="acceptable">
+            <td rowspan="2">1</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="acceptable">
+            <td rowspan="2">0</td>
+
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td>C</td>
+            <td></td>
+            <td>Oui</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="non-conforme">
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td>NC</td>
+            <td></td>
+            <td>Non</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Actions Correctives : :
+        ......................................................................................
+        .............................................................................................................................
+      </p>
+    </body>
+  </html>
+</apex:page>
