@@ -1,0 +1,270 @@
+<apex:page
+  renderAs="pdf"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  standardController="Opportunity"
+  extensions="FicheNonConformiteReceptionController"
+>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Company Report</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: calc(100% - 1cm);
+          margin: 0 auto;
+          padding: 20px;
+        }
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        header img {
+          max-width: 150px;
+        }
+        header .company-info {
+          text-align: center;
+          font-size: 18px;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          font-size: 15px;
+        }
+
+        td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        }
+        th {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+        .vertical-text {
+          writing-mode: vertical-lr;
+          transform: rotate(180deg);
+          white-space: nowrap;
+        }
+        .check {
+          width: 20px;
+          height: 20px;
+        }
+        footer {
+          text-align: center;
+          font-size: 10px;
+          margin-top: 20px;
+        }
+        @page {
+          size: A4;
+        }
+        .info {
+          text-align: left;
+          font-size: 15px;
+        }
+        .signature-container {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .signature-left {
+          float: left;
+          width: 45%;
+          text-align: left;
+        }
+
+        .signature-right {
+          float: right;
+          width: 45%;
+          text-align: right;
+          margin-right: 5%;
+          text-align: center;
+        }
+        .check {
+          width: 20px;
+          height: 15px;
+        }
+        .center-align {
+          text-align: center;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <header>
+          <img src="{!URLFOR($Resource.Logo)}" alt="Company Logo" />
+          <div class="company-info">
+            <p><h3>FICHE DE NON CONFORMITE DE LA RECEPTION</h3></p>
+            <div class="info">
+              <p>
+                Entreprise : {!Opportunity.Account.Name},
+                {!Opportunity.Account.BillingStreet},
+                {!Opportunity.Account.BillingPostalCode},
+                {!Opportunity.Account.BillingCity}
+              </p>
+              <p>Date et heure de livraison :</p>
+              <p>Nom du fournisseur :</p>
+              <p>Dénomination du produit :</p>
+              <p>Numéro du lot :</p>
+              <p>Date de fabrication :</p>
+              <p>DLC:</p>
+              <p>Quantité concernée :</p>
+            </div>
+          </div>
+          <br />
+        </header>
+        <table>
+          <thead>
+            <tr>
+              <th>Problème</th>
+              <th>Cocher les cases correspondantes</th>
+              <th>Observations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Non-respect de l’heure de livraison</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Température Non Conforme</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Non respect des quantités</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Emballage endommagé</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Operculage défectueux</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Boîte cabossée, rouillée, becquée, bombée, floche</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Absence d’étiquetage ou de D.L.C</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>D.L.C. dépassée ou trop courte</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Non-respect de la qualité</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Autres ...</td>
+              <td class="center-align">
+                <img
+                  src="{!URLFOR($Resource.uncheckbox)}"
+                  alt=""
+                  class="check"
+                />
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="signature-section">
+          <div class="signature-container">
+            <div class="signature-left">
+              <p>
+                Retour fournisseur le :<br />Destruction après accord du
+                fournisseur le :
+              </p>
+            </div>
+            <div class="signature-right">
+              <p>Nom et signature :</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+</apex:page>

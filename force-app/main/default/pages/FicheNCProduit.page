@@ -1,0 +1,301 @@
+<apex:page
+  renderAs="pdf"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Company Report</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: calc(100% - 1cm);
+          margin: 0 auto;
+          padding: 20px;
+        }
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+        header img {
+          max-width: 150px;
+        }
+        header .company-info {
+          text-align: center;
+          font-size: 18px;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          font-size: 15px;
+        }
+
+        td {
+          border: 1px solid #ddd;
+          padding: 12px;
+          text-align: left;
+        }
+        th {
+          border: 1px solid #ddd;
+          padding: 12px;
+          text-align: center;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+        .vertical-text {
+          writing-mode: vertical-lr;
+          transform: rotate(180deg);
+          white-space: nowrap;
+        }
+        .check {
+          width: 20px;
+          height: 20px;
+        }
+        footer {
+          text-align: center;
+          font-size: 10px;
+          margin-top: 20px;
+        }
+        @page {
+          size: A4 landscape;
+          margin: 5mm;
+        }
+        .info {
+          text-align: left;
+          font-size: 15px;
+        }
+        .signature-container {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .signature-left {
+          float: left;
+          width: 45%;
+          text-align: left;
+        }
+
+        .signature-right {
+          float: right;
+          width: 45%;
+          text-align: right;
+          margin-right: 5%;
+          text-align: center;
+        }
+        .check {
+          width: 20px;
+          height: 15px;
+        }
+        .center-align {
+          text-align: center;
+        }
+        footer {
+          text-align: center;
+          font-size: 10px;
+          margin-top: 20px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <header>
+          <img src="{!URLFOR($Resource.Logo)}" alt="Company Logo" />
+          <div class="company-info">
+            <p><h3>Fiche de non-conformité des produits alimentaires</h3></p>
+          </div>
+          <br />
+        </header>
+        <table>
+          <thead>
+            <tr>
+              <th>Dates</th>
+              <th>Opérateur</th>
+              <th>Produit</th>
+              <th>Quantité</th>
+              <th>Raison</th>
+              <th>Action</th>
+              <th>Responsable</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <footer>
+          <p>
+            SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le
+            Kremlin-Bicêtre<br /> Numéro SIRET : 81274844000037 <br /> Numéro de
+            déclaration d’activité : 11 94 10181 94 (auprès du préfet de région
+            de l’ile de France) - ID Data dock : 0080818
+          </p>
+        </footer>
+      </div>
+    </body>
+  </html>
+</apex:page>
