@@ -61,7 +61,6 @@
           font-size: 14px;
           vertical-align: middle;
         }
-
         .header,
         .sub-header {
           text-align: center;
@@ -93,293 +92,141 @@
         <thead>
           <tr>
             <th rowspan="2">Dates</th>
-            <th colspan="9">Friteuse</th>
+            <th colspan="8">Friteuse</th>
           </tr>
           <tr>
-            <th></th>
-            <th>Controle qualité</th>
-            <th></th>
-            <th>Changement d'huile</th>
-            <th></th>
-            <th>Controle qualité</th>
-            <th></th>
-            <th>Changement d'huile</th>
-            <th></th>
+            <th colspan="2">Controle qualité</th>
+            <th colspan="2">Changement d'huile</th>
+            <th colspan="2">Controle qualité</th>
+            <th colspan="2">Changement d'huile</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="non-conforme">
-            <td rowspan="2">10</td>
-
-            <td>C</td>
-            <td></td>
+          <tr>
+            <td rowspan="1"></td>
+            <td>Conforme</td>
+            <td>Non Conforme</td>
             <td>Oui</td>
-            <td></td>
-            <td>C</td>
-            <td></td>
+            <td>Non</td>
+            <td>Conforme</td>
+            <td>Non Conforme</td>
             <td>Oui</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
             <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td></td>
           </tr>
 
-          <tr class="non-conforme">
-            <td rowspan="2">9</td>
+          <tr>
+            <td rowspan="1"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
 
-            <td>C</td>
-            <td></td>
-            <td>Oui</td>
-            <td></td>
-            <td>C</td>
-            <td></td>
-            <td>Oui</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
             <td></td>
-            <td>Non</td>
             <td></td>
-            <td>NC</td>
             <td></td>
-            <td>Non</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td rowspan="2">8</td>
-
-            <td>C</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="non-conforme">
-            <td rowspan="2">7</td>
-
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <!-- Surveillances section for temperatures 6 and 5 -->
-          <tr class="surveillances">
-            <td rowspan="2">6</td>
-
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="surveillances">
-            <td rowspan="2">5</td>
-
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <!-- Acceptable section for temperatures 4 to 0 -->
-          <tr class="acceptable">
-            <td rowspan="2">4</td>
-
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="acceptable">
-            <td rowspan="2">3</td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="acceptable">
-            <td rowspan="2">2</td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
             <td></td>
-            <td>C</td>
             <td></td>
-            <td>Oui</td>
+            <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
+          <tr>
+            <td rowspan="1"></td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="acceptable">
-            <td rowspan="2">1</td>
-
-            <td>C</td>
-            <td></td>
-            <td>Oui</td>
-            <td></td>
-            <td>C</td>
-            <td></td>
-            <td>Oui</td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
             <td></td>
             <td></td>
-          </tr>
-          <tr class="acceptable">
-            <td rowspan="2">0</td>
-
-            <td>C</td>
-            <td></td>
-            <td>Oui</td>
-            <td></td>
-            <td>C</td>
-            <td></td>
-            <td>Oui</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="non-conforme">
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
-            <td></td>
-            <td>NC</td>
-            <td></td>
-            <td>Non</td>
             <td></td>
             <td></td>
           </tr>
         </tbody>
       </table>
-      <p>
-        Actions Correctives : :
-        ......................................................................................
-        .............................................................................................................................
-      </p>
     </body>
   </html>
 </apex:page>
