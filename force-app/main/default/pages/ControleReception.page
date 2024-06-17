@@ -81,12 +81,6 @@
         <header>
           <img src="{!URLFOR($Resource.Logo)}" alt="Company Logo" />
           <div class="company-info">
-            <p>
-              {!Opportunity.Account.Name}, {!Opportunity.Account.BillingStreet},
-              {!Opportunity.Account.BillingPostalCode},
-              {!Opportunity.Account.BillingCity}
-            </p>
-
             <p><h3>Contrôle à la réception</h3></p>
           </div>
         </header>
@@ -262,10 +256,10 @@
         </table>
         <footer>
           <p>
-            SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le
-            Kremlin-Bicêtre<br /> Numéro SIRET : 81274844000037 <br /> Numéro de
-            déclaration d’activité : 11 94 10181 94 (auprès du préfet de région
-            de l’ile de France) - ID Data dock : 0080818
+            {!Opportunity.Account.Name}<br />
+            {!Opportunity.Account.BillingStreet} –
+            {!Opportunity.Account.BillingPostalCode} ,
+            {!Opportunity.Account.BillingCity}<br />
           </p>
         </footer>
       </div>
