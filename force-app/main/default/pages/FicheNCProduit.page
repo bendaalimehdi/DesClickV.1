@@ -46,12 +46,12 @@
         }
 
         td {
-          border: 1px solid #ddd;
+          border: 1px solid #000000;
           padding: 12px;
           text-align: left;
         }
         th {
-          border: 1px solid #ddd;
+          border: 1px solid #000000;
           padding: 12px;
           text-align: center;
         }
@@ -107,7 +107,7 @@
         }
         footer {
           text-align: center;
-          font-size: 10px;
+          font-size: 14px;
           margin-top: 20px;
         }
       </style>

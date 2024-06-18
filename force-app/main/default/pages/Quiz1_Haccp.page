@@ -1,0 +1,302 @@
+<apex:page
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  renderAs="pdf"
+>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Company Report</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+        }
+        .header {
+          text-align: left;
+          border-bottom: 2px solid #000;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+        }
+        .header img {
+          width: 100px;
+          vertical-align: middle;
+        }
+        .header .title {
+          display: inline-block;
+          text-align: center;
+          margin-left: 10px;
+        }
+        .header h1,
+        .header h2,
+        .header h3 {
+          margin: 0;
+        }
+        .header h1 {
+          color: #00aaff;
+          font-size: 18px;
+        }
+        .form-section h2 {
+          color: #00aaff;
+          font-size: 14px;
+          text-align: center;
+        }
+        .form-section {
+          border: 1px solid #000;
+          padding: 10px;
+          margin-bottom: 20px;
+        }
+        .form-group {
+          margin-bottom: 10px;
+        }
+        .form-group-left {
+          align-content: left;
+        }
+        .form-group-right {
+          text-align: right;
+        }
+
+        .form-group h4 {
+          display: inline-block;
+          width: 100px;
+          font-weight: bold;
+          margin: 0;
+        }
+        .form-group input {
+          width: 200px;
+        }
+        .inline-group {
+          display: flex;
+          justify-content: space-between;
+        }
+        .questions {
+          margin: 20px 0;
+        }
+        .questions p {
+          font-weight: bold;
+        }
+        .question {
+          margin-bottom: 20px;
+        }
+        .question h2,
+        .question h3 {
+          margin-bottom: 10px;
+        }
+        .question .choice {
+          display: block;
+          margin-bottom: 5px;
+        }
+        .check {
+          width: 10px;
+          height: 10px;
+          vertical-align: middle;
+        }
+        .center-align {
+          text-align: center;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <img src="{!URLFOR($Resource.Logo)}" alt="DesClick Formation" />
+      </div>
+
+      <div class="form-section">
+        <div class="title">
+          <h2>
+            Formation Hygiène et Sécurité alimentaire en restauration
+            Commerciale
+          </h2>
+          <h2>Quiz 1</h2>
+        </div>
+
+        <div class="form-group-left">
+          <h4>Nom :</h4>
+        </div>
+
+        <div class="form-group">
+          <h4>Date :</h4>
+        </div>
+      </div>
+
+      <div class="questions">
+        <p>Veuillez cocher la bonne réponse.</p>
+
+        <div class="question">
+          <h3>1. Une contamination microbienne est d’origine ?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Chimique</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Biologique</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Physique</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="question">
+          <h3>2. Dans la catégorie des nuisibles, on trouve ?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Les insectes</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Les produits dangereux</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Les produits périmés</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="question">
+          <h3>
+            3. En cuisine, la multiplication par deux microbes à lieu toutes les
+            ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>20 minutes</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>2 heures</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>2 jours</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="question">
+          <h3>
+            4. A partir de quelle température la majorité des bactéries arrêtent
+            de se multiplier dans les aliments ? (Chaîne du chaud)
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>à 48°</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>à 63°</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>à 100°</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <section>
+        <br /><br />
+        <br />
+        <br /><br />
+        <br />
+        <div style="float: left; width: 50%; text-align: center">
+          <p></p>
+        </div>
+        <div style="float: right; width: 50%; text-align: center">
+          <p>
+            <strong> Nom Stagaire </strong>
+          </p>
+        </div>
+      </section>
+    </body>
+  </html>
+</apex:page>

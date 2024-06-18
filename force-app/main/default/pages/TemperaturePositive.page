@@ -6,7 +6,7 @@
   applyHtmlTag="false"
   applyBodyTag="false"
   standardController="Opportunity"
-  extensions="DevisController"
+  extensions="TemperaturePositiveController"
 >
   <html>
     <head>

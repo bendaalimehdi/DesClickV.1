@@ -6,7 +6,7 @@
   applyHtmlTag="false"
   applyBodyTag="false"
   standardController="Opportunity"
-  extensions="DevisController"
+  extensions="ControleReceptionController"
 >
   <html>
     <head>
@@ -46,11 +46,11 @@
           width: 100%;
           border-collapse: collapse;
           margin-bottom: 20px;
-          font-size: 10px;
+          font-size: 13px;
         }
         th,
         td {
-          border: 1px solid #ddd;
+          border: 1px solid black;
           padding: 8px;
           text-align: center;
         }
@@ -68,7 +68,7 @@
         }
         footer {
           text-align: center;
-          font-size: 10px;
+          font-size: 14px;
           margin-top: 20px;
         }
         @page {

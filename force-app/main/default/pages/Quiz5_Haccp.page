@@ -1,0 +1,299 @@
+<apex:page
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+  renderAs="pdf"
+>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Company Report</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          font-size: 14px;
+        }
+        .header {
+          text-align: left;
+          border-bottom: 2px solid #000;
+          padding-bottom: 10px;
+          margin-bottom: 20px;
+        }
+        .header img {
+          width: 100px;
+          vertical-align: middle;
+        }
+        .header .title {
+          display: inline-block;
+          text-align: center;
+          margin-left: 10px;
+        }
+        .header h1,
+        .header h2,
+        .header h3 {
+          margin: 0;
+        }
+        .header h1 {
+          color: #00aaff;
+          font-size: 18px;
+        }
+        .form-section h2 {
+          color: #00aaff;
+          font-size: 14px;
+          text-align: center;
+        }
+        .form-section {
+          border: 1px solid #000;
+          padding: 10px;
+          margin-bottom: 20px;
+        }
+        .form-group {
+          margin-bottom: 10px;
+        }
+        .form-group-left {
+          align-content: left;
+        }
+        .form-group-right {
+          text-align: right;
+        }
+
+        .form-group h4 {
+          display: inline-block;
+          width: 100px;
+          font-weight: bold;
+          margin: 0;
+        }
+        .form-group input {
+          width: 200px;
+        }
+        .inline-group {
+          display: flex;
+          justify-content: space-between;
+        }
+        .questions {
+          margin: 20px 0;
+        }
+        .questions p {
+          font-weight: bold;
+        }
+        .question {
+          margin-bottom: 20px;
+        }
+        .question h2,
+        .question h3 {
+          margin-bottom: 10px;
+        }
+        .question .choice {
+          display: block;
+          margin-bottom: 5px;
+        }
+        .check {
+          width: 10px;
+          height: 10px;
+          vertical-align: middle;
+        }
+        .center-align {
+          text-align: center;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <img src="{!URLFOR($Resource.Logo)}" alt="DesClick Formation" />
+      </div>
+
+      <div class="form-section">
+        <div class="title">
+          <h2>
+            Formation Hygiène et Sécurité alimentaire en restauration
+            Commerciale
+          </h2>
+          <h2>Quiz 5</h2>
+        </div>
+
+        <div class="form-group-left">
+          <h4>Nom :</h4>
+        </div>
+
+        <div class="form-group">
+          <h4>Date :</h4>
+        </div>
+      </div>
+
+      <div class="questions">
+        <p>Veuillez cocher la bonne réponse.</p>
+
+        <div class="question">
+          <h3>
+            1. Quelles sont les conséquences d’une rupture de chaine de froid ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Raccourcie la DLC</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Périme les aliments</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Intoxication alimentaire</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Provoque la prolifération des bactéries</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="question">
+          <h3>2. La décongélation peut être faite à température ambiante?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="question">
+          <h3>3. A quelle température doit-on conserver le poisson ?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>0°C à 2°C</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>2°C à 4°C</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>4°C à 6°C</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="question">
+          <h3>4. Assurer la rotation c’est</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Respecter les règles de rangement par date</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Utiliser un produit DLC est dépassé</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Changer la date quand je change de film</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <section>
+        <br /><br />
+        <br />
+        <br /><br />
+        <br />
+        <div style="float: left; width: 50%; text-align: center">
+          <p></p>
+        </div>
+        <div style="float: right; width: 50%; text-align: center">
+          <p>
+            <strong> Nom Stagaire </strong>
+          </p>
+        </div>
+      </section>
+    </body>
+  </html>
+</apex:page>
