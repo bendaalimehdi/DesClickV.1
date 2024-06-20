@@ -12,5 +12,7 @@ public with sharing class AutoControlePDFGeneration {
     TemperatureNegativeController.generatePDF(opportunityId);
 
     TemperaturePositiveController.generatePDF(opportunityId);
+
+    EnregistrementRefroidissementController.generatePDF(opportunityId);
   }
 }

@@ -1,46 +1,47 @@
 @isTest
 public class MassFileDownloaderControllerTest {
-  @testSetup
-  static void setup() {
-    Account testAccount = new Account(
-      Name = 'Test Account',
-      BillingStreet = 'Test Street',
-      BillingCity = 'Test City',
-      BillingState = 'Test State',
-      BillingPostalCode = '12345'
-    );
-    insert testAccount;
+    @isTest
+    static void testGetFiles() {
+        // Create a test Opportunity
+        Opportunity opp = new Opportunity(Name = 'Test Opportunity', StageName = 'Prospecting', CloseDate = Date.today());
+        insert opp;
 
-    Opportunity opp = new Opportunity(
-      Name = 'Test Opportunity',
-      StageName = 'Prospecting',
-      CloseDate = Date.today(),
-      AccountId = testAccount.Id
-    );
-    insert opp;
+        // Create test ContentVersion record
+        ContentVersion contentVersion = new ContentVersion(
+            Title = 'Test Document',
+            PathOnClient = 'TestDocument.pdf',
+            VersionData = Blob.valueOf('Test Content'),
+            IsMajorVersion = true
+        );
+        insert contentVersion;
 
-    Test.startTest();
-    String result = ControleHuileFritureController.generatePDF(opp.Id);
-    Test.stopTest();
-  }
+        // Retrieve the ContentDocument Id
+        contentVersion = [SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id = :contentVersion.Id LIMIT 1];
+        Id contentDocumentId = contentVersion.ContentDocumentId;
+        
+        System.assertNotEquals(null, contentDocumentId, 'Expected to find a ContentDocument linked to ContentVersion');
 
-  @isTest
-  static void testGetFiles() {
-    // Retrieve the Opportunity Id
-    Opportunity opp = [SELECT Id FROM Opportunity LIMIT 1];
+        // Link the ContentDocument to the Opportunity
+        ContentDocumentLink contentDocumentLink = new ContentDocumentLink(
+            LinkedEntityId = opp.Id,
+            ContentDocumentId = contentDocumentId,
+            ShareType = 'V'
+        );
+        insert contentDocumentLink;
 
-    // Call the getFiles method
-    Test.startTest();
-    ContentDocument[] documents = MassFileDownloaderController.getFiles(opp.Id);
-    Test.stopTest();
+        // Call the getFiles method
+        Test.startTest();
+        ContentDocument[] documents = MassFileDownloaderController.getFiles(opp.Id);
+        System.assert(documents.size() > 0, 'Expected documents to be returned');
+        System.assertEquals('pdf', documents[0].FileExtension, 'Expected file extension to be "pdf"');
 
-    // Validate the results
-    System.assert(documents.size() > 0, 'Expected documents to be returned');
+        MassFileDownloaderController.deleteFiles(new List<Id>{contentDocumentId});
+        Integer documentCount = [SELECT COUNT() FROM ContentDocument WHERE Id = :contentDocumentId];
+        System.assertEquals(0, documentCount, 'Expected documents to be deleted');
 
-    System.assertEquals(
-      'pdf',
-      documents[0].FileExtension,
-      'Expected file extension to be "pdf"'
-    );
-  }
+        Test.stopTest();
+
+        
+       
+    }
 }
