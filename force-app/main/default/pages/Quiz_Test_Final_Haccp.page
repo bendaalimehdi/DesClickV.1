@@ -1,15 +1,15 @@
 <apex:page
+  renderAs="pdf"
   showHeader="false"
   sidebar="false"
   standardStylesheets="false"
   applyHtmlTag="false"
   applyBodyTag="false"
-  renderAs="pdf"
 >
   <html>
     <head>
       <meta charset="UTF-8" />
-      <title>Company Report</title>
+      <title>Formation Hygiène et Sécurité Alimentaire</title>
       <style>
         body {
           font-family: Arial, sans-serif;
@@ -105,10 +105,10 @@
       <div class="form-section">
         <div class="title">
           <h2>
-            Formation Hygiène et Sécurité alimentaire en restauration
+            Formation Hygiène et Sécurité Alimentaire en Restauration
             Commerciale
           </h2>
-          <h2>Questionnaire de Positionnement</h2>
+          <h2>Test Final</h2>
         </div>
         <div class="form-group-left">
           <h4>Nom :</h4>
@@ -121,7 +121,86 @@
         <p>Veuillez cocher la bonne réponse.</p>
         <div class="question">
           <h3>
-            1. En cuisine, la multiplication par deux microbes à lieu toutes les
+            1. Une chambre froide où il y a des produits finis doit être réglée
+            à :
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>8°C</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>6°C</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>4°C</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            2. Quel est le temps minimal pour un lavage des mains efficace ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>5 secondes</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>1 minute</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>20 secondes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            3. En cuisine la multiplication par deux microbes a lieu toutes les
             :
           </h3>
           <table>
@@ -160,7 +239,84 @@
           </table>
         </div>
         <div class="question">
-          <h3>2. Les microbes sont détruits</h3>
+          <h3>
+            4. À partir de quelle température la majorité des bactéries arrêtent
+            de se multiplier dans les aliments ? (Chaîne du chaud)
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>48°C</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>63°C</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>100°C</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>5. Assurer la rotation c’est :</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Respecter les règles de rangement par date</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Utiliser un produit DLC/DDM(DLUO) dépassé</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Changer la date quand je change de film</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>6. Les microbes sont détruits :</h3>
           <table>
             <tbody>
               <tr>
@@ -197,7 +353,9 @@
           </table>
         </div>
         <div class="question">
-          <h3>3. Un produit en décongélation peut être conservé :</h3>
+          <h3>
+            7. Le port des gants garantit la maîtrise du risque sanitaire ?
+          </h3>
           <table>
             <tbody>
               <tr>
@@ -208,7 +366,7 @@
                     class="check"
                   />
                 </td>
-                <td>Deux jours</td>
+                <td>Vrai</td>
               </tr>
               <tr>
                 <td class="center-align">
@@ -218,23 +376,296 @@
                     class="check"
                   />
                 </td>
-                <td>4 jours</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Une semaine</td>
+                <td>Faux</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="question">
-          <h3>4. La contamination, c’est le déplacement des microbes avec</h3>
+          <h3>
+            8. Combien de fois puis-je réchauffer un plat cuisiné à l’avance ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>1 fois</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>3 fois</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Autant de fois que je veux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>9. Comment doivent être rangées les planches à découper ?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>C’est sans importance</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>À l’horizontale</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>À la verticale</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            10. Les autocontrôles de la température des produits en stockage
+            sont à réaliser :
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Tous les jours</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Une fois par jour</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Quand j’y pense</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            11. Des contrôles à réception des marchandises doivent être réalisés
+            dans les établissements alimentaires ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Cela dépend de l’activité de l’établissement</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            12. En combien de temps dois-je réchauffer un plat cuisiné préparé à
+            l’avance de 10°C à 63°C ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>1 heure maximum</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>2 heures maximum</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>3 heures maximum</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>13. Le plan de nettoyage est obligatoire ?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            14. Les contaminations croisées peuvent être la source
+            d’intoxications alimentaires ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            15. Je peux potentiellement contaminer en staphylocoques si j’ai des
+            lésions aux mains mal protégées ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>16. La contamination c’est le déplacement des microbes avec :</h3>
           <table>
             <tbody>
               <tr>
@@ -265,204 +696,14 @@
                     class="check"
                   />
                 </td>
-                <td>Les éternuments</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="question">
-          <h3>5. Le lavage des mains doit durer au minimum</h3>
-          <table>
-            <tbody>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>5 secondes</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>1 minute</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>30 secondes</td>
+                <td>Les éternuements</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="question">
           <h3>
-            6. Une chambre froide où il y a des produits finis doit être à
-          </h3>
-          <table>
-            <tbody>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>8°C</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>6°C</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>4°C</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="question">
-          <h3>7. Assurer la rotation c’est</h3>
-          <table>
-            <tbody>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Respecter les règles de rangement par date</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Utiliser un produit DLC/DLUO dépassé</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Changer la date quand je change de film</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="question">
-          <h3>8. Respecter les règles de la traçabilité, c’est</h3>
-          <table>
-            <tbody>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Dater les produits</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Conserver l’étiquette d’origine</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Protéger les produits entamés</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="question">
-          <h3>
-            9. Les autocontrôles de la température des produits en stockages
-            sont à réaliser
-          </h3>
-          <table>
-            <tbody>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Deux fois par jour</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Une fois par jour</td>
-              </tr>
-              <tr>
-                <td class="center-align">
-                  <img
-                    src="{!URLFOR($Resource.uncheckbox)}"
-                    alt=""
-                    class="check"
-                  />
-                </td>
-                <td>Quand j’y pense</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="question">
-          <h3>
-            10. Les étiquettes de traçabilité doivent être conservées pendant
+            17. Les étiquettes de traçabilité doivent être conservées pendant :
           </h3>
           <table>
             <tbody>
@@ -484,7 +725,7 @@
                     class="check"
                   />
                 </td>
-                <td>Deux semaines</td>
+                <td>1 semaine</td>
               </tr>
               <tr>
                 <td class="center-align">
@@ -494,23 +735,106 @@
                     class="check"
                   />
                 </td>
-                <td>6 mois</td>
+                <td>Deux semaines</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>
+            18. Le port d’une coiffe entourant la chevelure est obligatoire en
+            agro-alimentaire ?
+          </h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>19. Un bon nettoyage commence par une bonne désinfection ?</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Vrai</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>Faux</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="question">
+          <h3>20. Un produit en décongélation peut être conservé :</h3>
+          <table>
+            <tbody>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>2 jours</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>4 jours</td>
+              </tr>
+              <tr>
+                <td class="center-align">
+                  <img
+                    src="{!URLFOR($Resource.uncheckbox)}"
+                    alt=""
+                    class="check"
+                  />
+                </td>
+                <td>1 semaine</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <section>
-        <br /><br /><br /><br /><br /><br />
-        <div style="float: left; width: 50%; text-align: center">
-          <p></p>
-        </div>
-        <div style="float: right; width: 50%; text-align: center">
-          <p>
-            <strong> Nom Stagiaire </strong>
-          </p>
-        </div>
-      </section>
     </body>
   </html>
 </apex:page>

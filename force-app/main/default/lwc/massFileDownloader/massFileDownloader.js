@@ -1,4 +1,4 @@
-import { refreshApex } from '@salesforce/apex';
+import { refreshApex } from "@salesforce/apex";
 import deleteFiles from "@salesforce/apex/MassFileDownloaderController.deleteFiles";
 import getFiles from "@salesforce/apex/MassFileDownloaderController.getFiles";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
@@ -9,16 +9,10 @@ const COLUMNS = [
     label: "Title",
     fieldName: "Id",
     type: "url",
-    typeAttributes: {
-      label: { fieldName: "Title" },
-      target: "_blank"
-    }
+    typeAttributes: { label: { fieldName: "Title" }, target: "_blank" },
+    wrapText: true
   },
-  {
-    label: "Type",
-    fieldName: "FileExtension",
-    type: "text"
-  }
+  { label: "Created Date", fieldName: "CreatedDate", type: "date" }
 ];
 
 const BASE_DOWNLOAD_PATH = "/sfc/servlet.shepherd/version/download";
