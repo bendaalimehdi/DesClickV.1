@@ -1,0 +1,300 @@
+<apex:page
+  renderAs="pdf"
+  showHeader="false"
+  sidebar="false"
+  standardStylesheets="false"
+  applyHtmlTag="false"
+  applyBodyTag="false"
+>
+  <html>
+    <head>
+      <meta charset="UTF-8" />
+      <title>Bon de commande</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #000;
+          margin: 0;
+          padding: 0;
+        }
+        .container {
+          width: calc(100% - 1cm);
+          margin: 0 auto;
+          padding: 20px;
+        }
+        header {
+          margin-bottom: 20px;
+          overflow: hidden;
+        }
+        header img {
+          max-width: 250px;
+          float: left;
+        }
+        header h2 {
+          float: right;
+          text-align: right;
+          margin: 0;
+          font-size: 16px;
+        }
+        .centered {
+          text-align: center;
+        }
+        .small-text {
+          font-size: 10px;
+          color: grey;
+          margin-top: 10px;
+        }
+        .produit th,
+        td {
+          border: 1px solid #000000;
+          padding: 10px;
+          text-align: left;
+        }
+        .produit th {
+          background-color: #aa2e2e;
+          color: #ffffff;
+        }
+        .somme th,
+        td {
+          border: 1px solid #000000;
+          padding: 10px;
+          text-align: left;
+        }
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+        }
+        th,
+        td {
+          border: 1px solid #000000;
+          padding: 10px;
+          text-align: left;
+        }
+        .signature-container {
+          width: 50%;
+          overflow: hidden;
+        }
+        .signature-left {
+          float: left;
+          width: 45%;
+          text-align: center;
+          font-size: 12px;
+        }
+        .signature-right {
+          float: right;
+          width: 45%;
+          text-align: center;
+          font-size: 12px;
+        }
+        footer {
+          text-align: center;
+          font-size: 10px;
+          margin-top: 20px;
+        }
+        @page {
+          size: 21cm 29.7cm;
+        }
+        .clear {
+          clear: both;
+        }
+        .check {
+          width: 20px;
+          height: 20px;
+        }
+        .content {
+          float: left;
+          width: 55%;
+          font-size: 12px;
+        }
+        .Somme {
+          float: right;
+          width: 40%;
+        }
+        .info1 {
+          float: left;
+          width: 40%;
+          font-size: 12px;
+        }
+        td .info1 {
+          text-align: center;
+        }
+        .info2 {
+          float: right;
+          width: 40%;
+          font-size: 12px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <img src="{!URLFOR($Resource.Logo)}" alt="Logo" />
+        <h3 class="centered">Bon De Commande N°:</h3>
+        <div class="information">
+          <br /><br /> <br /><br />
+          <table class="info1">
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <img src="{!URLFOR($Resource.Call_Logo)}" alt="Call Logo" />
+              </td>
+              <td>
+                <img
+                  src="{!URLFOR($Resource.Localisation)}"
+                  alt="Localisation"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Pole Formation</td>
+              <td>DC WEB APS</td>
+            </tr>
+            <tr>
+              <td>Du lundi au vendredi de 9h30 à 18h30</td>
+              <td>3, rue Lech Walesa 94 270 Le Kremlin-Bicêtre</td>
+            </tr>
+            <tr>
+              <td>01 80 91 62 25</td>
+              <td>formation@des-click.com</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Fait à :</td>
+              <td>le :</td>
+            </tr>
+          </table>
+
+          <table class="info2">
+            <tr>
+              <td>Votre conseiller :</td>
+            </tr>
+            <tr>
+              <td>Nom de la société :</td>
+            </tr>
+            <tr>
+              <td>Siret :</td>
+            </tr>
+            <tr>
+              <td>Effectif :</td>
+            </tr>
+            <tr>
+              <td>Tél. :</td>
+            </tr>
+            <tr>
+              <td>Adresse :</td>
+            </tr>
+            <tr>
+              <td>Ville :</td>
+            </tr>
+            <tr>
+              <td>CP :</td>
+            </tr>
+            <tr>
+              <td>Responsable :</td>
+            </tr>
+            <tr>
+              <td>Mobile :</td>
+            </tr>
+            <tr>
+              <td>Email :</td>
+            </tr>
+          </table>
+        </div>
+        <div class="clear"></div>
+
+        <section>
+          <table class="produit">
+            <thead>
+              <tr>
+                <th>Ref</th>
+                <th>Désignation du service</th>
+                <th>Qté</th>
+                <th>Prix HT</th>
+                <th>Prix Total HT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>22-PROD-10-01</td>
+                <td>Design Charte graphique MAJ</td>
+                <td>1</td>
+                <td>99.00 €</td>
+                <td>99.00 €</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="content">
+            <img src="{!URLFOR($Resource.uncheckbox)}" alt="" class="check" />
+            <label for="mandatCheck">Mandat (facultatif)</label><br />
+            <p class="italic">
+              Par la présente et à la date de signature, je mandate Faouzi
+              DJABER, représentant légal de l'organisme de formation SAS DC WEB
+              APS, pour effectuer toutes les démarches nécessaires à la
+              constitution et au suivi de mon dossier auprès de l'OPCO ou du FAF
+              jusqu'à son règlement. Tout document ou déclaration transmis en
+              mon nom par le mandataire m'engage en cas d'erreur, de
+              non-conformité ou de fausse déclaration. <br />
+              Par ce mandat, ces signatures valent bon pour mandat et bon pour
+              acceptation de mandat.
+            </p>
+          </div>
+          <table class="Somme">
+            <tbody>
+              <tr>
+                <td class="centered">Total HT</td>
+                <td class="centered">99.00 €</td>
+              </tr>
+              <tr>
+                <td class="centered">TVA (20%)</td>
+                <td class="centered">19.80 €</td>
+              </tr>
+              <tr>
+                <td class="centered">Total TTC</td>
+                <td class="centered">118.80 €</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="clear"></div>
+        </section>
+
+        <div class="signature-container">
+          <div class="signature-left">
+            <p><strong>Signature du Représentant :</strong></p>
+          </div>
+          <div class="signature-right">
+            <p>
+              <strong>Signature du Client</strong><br />Avec mention "Bon pour
+              accord" et cachet
+            </p>
+          </div>
+        </div>
+        <footer>
+          <p>
+            SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le
+            Kremlin-Bicêtre<br /> Numéro SIRET : 81274844000037<br />
+            Numéro de déclaration d’activité : 11 94 10181 94 (auprès du préfet
+            de région de l’ile de France) - ID Data dock : 0080818
+          </p>
+        </footer>
+      </div>
+    </body>
+  </html>
+</apex:page>
