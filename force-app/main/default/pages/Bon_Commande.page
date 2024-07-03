@@ -45,25 +45,37 @@
           margin-top: 10px;
         }
         .produit th,
-        td {
+        .produit td {
           border: 1px solid #000000;
           padding: 10px;
           text-align: left;
         }
         .produit th {
-          background-color: #aa2e2e;
+          background-color: #263a80;
           color: #ffffff;
         }
+        .produit {
+
+          overflow: hidden;
+          border-collapse: separate;
+          border-spacing: 0;
+        }
         .somme th,
-        td {
+        .somme td {
           border: 1px solid #000000;
           padding: 10px;
           text-align: left;
+        }
+        .somme {
+          border-radius: 20px;
+          overflow: hidden; /* Ensures the rounded corners are applied correctly */
         }
         table {
           width: 100%;
           border-collapse: collapse;
           margin-bottom: 20px;
+          font-size: 12px;
+
         }
         th,
         td {
@@ -72,8 +84,9 @@
           text-align: left;
         }
         .signature-container {
-          width: 50%;
+          width: 100%;
           overflow: hidden;
+          margin-top: 20px;
         }
         .signature-left {
           float: left;
@@ -99,8 +112,8 @@
           clear: both;
         }
         .check {
-          width: 20px;
-          height: 20px;
+          width: 15px;
+          height: 15px;
         }
         .content {
           float: left;
@@ -111,110 +124,77 @@
           float: right;
           width: 40%;
         }
-        .info1 {
+        .info1-centered {
           float: left;
-          width: 40%;
+          width: 33%;
           font-size: 12px;
-        }
-        td .info1 {
           text-align: center;
         }
         .info2 {
           float: right;
-          width: 40%;
+          width: 65%;
           font-size: 12px;
+          te
+          border: 1px solid white; /* White border for the table */
+          border-radius: 25px;
+        }
+        .info2 th,
+        .info2 td {
+          border: 1px solid #c6c9d3; /* White border for the cells */
+          background-color: #c6c9d3;
+        }
+        .png {
+          width: 50px;
+          height: 50px;
+        }
+        .content {
+          font-style: italic;
+          font-size: 10px;
         }
       </style>
     </head>
     <body>
       <div class="container">
-        <img src="{!URLFOR($Resource.Logo)}" alt="Logo" />
-        <h3 class="centered">Bon De Commande N°:</h3>
+        <header>
+          <img src="{!URLFOR($Resource.Logo)}" alt="Logo" />
+        </header>
+        <h3 class="centered">Bon De Commande N°: D240218</h3>
+        <div class="info1-centered">
+          <img src="{!URLFOR($Resource.Call_Logo)}" alt="Logo" class="png" />
+          <p><strong>SERVICE CLIENT</strong></p>
+          <p>Du lundi au vendredi de 9h30 à 18h30</p>
+          <p>support@des-click.com</p>
+          <br /> Fait à :<strong>Kremlin-Bicêtre</strong> <br />
+          Le :
+        </div>
         <div class="information">
-          <br /><br /> <br /><br />
-          <table class="info1">
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <img src="{!URLFOR($Resource.Call_Logo)}" alt="Call Logo" />
-              </td>
-              <td>
-                <img
-                  src="{!URLFOR($Resource.Localisation)}"
-                  alt="Localisation"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Pole Formation</td>
-              <td>DC WEB APS</td>
-            </tr>
-            <tr>
-              <td>Du lundi au vendredi de 9h30 à 18h30</td>
-              <td>3, rue Lech Walesa 94 270 Le Kremlin-Bicêtre</td>
-            </tr>
-            <tr>
-              <td>01 80 91 62 25</td>
-              <td>formation@des-click.com</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Fait à :</td>
-              <td>le :</td>
-            </tr>
-          </table>
-
           <table class="info2">
             <tr>
-              <td>Votre conseiller :</td>
+              <td colspan="2"></td>
             </tr>
             <tr>
-              <td>Nom de la société :</td>
+              <td>conseiller : MNAFFAKH Faten</td>
+              <td></td>
             </tr>
             <tr>
-              <td>Siret :</td>
+              <td>Nom de la société : RTM PIZZA</td>
+              <td>Enseigne : Pizza Max 27</td>
             </tr>
             <tr>
-              <td>Effectif :</td>
+              <td>Siret : 82384769400010</td>
+              <td>Tél. : 02.32.21.50.14</td>
             </tr>
             <tr>
-              <td>Tél. :</td>
+              <td>Adresse : 5 rue Charles Joseph Riquier</td>
+              <td>Ville : Vernon</td>
             </tr>
             <tr>
-              <td>Adresse :</td>
+              <td>CP : 27200</td>
+              <td>Responsable : Mr Redouane Riad</td>
             </tr>
             <tr>
-              <td>Ville :</td>
-            </tr>
-            <tr>
-              <td>CP :</td>
-            </tr>
-            <tr>
-              <td>Responsable :</td>
-            </tr>
-            <tr>
-              <td>Mobile :</td>
-            </tr>
-            <tr>
-              <td>Email :</td>
+              <td>Port. : 06.07.18.21.14</td>
+              <td>Email : rtmpizza@gmail.com</td>
             </tr>
           </table>
         </div>
@@ -224,7 +204,6 @@
           <table class="produit">
             <thead>
               <tr>
-                <th>Ref</th>
                 <th>Désignation du service</th>
                 <th>Qté</th>
                 <th>Prix HT</th>
@@ -233,11 +212,43 @@
             </thead>
             <tbody>
               <tr>
-                <td>22-PROD-10-01</td>
-                <td>Design Charte graphique MAJ</td>
+                <td>
+                  MISE À JOUR SITE WEB COMMANDE EN LIGNE VERS LA VERSION
+                  PLATINIUM I
+                </td>
                 <td>1</td>
-                <td>99.00 €</td>
-                <td>99.00 €</td>
+                <td>990,00 €</td>
+                <td>990,00 €</td>
+              </tr>
+              <tr>
+                <td>web mobile</td>
+                <td>1</td>
+                <td>0,00 €</td>
+                <td>0,00 €</td>
+              </tr>
+              <tr>
+                <td>changement de carte</td>
+                <td>1</td>
+                <td>0,00 €</td>
+                <td>0,00 €</td>
+              </tr>
+              <tr>
+                <td>Application mobile de gestion Run My Resto</td>
+                <td>1</td>
+                <td>0,00 €</td>
+                <td>0,00 €</td>
+              </tr>
+              <tr>
+                <td>Formation ADMIN</td>
+                <td>1</td>
+                <td>0,00 €</td>
+                <td>0,00 €</td>
+              </tr>
+              <tr>
+                <td>Changement de société Gratuit</td>
+                <td>1</td>
+                <td>0,00 €</td>
+                <td>0,00 €</td>
               </tr>
             </tbody>
           </table>
@@ -260,15 +271,15 @@
             <tbody>
               <tr>
                 <td class="centered">Total HT</td>
-                <td class="centered">99.00 €</td>
+                <td class="centered">990,00 €</td>
               </tr>
               <tr>
                 <td class="centered">TVA (20%)</td>
-                <td class="centered">19.80 €</td>
+                <td class="centered">198,00 €</td>
               </tr>
               <tr>
                 <td class="centered">Total TTC</td>
-                <td class="centered">118.80 €</td>
+                <td class="centered">1188,00 €</td>
               </tr>
             </tbody>
           </table>
@@ -278,12 +289,14 @@
         <div class="signature-container">
           <div class="signature-left">
             <p><strong>Signature du Représentant :</strong></p>
+            <p>Faten Mnaffakh</p>
           </div>
           <div class="signature-right">
             <p>
               <strong>Signature du Client</strong><br />Avec mention "Bon pour
               accord" et cachet
             </p>
+            <p>Mr Redouane Riad</p>
           </div>
         </div>
         <footer>
