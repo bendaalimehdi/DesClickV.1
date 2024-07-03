@@ -5,6 +5,8 @@
   standardStylesheets="false"
   applyHtmlTag="false"
   applyBodyTag="false"
+  standardController="Commande__c"
+  extensions="Bon_Commande_Controller"
 >
   <html>
     <head>
@@ -55,7 +57,6 @@
           color: #ffffff;
         }
         .produit {
-
           overflow: hidden;
           border-collapse: separate;
           border-spacing: 0;
@@ -75,7 +76,6 @@
           border-collapse: collapse;
           margin-bottom: 20px;
           font-size: 12px;
-
         }
         th,
         td {
@@ -134,7 +134,7 @@
           float: right;
           width: 65%;
           font-size: 12px;
-          te
+          text-align: left;
           border: 1px solid white; /* White border for the table */
           border-radius: 25px;
         }
@@ -158,7 +158,7 @@
         <header>
           <img src="{!URLFOR($Resource.Logo)}" alt="Logo" />
         </header>
-        <h3 class="centered">Bon De Commande N°: D240218</h3>
+        <h3 class="centered">Bon De Commande N°: {!Commande__c.Name}</h3>
         <div class="info1-centered">
           <img src="{!URLFOR($Resource.Call_Logo)}" alt="Logo" class="png" />
           <p><strong>SERVICE CLIENT</strong></p>
@@ -173,28 +173,28 @@
               <td colspan="2"></td>
             </tr>
             <tr>
-              <td>conseiller : MNAFFAKH Faten</td>
+              <td>Conseiller : {!com.Conseiller__c}</td>
               <td></td>
             </tr>
             <tr>
-              <td>Nom de la société : RTM PIZZA</td>
+              <td>Nom de la société : {!com.Nom_societe__c}</td>
               <td>Enseigne : Pizza Max 27</td>
             </tr>
             <tr>
-              <td>Siret : 82384769400010</td>
+              <td>Siret : {!com.Num_SIRET__c}</td>
               <td>Tél. : 02.32.21.50.14</td>
             </tr>
             <tr>
-              <td>Adresse : 5 rue Charles Joseph Riquier</td>
-              <td>Ville : Vernon</td>
+              <td>Adresse : {!com.Adresse__Street__s}</td>
+              <td>Ville : {!com.Adresse__City__s}</td>
             </tr>
             <tr>
-              <td>CP : 27200</td>
-              <td>Responsable : Mr Redouane Riad</td>
+              <td>CP : {!com.Adresse__PostalCode__s}</td>
+              <td>Responsable : {!com.Responsable__c}</td>
             </tr>
             <tr>
-              <td>Port. : 06.07.18.21.14</td>
-              <td>Email : rtmpizza@gmail.com</td>
+              <td>Port. : {!com.Mobile__c}</td>
+              <td>Email : {!com.Email__c}</td>
             </tr>
           </table>
         </div>
@@ -212,44 +212,13 @@
             </thead>
             <tbody>
               <tr>
-                <td>
-                  MISE À JOUR SITE WEB COMMANDE EN LIGNE VERS LA VERSION
-                  PLATINIUM I
-                </td>
-                <td>1</td>
-                <td>990,00 €</td>
-                <td>990,00 €</td>
+                <td>{!com.Produit__c}</td>
+                <td>{!com.Quantite__c}</td>
+                <td>{!com.Prix_HT__c}</td>
+                <td>{!com.Prix_Total_HT__c}</td>
               </tr>
-              <tr>
-                <td>web mobile</td>
-                <td>1</td>
-                <td>0,00 €</td>
-                <td>0,00 €</td>
-              </tr>
-              <tr>
-                <td>changement de carte</td>
-                <td>1</td>
-                <td>0,00 €</td>
-                <td>0,00 €</td>
-              </tr>
-              <tr>
-                <td>Application mobile de gestion Run My Resto</td>
-                <td>1</td>
-                <td>0,00 €</td>
-                <td>0,00 €</td>
-              </tr>
-              <tr>
-                <td>Formation ADMIN</td>
-                <td>1</td>
-                <td>0,00 €</td>
-                <td>0,00 €</td>
-              </tr>
-              <tr>
-                <td>Changement de société Gratuit</td>
-                <td>1</td>
-                <td>0,00 €</td>
-                <td>0,00 €</td>
-              </tr>
+              <tr></tr>
+              <!-- Add more product rows here if needed -->
             </tbody>
           </table>
           <div class="content">
@@ -271,15 +240,15 @@
             <tbody>
               <tr>
                 <td class="centered">Total HT</td>
-                <td class="centered">990,00 €</td>
+                <td class="centered">{!com.Prix_Total_HT__c}</td>
               </tr>
               <tr>
                 <td class="centered">TVA (20%)</td>
-                <td class="centered">198,00 €</td>
+                <td class="centered">{!com.Prix_Total_HT__c * 0.20}</td>
               </tr>
               <tr>
                 <td class="centered">Total TTC</td>
-                <td class="centered">1188,00 €</td>
+                <td class="centered">{!com.Prix_Total_HT__c * 1.20}</td>
               </tr>
             </tbody>
           </table>
@@ -289,14 +258,14 @@
         <div class="signature-container">
           <div class="signature-left">
             <p><strong>Signature du Représentant :</strong></p>
-            <p>Faten Mnaffakh</p>
+            <p>{!com.Conseiller__c}</p>
           </div>
           <div class="signature-right">
             <p>
               <strong>Signature du Client</strong><br />Avec mention "Bon pour
               accord" et cachet
             </p>
-            <p>Mr Redouane Riad</p>
+            <p>{!com.Responsable__c}</p>
           </div>
         </div>
         <footer>
