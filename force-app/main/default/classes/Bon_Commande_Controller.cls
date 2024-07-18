@@ -8,6 +8,12 @@
 
 public with sharing class Bon_Commande_Controller {
   public Commande__c com { get; set; }
+  public List<String> sousProduitValues { get; set; }
+  public Date today {
+    get {
+      return Date.today();
+    }
+  }
 
   public Bon_Commande_Controller(ApexPages.StandardController stdController) {
     String commandeId = ApexPages.currentPage().getParameters().get('id');
@@ -37,19 +43,18 @@ public with sharing class Bon_Commande_Controller {
       FROM Commande__c
       WHERE Id = :commandeId
     ];
+    sousProduitValues = getMultiPicklistValues(com.Sous_Produit__c);
+    Date todayDate = Date.today();
   }
-  public List<SelectOption> getPicklistValues() {
-    List<SelectOption> options = new List<SelectOption>();
-
-    Schema.DescribeFieldResult fieldResult = Commande__c.Sous_Produit__c.getDescribe();
-
-    for (Schema.PicklistEntry picklistEntry : fieldResult.getPicklistValues()) {
-      options.add(
-        new SelectOption(picklistEntry.getValue(), picklistEntry.getLabel())
-      );
+  public List<String> getMultiPicklistValues(String picklistValues) {
+    if (picklistValues == null) {
+      return new List<String>();
     }
+    return picklistValues.split(';');
+  }
 
-    return options;
+  public Integer getSousProduitValuesSize() {
+    return sousProduitValues.size();
   }
 
   // // Method to generate PDF with provided content

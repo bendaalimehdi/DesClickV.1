@@ -25,10 +25,8 @@
         }
 
         .container {
-          width: calc(
-            100% - 1cm
-          ); /* Adjust container width to match page width minus left and right margins */
-          margin: 0 auto; /* Center the container horizontally */
+          width: calc(100% - 1cm);
+          margin: 0 auto;
           padding: 20px;
         }
 
@@ -55,7 +53,7 @@
 
         th,
         td {
-          border: 1px solid #ddd;
+          border: 1px solid #292929;
           padding: 10px;
           text-align: left;
         }
