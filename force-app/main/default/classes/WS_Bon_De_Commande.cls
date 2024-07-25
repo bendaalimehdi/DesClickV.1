@@ -19,19 +19,21 @@ global with sharing class WS_Bon_De_Commande {
     public String prixHT;
     public String remiseType;
     public String remiseValue;
+    public String Activite;
+    public String Observation;
+    public String ModeReglement;
+    public String enseigne;
+    public String tel;
   }
 
   @HttpPost
   global static String createCommande() {
     try {
-      // Retrieve the request body
       RestRequest req = RestContext.request;
       String jsonPayload = req.requestBody.toString();
 
-      // Debugging log to check the incoming JSON payload
       System.debug('Incoming JSON payload: ' + jsonPayload);
 
-      // Parse the incoming JSON payload
       CommandeRequest request;
       try {
         request = (CommandeRequest) JSON.deserialize(
@@ -47,17 +49,18 @@ global with sharing class WS_Bon_De_Commande {
         );
       }
 
-      // Debugging log to check the deserialized request
       System.debug('Deserialized request: ' + request);
 
-      // Create a new Commande__c record
       Commande__c newCommande = new Commande__c();
       newCommande.Email__c = request.email;
       newCommande.Status__c = request.status;
       newCommande.Conseiller__c = request.conseiller;
       newCommande.Nom_societe__c = request.societe;
+      newCommande.Enseigne__c = request.enseigne;
+      newCommande.Observation__c = request.Observation;
+      newCommande.Activite__c = request.Activite;
+      newCommande.Num_Tel__c = request.tel;
 
-      // Handle potential null or invalid number formats
       try {
         if (String.isNotBlank(request.siret)) {
           newCommande.Num_SIRET__c = Decimal.valueOf(request.siret);
@@ -78,7 +81,6 @@ global with sharing class WS_Bon_De_Commande {
       newCommande.Adresse__City__s = request.ville;
       newCommande.Adresse__CountryCode__s = request.pays;
 
-      // Handle potential null or invalid number formats
       try {
         if (String.isNotBlank(request.nombreSalarie)) {
           newCommande.Nombre_Salarie__c = Decimal.valueOf(
@@ -106,7 +108,6 @@ global with sharing class WS_Bon_De_Commande {
       newCommande.Produit__c = request.produit;
       newCommande.Type_de_Remise__c = request.remiseType;
 
-      // Validate and assign the sousProduit field (multi-select picklist)
       if (String.isNotBlank(request.sousProduit)) {
         List<String> sousProduitList = request.sousProduit.split(';');
         Schema.SObjectField field = Commande__c.Sous_Produit__c;
@@ -129,15 +130,34 @@ global with sharing class WS_Bon_De_Commande {
         newCommande.Sous_Produit__c = request.sousProduit;
       }
 
-      // Insert the new Commande__c record
+      if (String.isNotBlank(request.ModeReglement)) {
+        List<String> ModeReglementList = request.ModeReglement.split(';');
+        Schema.SObjectField field = Commande__c.Mode_Reglement__c;
+        Schema.DescribeFieldResult fieldResult = field.getDescribe();
+        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
+        Set<String> validValues = new Set<String>();
+        for (Schema.PicklistEntry entry : picklistValues) {
+          validValues.add(entry.getValue());
+        }
+        for (String value : ModeReglementList) {
+          if (!validValues.contains(value.trim())) {
+            return JSON.serialize(
+              new Map<String, String>{
+                'status' => 'error',
+                'message' => 'Invalid value for ModeReglement: ' + value.trim()
+              }
+            );
+          }
+        }
+        newCommande.Mode_Reglement__c = request.ModeReglement;
+      }
+
       insert newCommande;
 
-      // Return the ID of the newly created record
       return JSON.serialize(
         new Map<String, String>{ 'status' => 'success', 'id' => newCommande.Id }
       );
     } catch (Exception e) {
-      // Handle the exception and return an error message
       System.debug('Error: ' + e.getMessage());
       return JSON.serialize(
         new Map<String, String>{

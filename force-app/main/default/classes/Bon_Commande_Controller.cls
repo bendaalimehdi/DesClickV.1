@@ -9,6 +9,7 @@
 public with sharing class Bon_Commande_Controller {
   public Commande__c com { get; set; }
   public List<String> sousProduitValues { get; set; }
+  public List<String> modeReglement { get; set; }
   public Date today {
     get {
       return Date.today();
@@ -39,11 +40,16 @@ public with sharing class Bon_Commande_Controller {
         Quantite__c,
         Responsable__c,
         Sous_Produit__c,
-        Status__c
+        Enseigne__c,
+        Observation__c,
+        Mode_Reglement__c,
+        Status__c,
+        Num_Tel__c
       FROM Commande__c
       WHERE Id = :commandeId
     ];
     sousProduitValues = getMultiPicklistValues(com.Sous_Produit__c);
+    modeReglement = getMultiPicklistValues(com.Mode_Reglement__c);
     Date todayDate = Date.today();
   }
   public List<String> getMultiPicklistValues(String picklistValues) {

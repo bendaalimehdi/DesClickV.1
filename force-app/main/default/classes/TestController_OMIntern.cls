@@ -10,6 +10,7 @@ private class TestController_OMIntern {
   @testSetup
   static void setup() {
     Date currentDate = Date.today();
+    Controller_OMIntern.bypassTrigger = true;
 
     Formateur__c internalFormateurObj = new Formateur__c(
       Name = 'Test Formateur Internal',

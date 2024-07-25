@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h2>
+      Triggers Dependency Graph for
+      c:\Users\midid\OneDrive\Documents\DesClickV.1\force-app\main\default<br /><br />Number
+      of Dependencies: 4
+    </h2>
+    <div id="theGraph" class="mermaid">
+      graph LR Commande_Email-TRIGGER(Commande_Email TRIGGER) -->
+      Bon_Commande_Email-CLASS(Bon_Commande_Email CLASS<br /><br />instantiation)
+      EventOnOpportunity-TRIGGER(EventOnOpportunity TRIGGER) -->
+      OpportunityEvent-CLASS(OpportunityEvent CLASS<br /><br />reference)
+      LeadNotification-TRIGGER(LeadNotification TRIGGER) -->
+      LeadNotificationService-CLASS(LeadNotificationService CLASS<br /><br />reference)
+      SendEmailOnNewLead-TRIGGER(SendEmailOnNewLead TRIGGER) -->
+      SendEmailNewLead-CLASS(SendEmailNewLead CLASS<br /><br />reference)
+      classDef TRIGGER fill:cyan,stroke-width:4px; class
+      Commande_Email-TRIGGER,EventOnOpportunity-TRIGGER,LeadNotification-TRIGGER,SendEmailOnNewLead-TRIGGER
+      TRIGGER
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        maxTextSize: 190000,
+        securityLevel: "loose"
+      });
+      setTimeout(() => {
+        var theGraph = document.querySelector("#theGraph SVG");
+        theGraph.setAttribute("height", "100%");
+      }, 1000);
+    </script>
+  </body>
+</html>

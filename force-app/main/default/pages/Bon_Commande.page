@@ -183,11 +183,11 @@
             </tr>
             <tr>
               <td>Nom de la société : {!com.Nom_societe__c}</td>
-              <td>Enseigne : Pizza Max 27</td>
+              <td>Enseigne : {!com.Enseigne__c}</td>
             </tr>
             <tr>
               <td>Siret : {!com.Num_SIRET__c}</td>
-              <td>Tél. : 02.32.21.50.14</td>
+              <td>Tél. : {!com.Num_Tel__c}</td>
             </tr>
             <tr>
               <td>Adresse : {!com.Adresse__Street__s}</td>
@@ -230,7 +230,6 @@
                   <td>0</td>
                 </tr>
               </apex:repeat>
-              <!-- Add more product rows here if needed -->
             </tbody>
           </table>
           <div class="content">
@@ -264,10 +263,10 @@
               </tr>
               <tr>
                 <td class="centered">Mode De Règlement</td>
-                <td class="centered">CB</td>
+                <td class="centered">{!modeReglement}</td>
               </tr>
               <tr>
-                <td class="centered" colspan="2">Payment sur 6 foix</td>
+                <td class="centered" colspan="2">{!com.Observation__c}</td>
               </tr>
             </tbody>
           </table>

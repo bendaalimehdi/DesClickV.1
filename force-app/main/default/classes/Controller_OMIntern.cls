@@ -1,4 +1,5 @@
 public with sharing class Controller_OMIntern {
+  public static Boolean bypassTrigger = false;
   public Opportunity formateur { get; private set; }
   public Date today {
     get {
