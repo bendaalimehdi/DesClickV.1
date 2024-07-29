@@ -31,7 +31,6 @@ global with sharing class WS_Bon_De_Commande {
     try {
       RestRequest req = RestContext.request;
       String jsonPayload = req.requestBody.toString();
-
       System.debug('Incoming JSON payload: ' + jsonPayload);
 
       CommandeRequest request;
@@ -108,17 +107,20 @@ global with sharing class WS_Bon_De_Commande {
       newCommande.Produit__c = request.produit;
       newCommande.Type_de_Remise__c = request.remiseType;
 
+      // Check sousProduit values
       if (String.isNotBlank(request.sousProduit)) {
         List<String> sousProduitList = request.sousProduit.split(';');
-        Schema.SObjectField field = Commande__c.Sous_Produit__c;
-        Schema.DescribeFieldResult fieldResult = field.getDescribe();
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        Set<String> validValues = new Set<String>();
-        for (Schema.PicklistEntry entry : picklistValues) {
-          validValues.add(entry.getValue());
+        Schema.DescribeFieldResult sousProduitFieldResult = Commande__c.Sous_Produit__c.getDescribe();
+        Set<String> validSousProduitValues = new Set<String>();
+        for (
+          Schema.PicklistEntry entry : sousProduitFieldResult.getPicklistValues()
+        ) {
+          validSousProduitValues.add(entry.getValue().toLowerCase().trim());
         }
+
+        // Validate each sousProduit value
         for (String value : sousProduitList) {
-          if (!validValues.contains(value.trim())) {
+          if (!validSousProduitValues.contains(value.toLowerCase().trim())) {
             return JSON.serialize(
               new Map<String, String>{
                 'status' => 'error',
@@ -130,17 +132,20 @@ global with sharing class WS_Bon_De_Commande {
         newCommande.Sous_Produit__c = request.sousProduit;
       }
 
+      // Check ModeReglement values
       if (String.isNotBlank(request.ModeReglement)) {
         List<String> ModeReglementList = request.ModeReglement.split(';');
-        Schema.SObjectField field = Commande__c.Mode_Reglement__c;
-        Schema.DescribeFieldResult fieldResult = field.getDescribe();
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        Set<String> validValues = new Set<String>();
-        for (Schema.PicklistEntry entry : picklistValues) {
-          validValues.add(entry.getValue());
+        Schema.DescribeFieldResult ModeReglementFieldResult = Commande__c.Mode_Reglement__c.getDescribe();
+        Set<String> validModeReglementValues = new Set<String>();
+        for (
+          Schema.PicklistEntry entry : ModeReglementFieldResult.getPicklistValues()
+        ) {
+          validModeReglementValues.add(entry.getValue().toLowerCase().trim());
         }
+
+        // Validate each ModeReglement value
         for (String value : ModeReglementList) {
-          if (!validValues.contains(value.trim())) {
+          if (!validModeReglementValues.contains(value.toLowerCase().trim())) {
             return JSON.serialize(
               new Map<String, String>{
                 'status' => 'error',
@@ -152,7 +157,16 @@ global with sharing class WS_Bon_De_Commande {
         newCommande.Mode_Reglement__c = request.ModeReglement;
       }
 
-      insert newCommande;
+      try {
+        insert newCommande;
+      } catch (DmlException dmlEx) {
+        return JSON.serialize(
+          new Map<String, String>{
+            'status' => 'error',
+            'message' => 'Failed to create Commande__c: ' + dmlEx.getMessage()
+          }
+        );
+      }
 
       return JSON.serialize(
         new Map<String, String>{ 'status' => 'success', 'id' => newCommande.Id }

@@ -5,22 +5,73 @@
   </head>
   <body>
     <h2>
-      Triggers Dependency Graph for
+      Classes Dependency Graph for
       c:\Users\midid\OneDrive\Documents\DesClickV.1\force-app\main\default<br /><br />Number
-      of Dependencies: 4
+      of Dependencies: 10
     </h2>
     <div id="theGraph" class="mermaid">
-      graph LR Commande_Email-TRIGGER(Commande_Email TRIGGER) -->
-      Bon_Commande_Email-CLASS(Bon_Commande_Email CLASS<br /><br />instantiation)
-      EventOnOpportunity-TRIGGER(EventOnOpportunity TRIGGER) -->
-      OpportunityEvent-CLASS(OpportunityEvent CLASS<br /><br />reference)
-      LeadNotification-TRIGGER(LeadNotification TRIGGER) -->
-      LeadNotificationService-CLASS(LeadNotificationService CLASS<br /><br />reference)
-      SendEmailOnNewLead-TRIGGER(SendEmailOnNewLead TRIGGER) -->
-      SendEmailNewLead-CLASS(SendEmailNewLead CLASS<br /><br />reference)
-      classDef TRIGGER fill:cyan,stroke-width:4px; class
-      Commande_Email-TRIGGER,EventOnOpportunity-TRIGGER,LeadNotification-TRIGGER,SendEmailOnNewLead-TRIGGER
-      TRIGGER
+      graph LR AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS)
+      --> ControleHuileFritureController-CLASS(ControleHuileFritureController
+      CLASS<br /><br />reference)
+      AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS) -->
+      ControleReceptionController-CLASS(ControleReceptionController CLASS<br /><br />reference)
+      AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS) -->
+      EnregistrementRefroidissementController-CLASS(EnregistrementRefroidissementController
+      CLASS<br /><br />reference)
+      AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS) -->
+      FicheNCProduitController-CLASS(FicheNCProduitController CLASS<br /><br />reference)
+      AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS) -->
+      FicheNonConformiteReceptionController-CLASS(FicheNonConformiteReceptionController
+      CLASS<br /><br />reference)
+      AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS) -->
+      TemperatureNegativeController-CLASS(TemperatureNegativeController CLASS<br /><br />reference)
+      AutoControlePDFGeneration-CLASS(AutoControlePDFGeneration CLASS) -->
+      TemperaturePositiveController-CLASS(TemperaturePositiveController CLASS<br /><br />reference)
+      Quiz_HaccpController-CLASS(Quiz_HaccpController CLASS)
+      ControleReceptionController-CLASS(ControleReceptionController CLASS)
+      PDFGenerationBridge-CLASS(PDFGenerationBridge CLASS) -->
+      DevisController-CLASS(DevisController CLASS<br /><br />reference)
+      PDFGenerationBridge-CLASS(PDFGenerationBridge CLASS) -->
+      MyControllerExtension-CLASS(MyControllerExtension CLASS<br /><br />reference)
+      ControleHuileFritureController-CLASS(ControleHuileFritureController CLASS)
+      FicheNCProduitController-CLASS(FicheNCProduitController CLASS)
+      FicheNonConformiteReceptionController-CLASS(FicheNonConformiteReceptionController
+      CLASS) TemperatureNegativeController-CLASS(TemperatureNegativeController
+      CLASS) TemperaturePositiveController-CLASS(TemperaturePositiveController
+      CLASS) Controller_covocation_Stagaire-CLASS(Controller_covocation_Stagaire
+      CLASS) Controller_OMIntern-CLASS(Controller_OMIntern CLASS)
+      DevisController-CLASS(DevisController CLASS)
+      MyControllerExtension-CLASS(MyControllerExtension CLASS)
+      EnregistrementRefroidissementController-CLASS(EnregistrementRefroidissementController
+      CLASS)
+      Controller_Convocation_Formateur-CLASS(Controller_Convocation_Formateur
+      CLASS) Controller_FeuilleEmargement-CLASS(Controller_FeuilleEmargement
+      CLASS) WS_Bon_De_Commande-CLASS(WS_Bon_De_Commande CLASS)
+      WS_Bon_De_Commande_File-CLASS(WS_Bon_De_Commande_File CLASS) -->
+      WS_Bon_De_Commande-CLASS(WS_Bon_De_Commande CLASS)
+      Bon_Commande_Controller-CLASS(Bon_Commande_Controller CLASS)
+      Bon_Commande_Email-CLASS(Bon_Commande_Email CLASS) GetInfo-CLASS(GetInfo
+      CLASS) LeadNotificationService-CLASS(LeadNotificationService CLASS)
+      MassFileDownloaderController-CLASS(MassFileDownloaderController CLASS)
+      OpportunityEvent-CLASS(OpportunityEvent CLASS)
+      Quiz_HaccpPdfGenerator-CLASS(Quiz_HaccpPdfGenerator CLASS)
+      SendEmailNewLead-CLASS(SendEmailNewLead CLASS) WS_Pappers-CLASS(WS_Pappers
+      CLASS) independentItems(ITEMS WITH NO DEPENDENCIES:<br /><br />Quiz_HaccpController
+      CLASS<br />ControleReceptionController CLASS<br />ControleHuileFritureController
+      CLASS<br />FicheNCProduitController CLASS<br />FicheNonConformiteReceptionController
+      CLASS<br />TemperatureNegativeController CLASS<br />TemperaturePositiveController
+      CLASS<br />Controller_covocation_Stagaire CLASS<br />Controller_OMIntern
+      CLASS<br />DevisController CLASS<br />MyControllerExtension CLASS<br />EnregistrementRefroidissementController
+      CLASS<br />Controller_Convocation_Formateur CLASS<br />Controller_FeuilleEmargement
+      CLASS<br />WS_Bon_De_Commande CLASS<br />Bon_Commande_Controller CLASS<br />Bon_Commande_Email
+      CLASS<br />GetInfo CLASS<br />LeadNotificationService CLASS<br />MassFileDownloaderController
+      CLASS<br />OpportunityEvent CLASS<br />Quiz_HaccpPdfGenerator CLASS<br />SendEmailNewLead
+      CLASS<br />WS_Pappers CLASS<br />SiteLoginController CLASS<br />SiteRegisterController
+      CLASS<br />WS_WEB CLASS) classDef moreRefs fill:orange,stroke-width:4px;
+      class AutoControlePDFGeneration-CLASS moreRefs classDef CLASS
+      fill:lightblue,stroke-width:4px; class
+      Quiz_HaccpController-CLASS,ControleReceptionController-CLASS,PDFGenerationBridge-CLASS,ControleHuileFritureController-CLASS,FicheNCProduitController-CLASS,FicheNonConformiteReceptionController-CLASS,TemperatureNegativeController-CLASS,TemperaturePositiveController-CLASS,Controller_covocation_Stagaire-CLASS,Controller_OMIntern-CLASS,DevisController-CLASS,MyControllerExtension-CLASS,EnregistrementRefroidissementController-CLASS,Controller_Convocation_Formateur-CLASS,Controller_FeuilleEmargement-CLASS,WS_Bon_De_Commande-CLASS,WS_Bon_De_Commande_File-CLASS,Bon_Commande_Controller-CLASS,Bon_Commande_Email-CLASS,GetInfo-CLASS,LeadNotificationService-CLASS,MassFileDownloaderController-CLASS,OpportunityEvent-CLASS,Quiz_HaccpPdfGenerator-CLASS,SendEmailNewLead-CLASS,WS_Pappers-CLASS,SiteLoginController-CLASS,SiteRegisterController-CLASS,WS_WEB-CLASS
+      CLASS
     </div>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>

@@ -16,8 +16,8 @@ private class Test_WS_BDCommande {
     String ville = 'Test City';
     String pays = 'FR';
     String nombreSalarie = '10';
-    String produit = 'Design Charte graphique';
-    String sousProduit = 'Back Office – Gestion de la base de données produit;Segmentation Base de données Clients Modification paramètres de commandes;Modification de carte;Prise en main de l’application Run My Resto;Paramétrage des questionnaires de satisfaction;Interprétation des données brutes de l’interface Admin';
+    String produit = 'CRÉATION DE SITE WEB COMMANDE EN LIGNE PLATINUM  II + APPLICATION';
+    String sousProduit = 'LOGICIEL D’IMPRESSION AUTOMATIQUE DES COMMANDES SOUS WINDOWS';
     String quantite = '5';
     String prixHT = '100.50';
     String remiseType = 'Pourcentage';

@@ -10,6 +10,7 @@ public with sharing class Bon_Commande_Controller {
   public Commande__c com { get; set; }
   public List<String> sousProduitValues { get; set; }
   public List<String> modeReglement { get; set; }
+  public Decimal remise { get; set; }
   public Date today {
     get {
       return Date.today();
@@ -43,20 +44,33 @@ public with sharing class Bon_Commande_Controller {
         Enseigne__c,
         Observation__c,
         Mode_Reglement__c,
-        Status__c,
-        Num_Tel__c
+        Type_de_Remise__c,
+        Valeur_Remise__c,
+        Status__c
       FROM Commande__c
       WHERE Id = :commandeId
     ];
     sousProduitValues = getMultiPicklistValues(com.Sous_Produit__c);
     modeReglement = getMultiPicklistValues(com.Mode_Reglement__c);
     Date todayDate = Date.today();
+    remise = calculateRemise();
   }
   public List<String> getMultiPicklistValues(String picklistValues) {
     if (picklistValues == null) {
       return new List<String>();
     }
     return picklistValues.split(';');
+  }
+
+  public Decimal calculateRemise() {
+    if (com.Valeur_Remise__c != null && com.Valeur_Remise__c != 0) {
+      if (com.Type_de_Remise__c == 'Pourcentage') {
+        return (com.Prix_Total_HT__c * (com.Valeur_Remise__c / 100));
+      } else if (com.Type_de_Remise__c == 'Montant') {
+        return com.Valeur_Remise__c;
+      }
+    }
+    return 0;
   }
 
   public Integer getSousProduitValuesSize() {
