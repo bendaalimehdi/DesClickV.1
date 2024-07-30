@@ -5,7 +5,7 @@ private class Test_WS_BDCommande {
   static void testCreateRecordSuccess() {
     // Set up the test data
     String email = 'test@example.com';
-    String status = 'Production';
+    String status = 'Signature';
     String conseiller = 'Ben Daali Mehdi';
     String societe = 'Test Societe';
     String siret = '12345678901234';

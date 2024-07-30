@@ -16,10 +16,10 @@ public class Test_Bon_Commande_Controller {
       Num_SIRET__c = 12345678901234.0,
       Num_Tel__c = '0987654321',
       Prix_HT__c = 100.0,
-      Produit__c = 'Site Web',
+      Produit__c = 'AJOUT DE BOUTIQUE',
       Quantite__c = 5.0,
       Responsable__c = 'Test Responsable',
-      Sous_Produit__c = 'Segmentation Base de données Clients Modification paramètres de commandes;Prise en main de l’application Run My Resto',
+      Sous_Produit__c = 'FORMATION À DISTANCE',
       Enseigne__c = 'Test Enseigne',
       Observation__c = 'Test Observation',
       Mode_Reglement__c = 'CB;Chèques',
@@ -56,9 +56,9 @@ public class Test_Bon_Commande_Controller {
     // Verify the 'sousProduitValues' and 'modeReglement' properties
 
     System.assertEquals(
-      2,
+      1,
       controller.sousProduitValues.size(),
-      'sousProduitValues should contain 2 values'
+      'sousProduitValues should contain 1 values'
     );
     System.assertEquals(
       2,
@@ -129,6 +129,6 @@ public class Test_Bon_Commande_Controller {
 
     // Verify the size of sousProduitValues
     Integer size = controller.getSousProduitValuesSize();
-    System.assertEquals(2, size, 'The size of sousProduitValues should be 2');
+    System.assertEquals(1, size, 'The size of sousProduitValues should be 1');
   }
 }

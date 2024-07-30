@@ -14,7 +14,7 @@ private class Test_Bon_De_Commande_File {
 
     // Fetch the auto-populated Name value
     Commande__c insertedRecord = [
-      SELECT Id, Name
+      SELECT Id, Name, Nom_societe__c
       FROM Commande__c
       WHERE Id = :testRecord.Id
       LIMIT 1
@@ -75,12 +75,16 @@ private class Test_Bon_De_Commande_File {
 
     Date todayDate = Date.today();
     String formattedDate =
-      String.valueOf(todayDate.year()) +
+      String.valueOf(todayDate.day()).leftPad(2, '0') +
+      '/' +
       String.valueOf(todayDate.month()).leftPad(2, '0') +
-      String.valueOf(todayDate.day()).leftPad(2, '0');
+      '/' +
+      String.valueOf(todayDate.year());
     String fileExtension = fileName.substring(fileName.lastIndexOf('.'));
     String expectedFileName =
       insertedRecord.Name +
+      ' de ' +
+      insertedRecord.Nom_societe__c +
       ' signé ' +
       formattedDate +
       fileExtension;

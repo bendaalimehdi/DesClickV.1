@@ -32,7 +32,7 @@ global with sharing class WS_Bon_De_Commande_File {
 
       // Retrieve the record that matches the command name
       List<Commande__c> records = [
-        SELECT Id, Name
+        SELECT Id, Name, Nom_societe__c
         FROM Commande__c
         WHERE Name = :commandName
         LIMIT 1
@@ -46,7 +46,12 @@ global with sharing class WS_Bon_De_Commande_File {
       System.debug('Retrieved Commande__c record: ' + record);
 
       // Generate new file name
-      String newFileName = generateNewFileName(record.Name, originalFileName);
+      String newFileName = generateNewFileName(
+        record.Name,
+        originalFileName,
+        record.Nom_societe__c
+      );
+
       System.debug('Generated new file name: ' + newFileName);
 
       // Decode base64 file content
@@ -81,6 +86,9 @@ global with sharing class WS_Bon_De_Commande_File {
       insert contentDocumentLink;
       System.debug('Inserted ContentDocumentLink: ' + contentDocumentLink);
 
+      // Send email notification
+      Email_Commande_Signe.sendDocumentAttachedEmail(record.Id, newFileName);
+
       res.statusCode = 200;
       return 'File attached successfully';
     } catch (Exception e) {
@@ -92,17 +100,26 @@ global with sharing class WS_Bon_De_Commande_File {
 
   private static String generateNewFileName(
     String recordName,
-    String originalFileName
+    String originalFileName,
+    String nomSociete
   ) {
     Date todayDate = Date.today();
     String formattedDate =
-      String.valueOf(todayDate.year()) +
+      String.valueOf(todayDate.day()).leftPad(2, '0') +
+      '/' +
       String.valueOf(todayDate.month()).leftPad(2, '0') +
-      String.valueOf(todayDate.day()).leftPad(2, '0');
+      '/' +
+      String.valueOf(todayDate.year());
     String fileExtension = originalFileName.substring(
       originalFileName.lastIndexOf('.')
     );
-    String newFileName = recordName + ' signé ' + formattedDate + fileExtension;
+    String newFileName =
+      recordName +
+      ' de ' +
+      nomSociete +
+      ' signé ' +
+      formattedDate +
+      fileExtension;
     System.debug('generateNewFileName: ' + newFileName);
     return newFileName;
   }
