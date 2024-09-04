@@ -154,6 +154,12 @@
           font-style: italic;
           font-size: 10px;
         }
+        .invisible-block {
+          visibility: hidden;
+          height: 0;
+          margin: 0;
+          padding: 0;
+        }
       </style>
     </head>
     <body>
@@ -220,7 +226,7 @@
                 <td>{!com.Produit__c}</td>
                 <td>{!com.Quantite__c}</td>
                 <td>{!com.Prix_HT__c}</td>
-                <td>{!com.Prix_Total_HT__c}</td>
+                <td>{!com.Prix_HT__c}</td>
               </tr>
               <apex:repeat value="{!sousProduitValues}" var="sousProduit">
                 <tr>
@@ -232,6 +238,29 @@
               </apex:repeat>
             </tbody>
           </table>
+          <apex:outputPanel rendered="{!sousProduitValues.size > 5}">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+          </apex:outputPanel>
+
           <div class="content">
             <img src="{!URLFOR($Resource.uncheckbox)}" alt="" class="check" />
             <label for="mandatCheck">Mandat (facultatif)</label><br />
@@ -246,9 +275,16 @@
               Par ce mandat, ces signatures valent bon pour mandat et bon pour
               acceptation de mandat.
             </p>
+            <p class="italic">{!com.Remarque__c}</p>
           </div>
           <table class="Somme">
             <tbody>
+              <tr>
+                <apex:repeat value="{!remiseRows}" var="remiseRow">
+                  <td class="centered">Remise</td>
+                  <td class="centered">{!remiseRow.montantRemise}</td>
+                </apex:repeat>
+              </tr>
               <tr>
                 <td class="centered">Total HT</td>
                 <td class="centered">{!com.Prix_Total_HT__c}</td>
@@ -286,6 +322,13 @@
             <p>{!com.Responsable__c}</p>
           </div>
         </div>
+        <apex:outputPanel rendered="{!sousProduitValues.size > 5}">
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </apex:outputPanel>
         <footer>
           <p>
             SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le

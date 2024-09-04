@@ -62,7 +62,8 @@ public virtual class Bon_Commande_Email implements Queueable, Database.AllowsCal
 
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
     email.setToAddresses(new List<String>{ emailTo });
-
+    // OrgWideEmailAddress owea = [SELECT Id FROM OrgWideEmailAddress WHERE Address = 'formation@des-click.com' LIMIT 1];
+    // email.setOrgWideEmailAddressId(owea.Id);
     email.setSubject('Bon De Commande - ' + commande.Nom_societe__c);
 
     String emailBody =
