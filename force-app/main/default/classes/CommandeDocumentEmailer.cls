@@ -49,7 +49,7 @@ public with sharing class CommandeDocumentEmailer {
     Commande__c commande;
     try {
       commande = [
-        SELECT Name, Nom_societe__c, Status__c
+        SELECT Name, Nom_societe__c, Status__c, Description__c
         FROM Commande__c
         WHERE Id = :commandeId
       ];
@@ -71,10 +71,13 @@ public with sharing class CommandeDocumentEmailer {
         ' pour la société ' +
         commande.Nom_societe__c +
         ', ainsi que les documents nécessaires.\n\n' +
-        'Veuillez confirmer la réception en cliquant sur le lien suivant :\n\n' +
-        'https://formation.des-click.com/\n\n' +
-        'Cordialement,\n' +
-        'équipe commercial';
+        'Messsage du Commercial :\n' +
+        commande.Description__c +
+        '\n Veuillez confirmer la réception en cliquant sur le lien suivant :\n\n' +
+        'https://formation.des-click.com/update-commande/?commandeName=' +
+        EncodingUtil.urlEncode(commande.Name, 'UTF-8') +
+        '\n\n' +
+        'Cordialement,\n';
 
       mail.setToAddresses(new List<String>{ recipientEmail });
       mail.setSubject(emailSubject);

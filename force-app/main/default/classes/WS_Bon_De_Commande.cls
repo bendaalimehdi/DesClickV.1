@@ -24,6 +24,7 @@ global with sharing class WS_Bon_De_Commande {
     public String ModeReglement;
     public String enseigne;
     public String tel;
+    public String Description;
   }
 
   @HttpPost
@@ -59,6 +60,7 @@ global with sharing class WS_Bon_De_Commande {
       newCommande.Observation__c = request.Observation;
       newCommande.Activite__c = request.Activite;
       newCommande.Num_Tel__c = request.tel;
+      newCommande.Description__c = Request.Description;
 
       try {
         if (String.isNotBlank(request.siret)) {

@@ -27,6 +27,7 @@ private class Test_WS_BDCommande {
     String enseigne = 'Test Enseigne';
     String Observation = 'Test Observation';
     String tel = '020202020202';
+    String Description = 'payement restoproxy';
 
     // Create the JSON payload
     String jsonPayload = JSON.serialize(
@@ -53,7 +54,8 @@ private class Test_WS_BDCommande {
         'ModeReglement' => ModeReglement,
         'enseigne' => enseigne,
         'Observation' => Observation,
-        'tel' => tel
+        'tel' => tel,
+        'Description' => Description
       }
     );
 
