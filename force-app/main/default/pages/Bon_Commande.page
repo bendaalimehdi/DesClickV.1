@@ -239,26 +239,14 @@
             </tbody>
           </table>
           <apex:outputPanel rendered="{!sousProduitValues.size > 5}">
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <apex:outputPanel rendered="{!sousProduitValues.size <= 9}">
+              <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+              <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!sousProduitValues.size > 9}">
+              <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            </apex:outputPanel>
           </apex:outputPanel>
 
           <div class="content">
@@ -309,6 +297,11 @@
           <div class="clear"></div>
         </section>
 
+        <apex:outputPanel rendered="{!sousProduitValues.size > 5}">
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        </apex:outputPanel>
+
         <div class="signature-container">
           <div class="signature-left">
             <p><strong>Signature du Représentant :</strong></p>
@@ -323,12 +316,9 @@
           </div>
         </div>
         <apex:outputPanel rendered="{!sousProduitValues.size > 5}">
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <br /><br /><br /><br /><br />
         </apex:outputPanel>
+
         <footer>
           <p>
             SAS - DC WEB APS<br /> 3, Rue Lech Walesa – 94270 Le
