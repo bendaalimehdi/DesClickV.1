@@ -62,6 +62,17 @@ public with sharing class CommandeDocumentEmailer {
     System.debug('Step 6: Preparing the email');
     if (!String.isBlank(recipientEmail)) {
       Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+      OrgWideEmailAddress owea = [
+        SELECT Id
+        FROM OrgWideEmailAddress
+        WHERE Address = 'noreply@des-click.com'
+        LIMIT 1
+      ];
+      if (owea == null) {
+        System.debug('No OrgWideEmailAddress found for: noreply@des-click.com');
+        return;
+      }
+      mail.setOrgWideEmailAddressId(owea.Id);
 
       String emailSubject = 'Commande numéro ' + commande.Name;
       String emailBody =

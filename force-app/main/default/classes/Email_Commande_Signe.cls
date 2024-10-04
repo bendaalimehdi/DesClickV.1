@@ -41,6 +41,17 @@ global class Email_Commande_Signe {
 
       // Create email
       Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+      OrgWideEmailAddress owea = [
+        SELECT Id
+        FROM OrgWideEmailAddress
+        WHERE Address = 'noreply@des-click.com'
+        LIMIT 1
+      ];
+      if (owea == null) {
+        System.debug('No OrgWideEmailAddress found for: noreply@des-click.com');
+        return;
+      }
+      email.setOrgWideEmailAddressId(owea.Id);
       email.setToAddresses(new List<String>{ emailTo });
       email.setSubject('Document Attached: ' + fileName);
       email.setPlainTextBody(

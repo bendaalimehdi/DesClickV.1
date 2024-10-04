@@ -2,16 +2,26 @@ public class SendEmailNewLead {
   public static void sendEmails(List<Lead> newLeads) {
     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
     Map<String, Id> templateIds = retrieveTemplateIds();
+    Id oweaId = retrieveOrgWideEmailAddressId();
 
     try {
       for (Lead lead : newLeads) {
-        Messaging.SingleEmailMessage email = createEmail(lead, templateIds);
+        Messaging.SingleEmailMessage email = createEmail(
+          lead,
+          templateIds,
+          oweaId
+        );
         if (email != null) {
           emails.add(email);
         }
       }
 
       sendEmails(emails);
+
+      // Update the leads with the email sent flags
+      if (!newLeads.isEmpty()) {
+        update newLeads;
+      }
     } catch (Exception e) {
       System.debug('An unexpected error occurred: ' + e.getMessage());
     }
@@ -22,7 +32,9 @@ public class SendEmailNewLead {
       'LeadsWebToLeadmailresponseNEW' => null,
       'Web-to-Lead email response HACCP' => null,
       'LeadsWebToLeadmailresponsePiloterApp' => null,
-      'LeadsWebToLeadmailresponsePiloterSite' => null
+      'LeadsWebToLeadmailresponsePiloterSite' => null,
+      'LeadsWebToLeadmailresponseCLICKLEAN' => null,
+      'LeadsWebToLeadmailresponseMutations' => null
     };
 
     for (EmailTemplate template : [
@@ -37,11 +49,30 @@ public class SendEmailNewLead {
     return templateIds;
   }
 
+  private static Id retrieveOrgWideEmailAddressId() {
+    OrgWideEmailAddress owea = [
+      SELECT Id
+      FROM OrgWideEmailAddress
+      WHERE Address = 'noreply@des-click.com'
+      LIMIT 1
+    ];
+
+    if (owea == null) {
+      System.debug('No OrgWideEmailAddress found for: noreply@des-click.com');
+      return null;
+    }
+
+    return owea.Id;
+  }
+
   private static Messaging.SingleEmailMessage createEmail(
     Lead lead,
-    Map<String, Id> templateIds
+    Map<String, Id> templateIds,
+    Id oweaId
   ) {
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+
+    email.setOrgWideEmailAddressId(oweaId);
     email.setToAddresses(new List<String>{ lead.Email });
     email.setTargetObjectId(lead.Id);
     email.setSaveAsActivity(true);
@@ -63,6 +94,20 @@ public class SendEmailNewLead {
       ) {
         email.setTemplateId(
           templateIds.get('LeadsWebToLeadmailresponsePiloterApp')
+        );
+      } else if (
+        lead.Formation_Souhaite__c ==
+        'Maîtriser les fonctionnalités de la solution de gestion de la qualité CLICKLEAN'
+      ) {
+        email.setTemplateId(
+          templateIds.get('LeadsWebToLeadmailresponseCLICKLEAN')
+        );
+      } else if (
+        lead.Formation_Souhaite__c ==
+        'Mutations digitales et Pilotage de la performance de mon restaurant'
+      ) {
+        email.setTemplateId(
+          templateIds.get('LeadsWebToLeadmailresponseMutations')
         );
       }
       lead.Email_On_Working_Sent__c = true;

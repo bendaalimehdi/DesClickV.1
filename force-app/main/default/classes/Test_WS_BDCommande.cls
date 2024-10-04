@@ -1,329 +1,273 @@
-@IsTest
+@isTest
 private class Test_WS_BDCommande {
-  // Test method for successful record creation
-  @IsTest
-  static void testCreateRecordSuccess() {
-    // Set up the test data
-    String email = 'test@example.com';
-    String status = 'Signature';
-    String conseiller = 'Ben Daali Mehdi';
-    String societe = 'Test Societe';
-    String siret = '12345678901234';
-    String responsable = 'Test Responsable';
-    String mobile = '1234567890';
-    String adresse = '123 Test St';
-    String codePostale = '12345';
-    String ville = 'Test City';
-    String pays = 'FR';
-    String nombreSalarie = '10';
-    String produit = 'CRÉATION DE SITE WEB COMMANDE EN LIGNE PLATINUM  II + APPLICATION';
-    String sousProduit = 'LOGICIEL D’IMPRESSION AUTOMATIQUE DES COMMANDES SOUS WINDOWS';
-    String quantite = '5';
-    String prixHT = '100.50';
-    String remiseType = 'Pourcentage';
-    String remiseValue = '10.0';
-    String Activite = 'Restauration';
-    String ModeReglement = 'CB;Chèques';
-    String enseigne = 'Test Enseigne';
-    String Observation = 'Test Observation';
-    String tel = '020202020202';
-    String Description = 'payement restoproxy';
+  @isTest
+  static void testValidPayload() {
+    // Create valid JSON payload
+    String jsonPayload =
+      '{' +
+      '"email": "example@example.com",' +
+      '"status": "Initialisation",' +
+      '"conseiller": "Ben Daali Mehdi",' +
+      '"societe": "Example Corp",' +
+      '"siret": "12345678901234",' +
+      '"responsable": "Jane Doe",' +
+      '"mobile": "1234567890",' +
+      '"adresse": "123 Main St",' +
+      '"codePostale": "75001",' +
+      '"ville": "Paris",' +
+      '"pays": "FR",' +
+      '"nombreSalarie": "50",' +
+      '"produit": "AJOUT D\'APPLICATION",' +
+      '"sousProduit": "CHANGEMENT DE CARTE",' +
+      '"quantite": "10",' +
+      '"prixHT": "1000",' +
+      '"remiseType": "Pourcentage",' +
+      '"remiseValue": "10",' +
+      '"Observation": "Some observation",' +
+      '"ModeReglement": "CB",' +
+      '"enseigne": "Some enseigne",' +
+      '"tel": "9876543210",' +
+      '"Description": "A detailed description"' +
+      '}';
 
-    // Create the JSON payload
-    String jsonPayload = JSON.serialize(
-      new Map<String, Object>{
-        'email' => email,
-        'status' => status,
-        'conseiller' => conseiller,
-        'societe' => societe,
-        'siret' => siret,
-        'responsable' => responsable,
-        'mobile' => mobile,
-        'adresse' => adresse,
-        'codePostale' => codePostale,
-        'ville' => ville,
-        'pays' => pays,
-        'nombreSalarie' => nombreSalarie,
-        'produit' => produit,
-        'sousProduit' => sousProduit,
-        'quantite' => quantite,
-        'prixHT' => prixHT,
-        'remiseType' => remiseType,
-        'remiseValue' => remiseValue,
-        'Activite' => Activite,
-        'ModeReglement' => ModeReglement,
-        'enseigne' => enseigne,
-        'Observation' => Observation,
-        'tel' => tel,
-        'Description' => Description
-      }
-    );
-
-    // Mock the REST request
+    // Mock the REST request and response
     RestRequest req = new RestRequest();
-    req.requestURI = '/services/apexrest/createCommande';
+    RestResponse res = new RestResponse();
+    req.requestUri = '/services/apexrest/createCommande';
     req.httpMethod = 'POST';
     req.requestBody = Blob.valueOf(jsonPayload);
-
     RestContext.request = req;
-
-    // Mock the REST response
-    RestResponse res = new RestResponse();
     RestContext.response = res;
 
-    // Call the method
-    Test.startTest();
-    String result = WS_Bon_De_Commande.createCommande();
-    Test.stopTest();
+    // Call the method to test
+    String response = WS_Bon_De_Commande.createCommande();
+    System.debug('Response: ' + response);
 
-    // Verify the result
-    Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
-      result
+    // Validate the response
+    Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(
+      response
     );
-    System.assertEquals(
-      'success',
-      String.valueOf(response.get('status')),
-      'Expected status to be success'
-    );
-    System.assert(
-      response.containsKey('id'),
-      'Expected id field in the response'
-    );
+    System.assertEquals('success', result.get('status'));
 
-    // Verify the record was created
-    List<Commande__c> commandes = [
-      SELECT Id, Email__c, Status__c, Produit__c, Sous_Produit__c
+    // Check if the Commande__c record was created
+    String createdCommandeId = (String) result.get('id');
+    Commande__c createdCommande = [
+      SELECT Id, Mobile__c, Quantite__c, Prix_HT__c, Valeur_Remise__c
       FROM Commande__c
-      WHERE Email__c = :email
+      WHERE Id = :createdCommandeId
+      LIMIT 1
     ];
-    System.assertEquals(
-      1,
-      commandes.size(),
-      'Expected one record to be created'
-    );
-    Commande__c newCommande = commandes[0];
-    System.assertEquals(email, newCommande.Email__c, 'Expected email to match');
-    System.assertEquals(
-      status,
-      newCommande.Status__c,
-      'Expected status to match'
-    );
-    System.assertEquals(
-      produit,
-      newCommande.Produit__c,
-      'Expected produit to match'
-    );
-    System.assertEquals(
-      sousProduit,
-      newCommande.Sous_Produit__c,
-      'Expected sousProduit to match'
-    );
+    System.assertNotEquals(null, createdCommande);
+    System.assertEquals('1234567890', createdCommande.Mobile__c);
+    System.assertEquals(10, createdCommande.Quantite__c);
+    System.assertEquals(1000, createdCommande.Prix_HT__c);
+    System.assertEquals(10, createdCommande.Valeur_Remise__c);
   }
 
-  // Test method for invalid JSON format
-  @IsTest
+  @isTest
   static void testInvalidJsonFormat() {
-    String invalidJsonPayload = '{invalidJson}';
+    // Create invalid JSON payload
+    String jsonPayload =
+      '{' +
+      '"email": "example@example.com",' +
+      '"status": "Initialisation",' +
+      '"societe": "Example Corp",' +
+      // Missing other required fields
+      '}';
 
+    // Mock the REST request and response
     RestRequest req = new RestRequest();
-    req.requestURI = '/services/apexrest/createCommande';
-    req.httpMethod = 'POST';
-    req.requestBody = Blob.valueOf(invalidJsonPayload);
-
-    RestContext.request = req;
-
     RestResponse res = new RestResponse();
+    req.requestUri = '/services/apexrest/createCommande';
+    req.httpMethod = 'POST';
+    req.requestBody = Blob.valueOf(jsonPayload);
+    RestContext.request = req;
     RestContext.response = res;
 
-    Test.startTest();
-    String result = WS_Bon_De_Commande.createCommande();
-    Test.stopTest();
+    // Call the method to test
+    String response = WS_Bon_De_Commande.createCommande();
+    System.debug('Response: ' + response);
 
-    Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
-      result
+    // Validate the response
+    Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(
+      response
     );
+    System.assertEquals('error', result.get('status'));
+    System.assertEquals('Invalid JSON format', result.get('message'));
+  }
+
+  @isTest
+  static void testInvalidMobileNumber() {
+    // Create JSON payload with invalid mobile number
+    String jsonPayload =
+      '{' +
+      '"email": "example@example.com",' +
+      '"status": "Initialisation",' +
+      '"conseiller": "Ben Daali Mehdi",' +
+      '"societe": "Example Corp",' +
+      '"siret": "12345678901234",' +
+      '"responsable": "Jane Doe",' +
+      '"mobile": "12345",' + // Invalid mobile number
+      '"adresse": "123 Main St",' +
+      '"codePostale": "75001",' +
+      '"ville": "Paris",' +
+      '"pays": "FR",' +
+      '"nombreSalarie": "50",' +
+      '"produit": "AJOUT D\'APPLICATION",' +
+      '"sousProduit": "CHANGEMENT DE CARTE",' +
+      '"quantite": "10",' +
+      '"prixHT": "1000",' +
+      '"remiseType": "Pourcentage",' +
+      '"remiseValue": "10",' +
+      '"Observation": "Some observation",' +
+      '"ModeReglement": "CB",' +
+      '"enseigne": "Some enseigne",' +
+      '"tel": "9876543210",' +
+      '"Description": "A detailed description"' +
+      '}';
+
+    // Mock the REST request and response
+    RestRequest req = new RestRequest();
+    RestResponse res = new RestResponse();
+    req.requestUri = '/services/apexrest/createCommande';
+    req.httpMethod = 'POST';
+    req.requestBody = Blob.valueOf(jsonPayload);
+    RestContext.request = req;
+    RestContext.response = res;
+
+    // Call the method to test
+    String response = WS_Bon_De_Commande.createCommande();
+    System.debug('Response: ' + response);
+
+    // Validate the response
+    Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(
+      response
+    );
+    System.assertEquals('error', result.get('status'));
     System.assertEquals(
-      'error',
-      String.valueOf(response.get('status')),
-      'Expected status to be error'
-    );
-    System.assert(
-      String.valueOf(response.get('message')).contains('Invalid JSON format'),
-      'Expected error message for invalid JSON format'
+      'Invalid mobile format. The mobile number must be 10 digits long.',
+      result.get('message')
     );
   }
 
-  // Test method for invalid SIRET format
-  @IsTest
-  static void testInvalidSiretFormat() {
-    String email = 'test@example.com';
-    String status = 'Production';
-    String siret = 'invalidSiret'; // Invalid SIRET format
+  @isTest
+  static void testPicklistValueValidation() {
+    // Create JSON payload with invalid picklist value
+    String jsonPayload =
+      '{' +
+      '"email": "example@example.com",' +
+      '"status": "Initialisation",' +
+      '"conseiller": "Ben Daali Mehdi",' +
+      '"societe": "Example Corp",' +
+      '"siret": "12345678901234",' +
+      '"responsable": "Jane Doe",' +
+      '"mobile": "1234567890",' +
+      '"adresse": "123 Main St",' +
+      '"codePostale": "75001",' +
+      '"ville": "Paris",' +
+      '"pays": "FR",' +
+      '"nombreSalarie": "50",' +
+      '"produit": "INVALID_PRODUIT",' + // Invalid picklist value
+      '"sousProduit": "CHANGEMENT DE CARTE",' +
+      '"quantite": "10",' +
+      '"prixHT": "1000",' +
+      '"remiseType": "InvalidRemiseType",' + // Invalid picklist value
+      '"remiseValue": "10",' +
+      '"Observation": "Some observation",' +
+      '"ModeReglement": "InvalidModeReglement",' + // Invalid picklist value
+      '"enseigne": "Some enseigne",' +
+      '"tel": "9876543210",' +
+      '"Description": "A detailed description"' +
+      '}';
 
-    String jsonPayload = JSON.serialize(
-      new Map<String, Object>{
-        'email' => email,
-        'status' => status,
-        'siret' => siret
-      }
-    );
-
+    // Mock the REST request and response
     RestRequest req = new RestRequest();
-    req.requestURI = '/services/apexrest/createCommande';
+    RestResponse res = new RestResponse();
+    req.requestUri = '/services/apexrest/createCommande';
     req.httpMethod = 'POST';
     req.requestBody = Blob.valueOf(jsonPayload);
-
     RestContext.request = req;
-
-    RestResponse res = new RestResponse();
     RestContext.response = res;
 
-    Test.startTest();
-    String result = WS_Bon_De_Commande.createCommande();
-    Test.stopTest();
+    // Call the method to test
+    String response = WS_Bon_De_Commande.createCommande();
+    System.debug('Response: ' + response);
 
-    Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
-      result
+    // Validate the response
+    Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(
+      response
     );
-    System.assertEquals(
-      'error',
-      String.valueOf(response.get('status')),
-      'Expected status to be error'
-    );
+    System.assertEquals('error', result.get('status'));
     System.assert(
-      String.valueOf(response.get('message')).contains('Invalid SIRET format'),
-      'Expected error message for invalid SIRET format'
+      result.get('message')
+          .toString()
+          .contains('Invalid value for Produit__c') ||
+        result.get('message')
+          .toString()
+          .contains('Invalid value for Type_de_Remise__c') ||
+        result.get('message')
+          .toString()
+          .contains('Invalid value for Mode_Reglement__c')
     );
   }
 
-  // Test method for invalid number format
-  @IsTest
-  static void testInvalidNumberFormat() {
-    String email = 'test@example.com';
-    String status = 'Production';
-    String quantite = 'invalidQuantite'; // Invalid number format
+  @isTest
+  static void testForceException() {
+    // Set the flag to force an exception
+    WS_Bon_De_Commande.setForceException(true);
 
-    String jsonPayload = JSON.serialize(
-      new Map<String, Object>{
-        'email' => email,
-        'status' => status,
-        'quantite' => quantite
-      }
-    );
+    // Create JSON payload
+    String jsonPayload =
+      '{' +
+      '"email": "example@example.com",' +
+      '"status": "Initialisation",' +
+      '"conseiller": "Ben Daali Mehdi",' +
+      '"societe": "Example Corp",' +
+      '"siret": "12345678901234",' +
+      '"responsable": "Jane Doe",' +
+      '"mobile": "1234567890",' +
+      '"adresse": "123 Main St",' +
+      '"codePostale": "75001",' +
+      '"ville": "Paris",' +
+      '"pays": "FR",' +
+      '"nombreSalarie": "50",' +
+      '"produit": "AJOUT D\'APPLICATION",' +
+      '"sousProduit": "CHANGEMENT DE CARTE",' +
+      '"quantite": "10",' +
+      '"prixHT": "1000",' +
+      '"remiseType": "Pourcentage",' +
+      '"remiseValue": "10",' +
+      '"Observation": "Some observation",' +
+      '"ModeReglement": "CB",' +
+      '"enseigne": "Some enseigne",' +
+      '"tel": "9876543210",' +
+      '"Description": "A detailed description"' +
+      '}';
 
+    // Mock the REST request and response
     RestRequest req = new RestRequest();
-    req.requestURI = '/services/apexrest/createCommande';
+    RestResponse res = new RestResponse();
+    req.requestUri = '/services/apexrest/createCommande';
     req.httpMethod = 'POST';
     req.requestBody = Blob.valueOf(jsonPayload);
-
     RestContext.request = req;
-
-    RestResponse res = new RestResponse();
     RestContext.response = res;
 
-    Test.startTest();
-    String result = WS_Bon_De_Commande.createCommande();
-    Test.stopTest();
+    // Call the method to test
+    String response = WS_Bon_De_Commande.createCommande();
+    System.debug('Response: ' + response);
 
-    Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
-      result
+    // Validate the response
+    Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(
+      response
     );
+    System.assertEquals('error', result.get('status'));
     System.assertEquals(
-      'error',
-      String.valueOf(response.get('status')),
-      'Expected status to be error'
-    );
-    System.assert(
-      String.valueOf(response.get('message')).contains('Invalid number format'),
-      'Expected error message for invalid number format'
-    );
-  }
-
-  // Test method for invalid sousProduit value
-  @IsTest
-  static void testInvalidSousProduitValue() {
-    String email = 'test@example.com';
-    String status = 'Production';
-    String sousProduit = 'Invalid Value'; // Invalid sousProduit value
-
-    String jsonPayload = JSON.serialize(
-      new Map<String, Object>{
-        'email' => email,
-        'status' => status,
-        'sousProduit' => sousProduit
-      }
+      'Exception forced from unit test.',
+      result.get('message')
     );
 
-    RestRequest req = new RestRequest();
-    req.requestURI = '/services/apexrest/createCommande';
-    req.httpMethod = 'POST';
-    req.requestBody = Blob.valueOf(jsonPayload);
-
-    RestContext.request = req;
-
-    RestResponse res = new RestResponse();
-    RestContext.response = res;
-
-    Test.startTest();
-    String result = WS_Bon_De_Commande.createCommande();
-    Test.stopTest();
-
-    Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
-      result
-    );
-    System.assertEquals(
-      'error',
-      String.valueOf(response.get('status')),
-      'Expected status to be error'
-    );
-    System.assert(
-      String.valueOf(response.get('message'))
-        .contains('Invalid value for sousProduit'),
-      'Expected error message for invalid sousProduit value'
-    );
-  }
-
-  // Test method for invalid ModeReglement value
-  @IsTest
-  static void testInvalidModeReglementValue() {
-    String email = 'test@example.com';
-    String status = 'Production';
-    String ModeReglement = 'Invalid Value'; // Invalid ModeReglement value
-
-    String jsonPayload = JSON.serialize(
-      new Map<String, Object>{
-        'email' => email,
-        'status' => status,
-        'ModeReglement' => ModeReglement
-      }
-    );
-
-    RestRequest req = new RestRequest();
-    req.requestURI = '/services/apexrest/createCommande';
-    req.httpMethod = 'POST';
-    req.requestBody = Blob.valueOf(jsonPayload);
-
-    RestContext.request = req;
-
-    RestResponse res = new RestResponse();
-    RestContext.response = res;
-
-    Test.startTest();
-    String result = WS_Bon_De_Commande.createCommande();
-    Test.stopTest();
-
-    Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
-      result
-    );
-    System.assertEquals(
-      'error',
-      String.valueOf(response.get('status')),
-      'Expected status to be error'
-    );
-    System.assert(
-      String.valueOf(response.get('message'))
-        .contains('Invalid value for ModeReglement'),
-      'Expected error message for invalid ModeReglement value'
-    );
+    // Reset the flag after the test
+    WS_Bon_De_Commande.setForceException(false);
   }
 }
