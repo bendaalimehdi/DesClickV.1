@@ -16,7 +16,7 @@ public class Test_Bon_Commande_Email {
   @isTest
   static void testExecuteMethod() {
     Commande__c testCommande = [SELECT Id FROM Commande__c LIMIT 1];
-    Bon_Commande_Email queueableInstance = new Bon_Commande_Email(
+    Bon_Commande_Email_To_Lead queueableInstance = new Bon_Commande_Email_To_Lead(
       testCommande.Id
     );
 
@@ -36,5 +36,16 @@ public class Test_Bon_Commande_Email {
       res.setStatusCode(200);
       return res;
     }
+  }
+
+  @isTest
+  static void testBonCommandeEmailToConseiller() {
+    Commande__c testCommande = [SELECT Id, Status__c FROM Commande__c LIMIT 1];
+
+    testCommande.Status__c = 'Approbation';
+
+    Test.startTest();
+    update testCommande;
+    Test.stopTest();
   }
 }

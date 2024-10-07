@@ -1,15 +1,17 @@
-public virtual class Bon_Commande_Email implements Queueable, Database.AllowsCallouts {
+public virtual class Bon_Commande_Email_To_Conseiller implements Queueable, Database.AllowsCallouts {
   public Id commandeId;
 
-  public Bon_Commande_Email(Id commandeId) {
+  public Bon_Commande_Email_To_Conseiller(Id commandeId) {
     this.commandeId = commandeId;
   }
 
   public void execute(QueueableContext context) {
-    System.debug('Executing Queueable with commandeId: ' + commandeId);
+    System.debug(
+      'Executing Queueable for Conseiller with commandeId: ' + commandeId
+    );
 
     Commande__c commande = [
-      SELECT Id, Name, Conseiller__c, Nom_societe__c
+      SELECT Id, Name, Conseiller__c, Nom_societe__c, Status__c
       FROM Commande__c
       WHERE Id = :commandeId
       LIMIT 1
@@ -17,19 +19,24 @@ public virtual class Bon_Commande_Email implements Queueable, Database.AllowsCal
 
     System.debug('Commande record retrieved: ' + commande);
 
+    // Ensure the Status is "Approbation"
+    if (commande.Status__c != 'Approbation') {
+      System.debug(
+        'Commande is not approved. No email will be sent to conseiller.'
+      );
+      return;
+    }
+
+    // Get the Conseiller email
     List<Sales_Emails__mdt> salesEmailsList = [
       SELECT MasterLabel, Email__c
       FROM Sales_Emails__mdt
     ];
 
-    System.debug('Sales_Emails__mdt records retrieved: ' + salesEmailsList);
-
     Map<String, String> conseillerEmailMap = new Map<String, String>();
     for (Sales_Emails__mdt salesEmail : salesEmailsList) {
       conseillerEmailMap.put(salesEmail.MasterLabel, salesEmail.Email__c);
     }
-
-    System.debug('Conseiller email map created: ' + conseillerEmailMap);
 
     String emailTo;
     if (conseillerEmailMap.containsKey(commande.Conseiller__c)) {
@@ -60,8 +67,11 @@ public virtual class Bon_Commande_Email implements Queueable, Database.AllowsCal
     attachment.setBody(pdfBlob);
     attachment.setContentType('application/pdf');
 
+    // Create and configure the email
     Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
     email.setToAddresses(new List<String>{ emailTo });
+
+    // OrgWideEmailAddress selection
     OrgWideEmailAddress owea = [
       SELECT Id
       FROM OrgWideEmailAddress
@@ -73,30 +83,25 @@ public virtual class Bon_Commande_Email implements Queueable, Database.AllowsCal
       return;
     }
     email.setOrgWideEmailAddressId(owea.Id);
+    email.setFileAttachments(
+      new List<Messaging.EmailFileAttachment>{ attachment }
+    );
 
     email.setSubject('Bon De Commande - ' + commande.Nom_societe__c);
 
     String emailBody =
       'Bonjour ' +
       commande.Conseiller__c +
-      ',\n\n' +
-      'Vous trouverez ci-joint le bon de commande de la société ' +
+      ',\n\nVous trouverez ci-joint le bon de commande de la société ' +
       commande.Nom_societe__c +
-      '.\n\n' +
-      '--\n';
-
-    email.setHtmlBody(emailBody);
-    email.setFileAttachments(
-      new List<Messaging.EmailFileAttachment>{ attachment }
-    );
+      '.\n\n--\n';
+    email.setPlainTextBody(emailBody);
 
     Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ email });
-    System.debug('Email sent to: ' + emailTo);
+    System.debug('Email sent to conseiller: ' + emailTo);
 
     commande.Status__c = 'Signature';
     update commande;
-
-    System.debug('Commande Status updated to Signature for: ' + commandeId);
   }
 
   @TestVisible
