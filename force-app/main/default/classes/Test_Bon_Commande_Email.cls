@@ -1,51 +1,59 @@
 @isTest
 public class Test_Bon_Commande_Email {
-  @testSetup
-  static void setupTestData() {
-    // Create test data for Commande__c
-    Commande__c testCommande = new Commande__c(
-      Status__c = 'Initialisation',
-      Conseiller__c = 'Ben Daali Mehdi',
-      Nom_societe__c = 'Test Company',
-      Num_SIRET__c = 1234567890123L,
-      Email__c = 'bendaalimehdi@gmail.com'
-    );
-    insert testCommande;
-  }
+    
 
-  @isTest
-  static void testExecuteMethod() {
-    Commande__c testCommande = [SELECT Id FROM Commande__c LIMIT 1];
-    Bon_Commande_Email_To_Lead queueableInstance = new Bon_Commande_Email_To_Lead(
-      testCommande.Id
-    );
+    @isTest
+    static void testStatusUpdateForSpecialConseiller() {
+        
+        Commande__c commande = new Commande__c(
+            Nom_societe__c = 'Test Company',
+            Conseiller__c = 'Ben Daali Mehdi',
+            Status__c = 'Initialisation',
+            Email__c = 'bendaalimehdi@gmail.com'
+        );
+        insert commande;
 
-    Test.startTest();
-    Test.setMock(HttpCalloutMock.class, new PdfMock());
-    System.enqueueJob(queueableInstance);
-    Test.stopTest();
-  }
+        // Test the Bon_Commande_Email_To_Lead class
+        Bon_Commande_Email_To_Lead queueableJob = new Bon_Commande_Email_To_Lead(commande.Id);
+        Test.startTest();
+        System.enqueueJob(queueableJob);
+        Test.stopTest();
 
-  private class PdfMock implements HttpCalloutMock {
-    public HTTPResponse respond(HTTPRequest req) {
-      // Create a fake PDF blob
-      Blob pdfBlob = Blob.valueOf('This is a test PDF content.');
-      HTTPResponse res = new HTTPResponse();
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setBodyAsBlob(pdfBlob);
-      res.setStatusCode(200);
-      return res;
+
+        // Query the updated Commande__c record
+        commande = [SELECT Id, Status__c FROM Commande__c WHERE Id = :commande.Id LIMIT 1];
+
+        // Assert that the status is updated to 'Approbation'
+        System.assertEquals('Signature', commande.Status__c, 'Status should be updated to Signature for Mehdi and olfa');
+       
     }
-  }
 
-  @isTest
-  static void testBonCommandeEmailToConseiller() {
-    Commande__c testCommande = [SELECT Id, Status__c FROM Commande__c LIMIT 1];
 
-    testCommande.Status__c = 'Approbation';
+    @IsTest
+    static void testStatusUpdateForNonSpecialConseiller() {
+        // Create a Commande__c record with 'Yahya Olfa' as Conseiller
+        Commande__c commande = new Commande__c(
+            Nom_societe__c = 'Test Company',
+            Conseiller__c = 'MNAFFAKH Faten',
+            Email__c = 'bendaalimehdi@gmail.com',
+            Status__c = 'Initialisation'
+            );
+        insert commande;
 
-    Test.startTest();
-    update testCommande;
-    Test.stopTest();
-  }
+        // Test the Bon_Commande_Email_To_Lead class
+        Bon_Commande_Email_To_Lead queueableJob = new Bon_Commande_Email_To_Lead(commande.Id);
+        Test.startTest();
+        System.enqueueJob(queueableJob);
+        Test.stopTest();
+
+        // Assert that the status is not updated to 'Approbation'
+        commande = [SELECT Id, Status__c FROM Commande__c WHERE Id = :commande.Id LIMIT 1];
+
+        System.Assert.areNotEqual('Approbation', commande.Status__c, 'Status should not be updated to Approbation for Yahya Olfa');
+       
+    }
+    
+
+
+
 }

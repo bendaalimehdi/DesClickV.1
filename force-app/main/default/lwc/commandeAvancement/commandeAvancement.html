@@ -1,22 +1,24 @@
 <template>
-  <lightning-card title="Commandes with Avancements">
-    <lightning-input
-      type="text"
-      label="Filter by Société"
-      onchange={handleFilterChange}
-    ></lightning-input>
+  <lightning-card title="Commandes Grouped by Société">
+      <lightning-input type="text" label="Filter by Société" onchange={handleFilterChange}></lightning-input>
 
-    <template if:true={commandes.length}>
-      <lightning-datatable key-field="id" data={commandes} columns={columns}>
-      </lightning-datatable>
-    </template>
+      <template if:true={commandes.length}>
+          <lightning-tree-grid
+              key-field="id"
+              data={commandes}
+              columns={columns}
+              hide-checkbox-column>
+          </lightning-tree-grid>
+      </template>
 
-    <template if:true={error}>
-      <div class="error-message">{error}</div>
-    </template>
+      <template if:true={error}>
+          <div class="error-message">
+              {error}
+          </div>
+      </template>
 
-    <template if:true={isLoading}>
-      <lightning-spinner alternative-text="Loading"></lightning-spinner>
-    </template>
+      <template if:true={isLoading}>
+          <lightning-spinner alternative-text="Loading"></lightning-spinner>
+      </template>
   </lightning-card>
 </template>

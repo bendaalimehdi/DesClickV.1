@@ -76,24 +76,24 @@ public with sharing class CommandeDocumentEmailer {
 
       String emailSubject = 'Commande numéro ' + commande.Name;
       String emailBody =
-        'Bonjour,\n\n' +
-        'Vous trouverez ci-joint le bon de commande N°: ' +
-        commande.Name +
-        ' pour la société ' +
-        commande.Nom_societe__c +
-        ', ainsi que les documents nécessaires.\n\n' +
-        'Messsage du Commercial :\n' +
-        commande.Description__c +
-        '\n Veuillez confirmer la réception en cliquant sur le lien suivant :\n\n' +
-        'https://formation.des-click.com/update-commande/?commandeName=' +
-        EncodingUtil.urlEncode(commande.Name, 'UTF-8') +
-        '\n\n' +
-        'Cordialement,\n';
+      'Bonjour,\n\n' +
+      'Vous trouverez ci-joint le bon de commande N°: ' +
+      commande.Name +
+      ' pour la société ' +
+      commande.Nom_societe__c +
+      ', ainsi que les documents nécessaires.\n\n' +
+      'Message du Commercial :\n' +
+      commande.Description__c + '\n\n' +
+      'Veuillez mettre à jour l’avancement du projet à chaque étape sur le lien suivant :\n\n' +
+      'https://formation.des-click.com/avancement/\n\n' +
+      'Cordialement,\n';
+  
 
       mail.setToAddresses(new List<String>{ recipientEmail });
       mail.setSubject(emailSubject);
       mail.setPlainTextBody(emailBody);
       mail.setSaveAsActivity(true);
+      mail.setWhatId(commandeId);
       System.debug('Email basic information set. Subject and Body prepared.');
 
       if (!documents.isEmpty()) {

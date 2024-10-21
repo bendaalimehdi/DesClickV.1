@@ -13,13 +13,20 @@ public virtual class Bon_Commande_Email_To_Lead implements Queueable, Database.A
 
     // Retrieve the Commande__c record
     Commande__c commande = [
-      SELECT Id, Name, Nom_societe__c, Conseiller__c, Email__c
+      SELECT Id, Name, Nom_societe__c, Conseiller__c, Email__c, Status__c
       FROM Commande__c
       WHERE Id = :commandeId
       LIMIT 1
     ];
 
     System.debug('Commande record retrieved: ' + commande);
+
+    if (commande.Conseiller__c == 'Yahya Olfa' || commande.Conseiller__c == 'Ben Daali Mehdi') {
+      commande.Status__c = 'Approbation';
+      update commande;
+      System.debug('Status updated to Approbation for Conseiller: ' + commande.Conseiller__c);
+      return; 
+    }
 
     // Retrieve the lead email from custom metadata (e.g., Sales_Emails__mdt)
     Sales_Emails__mdt leadEmailRecord = [
@@ -29,10 +36,7 @@ public virtual class Bon_Commande_Email_To_Lead implements Queueable, Database.A
       LIMIT 1
     ];
 
-    if (leadEmailRecord == null || String.isBlank(leadEmailRecord.Email__c)) {
-      System.debug('No lead email found in custom metadata.');
-      return;
-    }
+
 
     String leadEmail = leadEmailRecord.Email__c;
     System.debug('Lead email retrieved from custom metadata: ' + leadEmail);
@@ -48,10 +52,7 @@ public virtual class Bon_Commande_Email_To_Lead implements Queueable, Database.A
       WHERE Address = 'noreply@des-click.com'
       LIMIT 1
     ];
-    if (owea == null) {
-      System.debug('No OrgWideEmailAddress found for: noreply@des-click.com');
-      return;
-    }
+ 
     emailToLead.setOrgWideEmailAddressId(owea.Id);
 
     // Set the email subject and body for the lead
